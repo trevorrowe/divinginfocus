@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# server maintenance check
+RewriteCond %{DOCUMENT_ROOT}/maintenance.php -f
+RewriteCond %{SCRIPT_FILENAME} !maintenance.php
+RewriteCond %{SCRIPT_FILENAME} !^/images/maintenance
+RewriteRule ^.*$ /maintenance.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /index.php

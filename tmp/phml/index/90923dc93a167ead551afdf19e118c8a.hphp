@@ -1,0 +1,16 @@
+<h1>Hello World!</h1>
+<p>
+  Just testing the php haml goodness.
+</p>
+<dl>
+  <dt>Foo</dt>
+  <dd>Bar</dd>
+  <dd>Yuck</dd>
+</dl>
+<div<?php $this->writeAttributes(array('id' => 'foo', 'class' => 'bar')); ?>>
+  <p<?php $this->writeAttributes(array('class' => 'important')); ?>>
+    Abc xyz
+    123
+  </p>
+</div>
+

@@ -1,0 +1,125 @@
+- use capistrano for deployment
+- use ActiveRecord::Migration for migrations ???
+- use compass for css
+- write my own js tool
+
+The Request Logging
+=============================
+- log total time
+- log db requests + their time
+- log renders
+- log params (provide param obsfucation)
+- log in color
+
+The Request object
+=============================
+
+$r->params           # a hash of request params
+$r->method           # 'GET', 'POST', 'PUT', 'DELETE'
+$r->format           # 'html', 'xml', 'pdf', etc
+$r->controller       # The controller klass
+$r->controller_path  # The controller path (relative to the controller dir)
+
+HTTP Status Pages
+=============================
+I want to simulate meaingful status pages during development and production.
+In development the pages should give debug information, in production they
+should be statis html pages.
+
+  App::render_status_page(404)
+
+The above method should inspect the environment and send the correct page
+followed by a exit statement;
+
+Routing Requirements
+=============================
+No matter what solution i end on, the following items are most important:
+
+- url/path construction
+
+  path($params) 
+  url($params)
+
+  $params = (
+    'controller' => |index|,
+    'action' => |index|,
+    'segment' => ||,
+    'format' => ||,
+    'port',
+    'etc',
+  )
+
+- url/path parsing
+
+  /foo/bar/123.xml
+
+  array(
+    'controller' => 'foo',
+    'action' => 'bar',
+    'id' => 123,
+  )
+
+
+Rails Routes
+=============================
+way-friggen-too-magical
+
+the :controller piece seems to be magical, it attempts to gobble up
+extra pieces. in rails the following route
+
+  map.connect '/test/:controller/:foo', :foo => 123
+
+
+Route Tests
+=============================
+The following route should work in all of the following test cases
+
+  :controller/:action/:id
+
+Test cases
+
+  / 
+    ccontroller: index
+    action: index
+    id: NOT SET
+
+  /abc
+    controller: abc
+    action: index
+    id: NOT SET
+
+  /abc/xyz
+    controller: abc
+    action: xyz
+    id: NOT SET
+
+  /abc/xyz/123
+    controller: abc
+    action: xyz
+    id: 123
+
+  # this one is currently the deal breaker, don't know how to do it w/out
+  # iteratting over all the possible controllers and their paths
+  /mno/abc/xyz/123
+    controller: mno/abc
+    action: xyz
+    id: 123
+
+
+Routing Strategies
+============================
+doc comment routing
+
+
+
+My Custom Routes
+============================
+
+App::root_path() => '/'
+App::photos_path() => '/photos'
+
+App::photo_path(array('id' => 123))
+
+would equal
+
+url(photos_route.params.merge(params))
