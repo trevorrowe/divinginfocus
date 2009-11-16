@@ -1,9 +1,9 @@
 <?php
 
-class AbcController extends \Framework\Controller {
+class AbcController extends \Pippa\Controller {
 
   public static function xyz($params) {
-    \Framework\debug($params);
+    \Pippa\debug($params);
   }
 
 }

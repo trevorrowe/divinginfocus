@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework;
+namespace Pippa;
 
 class Log {
 }

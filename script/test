@@ -4,11 +4,11 @@
 define('APP_ROOT', realpath(dirname(__FILE__) . '/..'));
 define('APP_ENV', getenv('APP_ENV') ? getenv('APP_ENV') : 'production');
 
-set_include_path(APP_ROOT . '/framework');
+set_include_path(APP_ROOT . '/pippa');
 
 require_once('app.php');
 
-\Framework\App::bootstrap();
+\Pippa\App::bootstrap();
 
 #require_once('route.php');
 #require_once('request.php');
@@ -17,7 +17,7 @@ require_once('app.php');
 
 require_once(APP_ROOT . '/config/routes.php');
 
-$test_files = glob(APP_ROOT . '/framework/test/*.php');
+$test_files = glob(APP_ROOT . '/pippa/test/*.php');
 
 foreach($test_files as $test_file) {
   echo "\n*** RUNNING TESTS: $test_file ***\n\n";

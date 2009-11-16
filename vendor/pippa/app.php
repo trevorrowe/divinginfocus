@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework;
+namespace Pippa;
 
 class App {
 
@@ -18,14 +18,14 @@ class App {
 
   public static function boot() {
 
-    spl_autoload_register("\Framework\App::autoloader");
+    spl_autoload_register("\Pippa\App::autoloader");
 
     set_include_path('');
     self::addIncludePath('/lib');
     self::addIncludePath('/app/models');
 
     # Load the environment.php file, with all of the users settings
-    require_once(self::root . '/vendor/framework/helpers.php');
+    require_once(self::root . '/vendor/pippa/helpers.php');
     require_once(self::root . '/config/environment.php');
     require_once(self::root . '/config/database.php');
     require_once(self::root . '/config/routes.php');

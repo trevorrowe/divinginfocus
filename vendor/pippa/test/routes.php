@@ -1,6 +1,6 @@
 <?php 
 
-namespace Framework;
+namespace Pippa;
 
 #$request = new Request('home/123');
 #$request = new Request('home/abc');
