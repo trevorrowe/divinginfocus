@@ -176,8 +176,6 @@ class Controller {
         $template = $this->request->params['action'];
     }
 
-    #require_once(App::root . '/vendor/phml/phml_orig.php');
-
     $cntl = $this->request->params['controller'];
     $actn = $this->request->params['action'];
 
