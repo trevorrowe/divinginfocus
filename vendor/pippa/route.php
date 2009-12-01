@@ -17,16 +17,16 @@ class Route {
 
     $this->path = trim($path, '/');
 
-    # the $opts hash all represent requirements excep the 'name' option
+    # all entries in $opts are routing requirements except for 'name'
     if(isset($opts['name'])) {
       $this->name = $opts['name'];
       unset($opts['name']);
     }
 
     $this->req = $opts;
-
-    foreach(array('method', 'format', 'controller', 'action') as $r)
-      $this->req[$r] = isset($opts[$r]) ? $opts[$r] : NULL;
+    foreach(array('controller', 'action', 'method', 'format') as $r)
+      if(!array_key_exists($r, $this->req) || !$this->req[$r])
+        $this->req[$r] = NULL;
   
     # ensure the controller and action are present as path segments or
     # as required values, but not both
@@ -34,7 +34,7 @@ class Route {
       if($this->req[$opt] && preg_match("/:$opt/", $this->path)) {
         $err = "Invalid route, `$opt` may be provided as a route segment " . 
                'or as a requirement, but not both.';
-        throw new \Exception($err);
+        throw new Exception($err);
       }
       # if controller or action are not defined as either a path segment or
       # a requirement we will set them as requirements to 'index'
@@ -96,9 +96,7 @@ class Route {
     $regex = implode('/', $regex);
     $regex = "#^$regex$#";
 
-#echo "test: '{$request->path}' against '{$this->path}' with $regex\n";
-    if(!preg_match($regex, trim($request->path, '/'), $matches)) {
-#  echo "fail: regex\n";
+    if(!preg_match($regex, $request->path, $matches)) {
       return false;
     }
 
@@ -109,8 +107,7 @@ class Route {
     foreach(array('controller', 'action', 'format') as $r)
       if($this->req[$r]) $params[$r] = $this->req[$r];
 
-    foreach($params as $k => $v)
-      $request->params[$k] = $v;
+    $request->dispatch($params);
 
     return true;
   }

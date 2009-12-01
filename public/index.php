@@ -7,6 +7,6 @@ define('APP_ENV', getenv('APP_ENV') ? getenv('APP_ENV') : 'production');
 
 require_once(APP_ROOT . '/vendor/pippa/app.php');
 
-App::boot();
+App::bootstrap();
 
-Router::dispatch(Request::httpRequest());
+Router::dispatch(Request::get_http_request());

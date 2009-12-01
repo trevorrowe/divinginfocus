@@ -1,9 +1,0 @@
-!!!
-%html{ 'xmlns' => 'http://www.w3.org/1999/xhtml', 'xml:lang' => 'en' }
-  %head
-    %title= isset($title) ? $title : 'Diving in Focus'
-    %meta{ 'http-equiv' => 'content-type', :content => 'text/html;charset=UTF-8' }
-  %body
-    %div#cntl{ :class => $params['controller'] }
-      %div#actn{ :class => $params['action'] }
-       = yield();
