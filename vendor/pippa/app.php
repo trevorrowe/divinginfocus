@@ -41,12 +41,11 @@ class App {
     require_once(self::root . '/vendor/hopnote/Hopnote.php');
     \Hopnote::register_handlers('72f3e257342bd683d986a4ef5f70be84', array(
       'environment' => self::env,
-      #'deployed' => self::env == 'production',
-      'deployed' => TRUE,
+      'deployed' => self::env == 'production',
       'fatals' => TRUE,
       'root' => self::root,
       'errors' => E_ALL | E_STRICT,
-      #'fivehundred' => self::root . '/public/500.html',
+      'fivehundred' => self::root . '/public/500.html',
     ));
 
     # TODO : why am I opening a buffer here?

@@ -2,6 +2,8 @@
 
 namespace Pippa;
 
+# TODO : add request logging (ala rails request logging)
+# TODO : add 404 responses
 class Controller {
 
   protected $request;
@@ -60,7 +62,7 @@ class Controller {
 
   public function run() {
     $actn = $this->request->params['action'] . '_action';
-    $this->$actn($this->request->params);
+    $this->$actn($this->request->params, $this->request);
     $this->render_or_redirect();
   }
 
@@ -175,8 +177,6 @@ class Controller {
         #echo "default render: {$this->request->params['action']}"; 
         $template = $this->request->params['action'];
     }
-
-    #require_once(App::root . '/vendor/phml/phml_orig.php');
 
     $cntl = $this->request->params['controller'];
     $actn = $this->request->params['action'];

@@ -2,10 +2,8 @@
 
 class IndexController extends \Pippa\Controller {
 
-  public function index_action($params) {
-    $foo = array();
-    $foo['bar'];
-    fatal_test();
-  }
+  public function index_action($params, $request) { }
+
+  #public function missing_template_action($params) { }
 
 }
