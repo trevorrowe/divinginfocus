@@ -80,9 +80,9 @@ class Controller {
   #   render('edit');      # 200, yes edit.:format.php  based on format
   #   render_text('text'); # 200, yes none              based on format
   #   render_json('text'); # 200, no  none              application/json?
-  #
-  # If the first arg to render is prefixed with a /
   # 
+  #  relative pathing of templates
+  #
   #   forms/whatever/foo
   #     app/views/:controller/forms/whatever/foo.:format.php
   #
