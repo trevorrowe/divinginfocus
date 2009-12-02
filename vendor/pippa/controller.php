@@ -2,6 +2,8 @@
 
 namespace Pippa;
 
+# TODO : add request logging (ala rails request logging)
+# TODO : add 404 responses
 class Controller {
 
   protected $request;
@@ -60,7 +62,7 @@ class Controller {
 
   public function run() {
     $actn = $this->request->params['action'] . '_action';
-    $this->$actn($this->request->params);
+    $this->$actn($this->request->params, $this->request);
     $this->render_or_redirect();
   }
 
@@ -74,14 +76,26 @@ class Controller {
 
   # Different render modes:
   #
-  #   render('edit');                     # 200, default layout
-  #   render_text('text');                # 200, default layout
-  #   render_file('/path/to/file.pdf');   # 200, no layout
-  #   render_file($filehandle);           # 200, no layout
+  #                        # STA  LYT TEMPLATE          CONTENTTYPE
+  #   render('edit');      # 200, yes edit.:format.php  based on format
+  #   render_text('text'); # 200, yes none              based on format
+  #   render_json('text'); # 200, no  none              application/json?
+  # 
+  #  relative pathing of templates
+  #
+  #   forms/whatever/foo
+  #     app/views/:controller/forms/whatever/foo.:format.php
+  #
+  #   /forms/whatever/foo
+  #     app/views/forms/whatever/foo.:format.php
   #
   # Rendering w/options
   #
+  #   status("HTTP/1.1 101 Switching Protocols");
+  #   status("HTTP/1.1 404 Switching Protocols");
+  #
   #   render('edit', array('status' => 200)));
+  #   render('edit', array('layout' => 'popup')));
   #   render('edit', array('layout' => 'popup')));
   #
   #   layout('popup');
