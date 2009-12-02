@@ -41,12 +41,7 @@ class App {
     require_once(self::root . '/vendor/hopnote/Hopnote.php');
     \Hopnote::register_handlers('72f3e257342bd683d986a4ef5f70be84', array(
       'environment' => self::env,
-<<<<<<< HEAD
       'deployed' => self::env == 'production',
-=======
-      #'deployed' => self::env == 'production',
-      'deployed' => true,
->>>>>>> b2b9efe99d03a4658f3961646b20573d97e5e51c
       'fatals' => TRUE,
       'root' => self::root,
       'errors' => E_ALL | E_STRICT,
