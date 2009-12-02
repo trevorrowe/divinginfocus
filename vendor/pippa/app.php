@@ -28,10 +28,10 @@ class App {
 
   public static function autoload($class) {
     # only autoload classes in the Pippa Framework
-    if(substr($class, 0, 6) != 'Pippa\\')
-      return false;
-    $dir = self::root . '/vendor/';
-    require($dir . strtolower(str_replace('\\', '/', $class)) . '.php');
+    if(substr($class, 0, 6) == 'Pippa\\') {
+      $dir = self::root . '/vendor/';
+      require($dir . strtolower(str_replace('\\', '/', $class)) . '.php');
+    }
   }
 
   public static function bootstrap() {
@@ -41,15 +41,17 @@ class App {
     require_once(self::root . '/vendor/hopnote/Hopnote.php');
     \Hopnote::register_handlers('72f3e257342bd683d986a4ef5f70be84', array(
       'environment' => self::env,
+<<<<<<< HEAD
       'deployed' => self::env == 'production',
+=======
+      #'deployed' => self::env == 'production',
+      'deployed' => true,
+>>>>>>> b2b9efe99d03a4658f3961646b20573d97e5e51c
       'fatals' => TRUE,
       'root' => self::root,
       'errors' => E_ALL | E_STRICT,
       'fivehundred' => self::root . '/public/500.html',
     ));
-
-    # TODO : why am I opening a buffer here?
-    ob_start();
 
     spl_autoload_register("\Pippa\App::autoload");
 

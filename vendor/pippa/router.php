@@ -21,6 +21,10 @@ class Router {
         # appropriate action
         
         $controller = $request->params['controller'];
+
+        \Hopnote::$controller = $controller;
+        \Hopnote::$action = $request->params['action'];
+
         require_once(Controller::controller_path($controller));
 
         $controller_class = Controller::class_name($controller);
