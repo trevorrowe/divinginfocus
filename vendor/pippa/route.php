@@ -2,6 +2,7 @@
 
 namespace Pippa;
 
+# TODO : add named route support
 class Route {
 
   protected $path;
@@ -118,6 +119,7 @@ class Route {
 
     foreach(explode('/', $this->path) as $segment) {
       if($segment == '') continue;
+
       # TODO : handle the '' path route
       if($segment[0] == ':') {
         $segment = substr($segment, 1);
@@ -125,6 +127,7 @@ class Route {
       } else {
         array_push($path, $segment);
       }
+
       unset($params[$segment]);
     }
       
@@ -133,7 +136,8 @@ class Route {
     if(count($params) > 0) {
       $querystring = array();
       foreach($params as $k => $v) {
-        if($params[$k] == $this->req[$k]) continue;
+        if(isset($this->req[$k]) && $this->req[$k] == $params[$k])
+          continue;
         array_push($querystring, "$k=$v");
       }
       if(count($querystring) > 0)

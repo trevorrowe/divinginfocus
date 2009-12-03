@@ -20,6 +20,7 @@ namespace Pippa;
 class App {
 
   const root = APP_ROOT;
+
   const env = APP_ENV;
 
   public static function add_include_path($path) {
@@ -34,11 +35,16 @@ class App {
     }
   }
 
-  public static function bootstrap() {
+  public static function run() {
+    self::boot();
+    Router::dispatch(Request::get_http_request());
+  }
+
+  public static function boot() {
 
     ini_set('error_log', App::root . '/log/' . App::env . '.log');
 
-    require_once(self::root . '/vendor/hopnote/Hopnote.php');
+    require(self::root . '/vendor/hopnote/Hopnote.php');
     \Hopnote::register_handlers('72f3e257342bd683d986a4ef5f70be84', array(
       'environment' => self::env,
       'deployed' => self::env == 'production',
@@ -48,33 +54,16 @@ class App {
       'fivehundred' => self::root . '/public/500.html',
     ));
 
-    header('X-Wf-Protocol-1: http://meta.wildfirehq.org/Protocol/JsonStream/0.2');
-    header('X-Wf-1-Plugin-1: http://meta.firephp.org/Wildfire/Plugin/FirePHP/Library-FirePHPCore/0.3');
-    header('X-Wf-1-Structure-1: http://meta.firephp.org/Wildfire/Structure/FirePHP/FirebugConsole/0.1');
-    header('X-Wf-1-1-1-1: 62|[{"Type":"LOG","File":" ... Test.php","Line":3},"Hello World"]|');
-
     spl_autoload_register("\Pippa\App::autoload");
 
     self::add_include_path('/lib');
     self::add_include_path('/app/models');
     
     # Load the environment.php file, with all of the users settings
-    require_once(self::root . '/config/environment.php');
-    require_once(self::root . '/config/environments/' . self::env . '.php');
-    require_once(self::root . '/config/routes.php');
+    require(self::root . '/vendor/pippa/helpers.php');
+    require(self::root . '/config/environment.php');
+    require(self::root . '/config/environments/' . self::env . '.php');
+    require(self::root . '/config/routes.php');
   }
 
-}
-
-function route($pattern, $options = array()) {
-  Router::add_route($pattern, $options);
-}
-
-function debug($obj, $stop = true) {
-  echo '<pre>';
-  #var_dump($obj);
-  print_r($obj);
-  echo "</pre>\n";
-  if($stop)
-    exit();
 }

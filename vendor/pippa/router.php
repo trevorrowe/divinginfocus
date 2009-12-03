@@ -4,13 +4,13 @@ namespace Pippa;
 
 class Router {
 
-  protected static $routes = array();
+  public static $routes = array();
 
   public static function add_route($pattern, $options = array()) {
     array_push(self::$routes, new Route($pattern, $options));
   }
 
-  public static function dispatch(Request $request) {
+  public static function dispatch($request) {
 
     # check this request against all available routes
     foreach(self::$routes as $route) {
@@ -19,6 +19,7 @@ class Router {
 
         # route matched, load the controller and dispatch the request to the
         # appropriate action
+        Log::request($request);
         
         $controller = $request->params['controller'];
 

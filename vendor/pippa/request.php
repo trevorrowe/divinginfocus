@@ -4,24 +4,15 @@ namespace Pippa;
 
 class Request {
 
-  protected $dispatched = false;
   protected $data;
 
   public function __construct($path, $method = 'GET', $params = array()) {
-
-    # TODO : validate params, must be an array and may not contain
-    #        controller or action (not allowed until dispatched)
-
     $this->data['path'] = trim($path, '/');
     $this->data['method'] = $method;
     $this->data['params'] = $params;
   }
 
-  public function dispatched() {
-    return $this->dispatched;
-  }
-
-  public function __get($what) {
+  public function &__get($what) {
     if(array_key_exists($what, $this->data))
       return $this->data[$what];
     throw new \Exception("Undefined Request property: $what");
@@ -29,7 +20,6 @@ class Request {
 
   public function dispatch($route_params) {
     $this->data['params'] = array_merge($this->data['params'], $route_params);
-    $this->dispatched = true;
   }
 
   public static function get_http_request() {

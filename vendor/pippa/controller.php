@@ -4,17 +4,38 @@ namespace Pippa;
 
 # TODO : add request logging (ala rails request logging)
 # TODO : add 404 responses
+
 class Controller {
+  
+  const MODE_RENDER_TMPL = 1;
+  const MODE_RENDER_TEXT = 2;
+  const MODE_REDIRECT = 3;
 
   protected $request;
 
-  protected $_render_or_redirect;
+  protected $params;
+
+  protected $locals = array();
+
+  protected $_mode;
+
+  protected $_mode_data;
 
   protected $_status;
 
-  protected $_layout = 'application';
+  protected $_layout;
 
-  protected $_statuses = array(
+  public static $content_types = array(
+    'html' => 'text/html',
+    'txt'  => 'text/plain',
+    'csv'  => 'text/csv',
+    'xml'  => 'text/xml',
+    'js'   => 'text/javascript',
+    'css'  => 'text/css',
+    'json' => 'application/json',
+  );
+
+  public static $statuses = array(
     100 => "HTTP/1.1 100 Continue",
     101 => "HTTP/1.1 101 Switching Protocols",
     200 => "HTTP/1.1 200 OK",
@@ -58,166 +79,228 @@ class Controller {
 
   public function __construct(Request $request) {
     $this->request = $request;
+    $this->params = &$request->params;
+    $this->locals['request'] = &$this->request;
+    $this->locals['params'] = &$this->params;
   }
 
+  # called by the Router during dispatch
   public function run() {
-    $actn = $this->request->params['action'] . '_action';
-    $this->$actn($this->request->params, $this->request);
-    $this->render_or_redirect();
+    $action_method = $this->params['action'] . '_action';
+    $this->$action_method($this->params, $this->request);
+    $this->_render_or_redirect();
+  }
+
+  public function layout($which) {
+    $this->_layout = $which;
   }
 
   public function status($status) {
     $this->_status = $status;
   }
 
-  public function render($what) {
-    $this->_render_or_redirect = array('render', $what);
+  public function render($what, $opts = array()) {
+    $this->_check_render_redirect();
+    $this->_parse_std_options($opts);
+    $this->_mode = self::MODE_RENDER_TMPL;
+    $this->_mode_data = $what;
   }
 
-  # Different render modes:
-  #
-  #                        # STA  LYT TEMPLATE          CONTENTTYPE
-  #   render('edit');      # 200, yes edit.:format.php  based on format
-  #   render_text('text'); # 200, yes none              based on format
-  #   render_json('text'); # 200, no  none              application/json?
-  # 
-  #  relative pathing of templates
-  #
-  #   forms/whatever/foo
-  #     app/views/:controller/forms/whatever/foo.:format.php
-  #
-  #   /forms/whatever/foo
-  #     app/views/forms/whatever/foo.:format.php
-  #
-  # Rendering w/options
-  #
-  #   status("HTTP/1.1 101 Switching Protocols");
-  #   status("HTTP/1.1 404 Switching Protocols");
-  #
-  #   render('edit', array('status' => 200)));
-  #   render('edit', array('layout' => 'popup')));
-  #   render('edit', array('layout' => 'popup')));
-  #
-  #   layout('popup');
-  #   render('calculator');
-  #
-  #   status(404);
-  #   render('missing');
-  #
-  # Formats
-  #
-  # Given the following request params:
-  #
-  #   controller: widgets
-  #   action: show
-  #   id: 123
-  #   format: xml
-  #
-  # If no call to render was made the defaults would be
-  # 
-  #   template: show.xml
-  #   layout: application.xml
-  #
-  # Something must happen, render, redirect or send_file
-
-  public function render_text($text) {
-    echo $text;
-    exit;
+  public function render_text($text, $opts = array()) {
+    $this->_check_render_redirect();
+    $this->_parse_std_options($opts);
+    $this->_mode = self::MODE_RENDER_TEXT;
+    $this->_mode_data = $text;
   }
 
-  # Examples:
-  #   redirect($params);
-  #   redirect('/some/path');
-  #   redirect('action');
-  #   redirect('action', 123); # actn, id
-  #   redirect('controller', 'action', 123); # cntl, actn, id
   public function redirect() {
-    $argc = func_num_args();
+
+    $this->_check_render_redirect();
+
     $args = func_get_args();
+    $argc = func_num_args();
+
+    if($argc > 1 && is_array($args[$argc - 1])) {
+      $this->_parse_std_options(array_pop($args));
+      $argc -= 1;
+    }
+
     switch(true) {
-      # redirect($params_hash)
-      case $argc == 1 && is_array($args[0]):
-        $where = url($args[0]);
-        break;
-      # redirect('/some/path');
-      case $argc == 1 && $args[0][0] == '/':
+
+      case $argc == 1 && is_array($args[0]): # redirect($params_hash)
+      case $argc == 1 && $args[0][0] == '/': # redirect('/some/url/path')
         $where = $args[0];
         break;
-      # redirect('index');
-      case $argc == 1:
+
+      case $argc == 1: # redirect(:action)
         $where = array(
-          'controller' => $this->request->params['controller'],
+          'controller' => $this->params['controller'],
           'action' => $args[0],
         );
         break;
-      # redirect('show', 123);
-      case $argc == 2:
+
+      case $argc == 2: # redirect(:action, :id)
         $where = array(
-          'controller' => $this->request->params['controller'],
+          'controller' => $this->params['controller'],
           'action' => $args[0],
           'id' => $args[1],
         );
         break;
-      # redirect('other_controller', 'show', 123);
-      case $argc == 3:
+
+      case $argc == 3: # redirect(:controller, :action, :id);
         $where = array(
           'controller' => $args[0],
           'action' => $args[1],
           'id' => $args[2],
         );
         break;
+
       default:
         throw new Exception('Invalid redirect params: ' . print_r($args, true));
+
     }
-    $this->_render_or_redirect = array('redirect', $where);
+    $this->_mode = self::MODE_REDIRECT;
+    $this->_mode_data = url($where);
   }
 
-  protected function render_or_redirect() {
+  protected function _render_or_redirect() {
+    
+    # if the user called neither render or redirect then the default 
+    # is rendering the template by the same name as the current action
+    if(is_null($this->_mode)) {
+      $this->_mode = self::MODE_RENDER_TMPL;
+      $this->_mode_data = $this->params['action'];
+    }
+    
+    if($this->_mode == self::MODE_REDIRECT)
+      $this->_redirect();
+    else
+      $this->_render();
 
-    $status = $this->_status ? $this->_status : 200;
+  }
 
-    header($this->_statuses[$status]);
-    switch($this->_render_or_redirect[0]) {
-      case 'render':
-        #echo "render template: {$this->render_or_redirect[1]}";
-        $template = $this->_render_or_redirect[1];
+  protected function _redirect() {
+    header(self::$statuses[$this->_status ? $this->_status : 302]);
+    header ("Location: {$this->_mode_data}");
+  }
+
+  protected function _render() {
+    switch($this->_mode) {
+      case self::MODE_RENDER_TMPL:
+        $this->_render_tmpl();
         break;
-      case 'redirect':
-        header ("Location: {$this->_render_or_redirect[1]}");
-        return;
+      case self::MODE_RENDER_TEXT:
+        $this->_render_text($this->_mode_data);
+        break;
       default:
-        #echo "default render: {$this->request->params['action']}"; 
-        $template = $this->request->params['action'];
+        throw new Exception("Unknown render mode: {$this->_mode}");
+    }
+  }
+
+  protected function _render_tmpl() {
+
+    $cntl = $this->params['controller'];
+    $actn = $this->params['action'];
+    $suffix = $this->_tmpl_suffix();
+
+    $tmpl = $this->_mode_data;
+
+    switch(true) {
+      case is_null($tmpl):
+        $tmpl = App::root . "/app/views/$cntl/$actn$suffix";
+        break;
+      case $tmpl[0] == '/':
+        $tmpl = App::root . "/app/views/$tmpl$suffix";
+        break;
+      default:
+        $tmpl = App::root . "/app/views/$cntl/$tmpl$suffix";
     }
 
-    $cntl = $this->request->params['controller'];
-    $actn = $this->request->params['action'];
-
-    $tmpl = App::root . '/app/views/'. $cntl . '/' . $actn . '.html.php';
-      
     if(!file_exists($tmpl))
       throw new \Exception("Missing template file $tmpl"); 
 
-    $layout = App::root . '/app/views/layouts/application.html.php';
+    $this->_render_text($this->_include_with_locals($tmpl));
+  }
 
-    if($layout) {
-      ob_start();
-      include($tmpl);
-      $page = ob_get_clean();
-      ob_end_flush();
-      include($layout);
-    } else {
-      include($tmpl);
+  protected function _render_text($page) {
+
+    $default = 'default';
+    $layout = $this->_layout;
+
+    switch(true) {
+      case $layout === NULL:
+        $layout = $this->_format() == 'html' ? $default : FALSE;
+        break;
+      case $layout === FALSE:
+        $layout = FALSE;
+        break;
+      case $layout === TRUE:
+        $layout = $default;
+        break;
+      default:
+        $layout = $this->_layout;
     }
+
+    # set the http status header
+    header(self::$statuses[$this->_status ? $this->_status : 200]);
+
+    # set the content type header
+    header('Content-type: ' . $this->_content_type());
+
+    # display the page
+    if($layout) {
+      $file = App::root . "/app/views/layouts/$layout" . $this->_tmpl_suffix();
+      echo $this->_include_with_locals($file, $page);
+    } else {
+      echo $page;
+    }
+
+  }
+
+  protected function _content_type() {
+    $format = $this->_format();
+    if(!isset(self::$content_types[$format]))
+      throw new Exception("Unknown content type for format: $format");
+    return self::$content_types[$format];
+  }
+
+  protected function _format() {
+    return isset($this->params['format']) ? $this->params['format'] : 'html';
+  }
+
+  protected function _tmpl_suffix() {
+    return '.' . $this->_format() . '.php';
+  }
+
+  protected function _include_with_locals($file, $content = NULL) {
+
+    foreach($this->locals as $name => &$value)
+      $$name = &$value;
+
+    ob_start();
+    include($file);
+    $results = ob_get_clean();
+    ob_end_flush();
+
+    return $results;
+  }
+
+  protected function _check_render_redirect() {
+    if($this->_mode != NULL) {
+      $msg = "render or redirect has already been called for this action";
+      throw new Exception($msg);
+    }
+  }
+
+  protected function _parse_std_options($options) {
+    foreach(array('layout', 'status') as $option_name) 
+      if(isset($options[$option_name]))
+        $this->$option_name($options[$option_name]);
   }
 
   public function __call($method, $args) {
     # 404 page, action not found
   }
-
-  /****************************************************************************
-   * Class methods
-   ***************************************************************************/
 
   public static function class_name($controller) {
     $class_name = '';

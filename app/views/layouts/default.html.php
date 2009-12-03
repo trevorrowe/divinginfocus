@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  <div id="cntl" class="<?php echo $cntl; ?>">
-    <div id="actn" class="<?php echo $actn; ?>">
+  <div id="cntl" class="<?php echo $params['controller']; ?>">
+    <div id="actn" class="<?php echo $params['action']; ?>">
       <div id="content">
-        <?php echo $page ?>
+        <?php echo $content ?>
       </div>
       <div id="header">
         <ul>  
