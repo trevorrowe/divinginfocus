@@ -37,10 +37,11 @@ class Log {
 
   public static function db($query, $ms) {
     $reset = "\x1b[0m";
-    $color = cycle(36,35);
-    $weight = cycle("\x1b[1m", '');
+    $bold = "\x1b[1m";
+    $color = cycle("\x1b[36m","\x1b[35m");
+    $weight = cycle($bold, '');
     $time = '10ms';
-    $msg = "  \x1b[{$color}m\x1b[1m[DB] ($time)$reset$weight $query$reset";
+    $msg = "  $color$bold[DB] ($time)$reset$weight $query$reset";
     self::logger()->write($msg);
   }
 

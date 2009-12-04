@@ -10,13 +10,6 @@
 
 namespace Pippa;
 
-/**
- * @package Pippa
- */
-
-/**
- * 
- */
 class App {
 
   const root = APP_ROOT;
