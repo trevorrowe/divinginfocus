@@ -302,6 +302,10 @@ class Controller {
     # 404 page, action not found
   }
 
+  # TODO : this function needs to support $controller values like:
+  #
+  #   admin/directory_pages_controller => Admin_DirectoryPagesController
+  #
   public static function class_name($controller) {
     $class_name = '';
     foreach(explode('/', $controller) as $part)
@@ -314,7 +318,7 @@ class Controller {
   }
 
   public static function exists($controller) {
-    return file_exists(self::controller_path($controller));
+    return in_array($controller, App::$controllers);
   }
 
 }

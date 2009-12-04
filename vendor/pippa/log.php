@@ -4,25 +4,19 @@ namespace Pippa;
 
 class Log {
 
+  protected $path;
   protected $stream;
 
-  protected static $logger;
-
-  protected function __construct() {
-    $url = 'file://' . App::root . '/log/' . App::env . '.log';
+  public function __construct($path) {
+    $this->path = $path;
+    $url = "file://$path";
     if(!$this->stream = @fopen($url, 'a', false))
-      throw new Exception("Unable to write to application log: $url");
+      throw new Exception('Unable to write to log: ' . $this->path);
   }
 
   public function write($msg) {
     if(false === @fwrite($this->stream, $msg . "\n"))
-      throw new Exception("Unable to write to log");
-  }
-
-  public static function logger() {
-    if(is_null(self::$logger))
-      self::$logger = new Log();
-    return self::$logger;
+      throw new Exception('Unable to write to log: ' . $this->path);
   }
   
   public static function request($request) {
@@ -32,7 +26,7 @@ class Log {
     $time = strftime('%Y-%m-%d %T');
     $method = $request->method;
     $msg = "\nProcessing $cntl#$actn (for $ip at $time) [$method]";
-    self::logger()->write($msg);
+    App::$log->write($msg);
   }
 
   public static function db($query, $ms) {
@@ -42,18 +36,18 @@ class Log {
     $weight = cycle($bold, '');
     $time = '10ms';
     $msg = "  $color$bold[DB] ($time)$reset$weight $query$reset";
-    self::logger()->write($msg);
+    App::$log->write($msg);
   }
 
   public static function timing($start, $stop) {
     $ms = ($stop - $start) * 1000;
     $time = self::format_time($ms);
     $msg = "  \x1b[33m\x1b[1m[APP TIMING] ($time)\x1b[0m $ms";
-    self::logger()->write($msg);
-    $url = request_url();
+    App::$log->write($msg);
+    $url = Request::get_http_request()->url;
     $status = 200;
     $msg = "Completed in $time ($ms) | $status [$url]";
-    self::logger()->write($msg);
+    App::$log->write($msg);
   }
 
   protected static function format_time($ms) {

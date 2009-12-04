@@ -2,19 +2,24 @@
 
 namespace Pippa;
 
-#$request = new Request('home/123');
-#$request = new Request('home/abc');
-#$request = new Request('home');
-#$request = new Request('abc/xyz/123');
-$request = new Request('abc/123/edit');
-#$request = new Request('');
+App::$routes = array();
 
-// foreach(App::$routes as $route) {
-//   if($params = $route->match($request)) {
-//     print_r($params);
-//     exit();
-//   }
-// }
+route('/');
+route(':controller');
+route(':controller/:action');
+route(':controller/:action/:id');
+
+$request = new Request('/index/index/edit');
+
+foreach(App::$routes as $route) {
+  if($route->matches_request($request)) {
+     print_r($request->params);
+     exit();
+  }
+}
+
+echo "failed\n";
+exit;
 
 $params = array(
   'controller' => 'abc',
@@ -23,13 +28,15 @@ $params = array(
 );
 
 $params = array(
-  'controller' => 'home',
+  'controller' => 'index',
+  'action' => 'index',
   'id' => '123',
 );
 
-foreach(Route::$routes as $route) {
-  if($route->testParams($params)) {
-    echo $route->buildPath($params) . "\n";
-    exit();
+foreach(App::$routes as $route) {
+  if($route->matches_params($params)) {
+    echo $route->build_url($params) . "\n";
+    exit;
   }
 }
+echo "failed\n";

@@ -2,77 +2,103 @@
 
 namespace Pippa;
 
-# TODO : add named route support
 class Route {
 
-  protected $path;
-  protected $name = NULL;
+  protected $name;
+  protected $pattern;
   protected $req = array();
 
-  # controller
-  # action
-  # method
-  # format
+  protected $match_indexes = array();
+  protected $regex;
 
-  public function __construct($path, $opts = array()) {
+  public function __construct($pattern, $options = array()) {
 
-    $this->path = trim($path, '/');
+    $this->pattern = trim($pattern, '/');
 
-    # all entries in $opts are routing requirements except for 'name'
-    if(isset($opts['name'])) {
-      $this->name = $opts['name'];
-      unset($opts['name']);
+    # all entries in $options are routing requirements except for 'name'
+    if(isset($options['name'])) {
+      $this->name = $options['name'];
+      unset($options['name']);
     }
+    $this->req = $options;
 
-    $this->req = $opts;
-    foreach(array('controller', 'action', 'method', 'format') as $r)
-      if(!array_key_exists($r, $this->req) || !$this->req[$r])
-        $this->req[$r] = NULL;
-  
-    # ensure the controller and action are present as path segments or
-    # as required values, but not both
-    foreach(array('controller', 'action') as $opt) {
-      if($this->req[$opt] && preg_match("/:$opt/", $this->path)) {
-        $err = "Invalid route, `$opt` may be provided as a route segment " . 
-               'or as a requirement, but not both.';
+    foreach(array('controller', 'action') as $req) {
+      # controller and action may be provided in only one place
+      if(isset($this->req[$req]) && preg_match("/:$req/", $this->pattern)) {
+        $err = "$req may be in the route pattern or requirements, but no both";
         throw new Exception($err);
       }
-      # if controller or action are not defined as either a path segment or
-      # a requirement we will set them as requirements to 'index'
-      if(!$this->req[$opt] && !preg_match("/:$opt/", $this->path))
-        $this->req[$opt] = 'index';
+      # controller and action both default to index when not provided
+      if(!isset($this->req[$req]) && !preg_match("/:$req/", $this->pattern))
+        $this->req[$req] = 'index';
     }
-
   }
 
-  public function matches(Request $request) {
-    if(!$this->matchesMethod($request)) return false;
-    if(!$this->matchesFormat($request)) return false;
-    if(!($this->matchesPath($request))) return false;
-    return Controller::exists($request->params['controller']);
+  public function matches_request($request) {
+
+    if(!$this->matches_method($request)) 
+      return false;
+
+    if(!$this->matches_format($request)) 
+      return false;
+
+    $params = $this->matches_pattern($request);
+    if(!$params) 
+      return false;
+
+    if(!Controller::exists($params['controller'])) 
+      return false;
+
+    foreach($params as $k => $v)
+      $request->params[$k] = $v;
+
+    return true;
   }
 
-  protected function matchesMethod(Request $r) {
-    return $this->req['method'] ? $this->req['method'] == $r->method : true;
+  protected function matches_method($request) {
+    return isset($this->req['method']) ? 
+      $this->req['method'] == $request->method : 
+      true;
   }
 
-  protected function matchesFormat(Request $request) {
-    return $this->req['format'] ? $this->req['format'] == $r->format : true;
+  protected function matches_format($request) {
+    return isset($this->req['format']) ? 
+      $this->req['format'] == $request->format : 
+      true;
   }
 
-  protected function matchesPath(Request $request) {
+  protected function matches_pattern($request) {
 
-    $match_index = 1;
-    $match_indexes = array();
+    $this->compile();
+    if(!preg_match($this->regex, $request->route_path, $matches))
+      return false;
 
-    # build a regex based on the route path and requirements
+    $params = array();
+    foreach($this->match_indexes as $i => $name)
+      $params[$name] = $matches[$i];
+
+    foreach(array('controller', 'action', 'format') as $r)
+      if(isset($this->req[$r])) $params[$r] = $this->req[$r];
+
+    return $params;
+  }
+
+  protected function compile() {
+
+    $match_index = 0;
+
+    # build a regex based on the route pattern and requirements
     $regex = array();
-    foreach(explode('/', $this->path) as $segment) {
+    foreach(explode('/', $this->pattern) as $segment) {
 
+      # the empty route pattern is the root path "/"
       if($segment == '') continue;
 
+      # a static route segment like archive in the following example:
+      # /:controller/archive/:year/:month
       if($segment[0] != ':') {
         array_push($regex, $segment);
+        $match_index += $this->count_captures($segment);
         continue;
       }
 
@@ -81,49 +107,55 @@ class Route {
 
       # keep track of where in the array of regex matches this segment
       # will store its value.
-      $match_indexes[$match_index++] = $segment;
+      $this->match_indexes[++$match_index] = $segment;
 
       if(isset($this->req[$segment])) {
         $requirement = $this->req[$segment];
         $requirement = preg_replace('/\./', '[^/]', $requirement);
         array_push($regex, "($requirement)");
-        $match_index += preg_match_all('/\(/', $requirement, $discard);
+        $match_index += $this->count_captures($requirement);
       }
       else if($segment == 'controller')
-        array_push($regex, '([a-z][/a-z]*)');
+        array_push($regex, '(\w[/\w]*)');
       else
-        array_push($regex, '([^/]+)');
+        array_push($regex, '(\w+)');
     }
+
     $regex = implode('/', $regex);
-    $regex = "#^$regex$#";
+    $this->regex = "#^$regex$#";
 
-    if(!preg_match($regex, $request->path, $matches)) {
-      return false;
+  }
+
+  protected function count_captures($str) {
+    return preg_match_all('/\(/', $str, $discard);
+  }
+
+  public function matches_params($params) {
+    foreach($this->req as $req => $regex) {
+      if(!isset($params[$req])) 
+        return false;
+      if(!preg_match("#^$regex$#", $params[$req])) 
+        return false;
     }
-
-    $params = array();
-    foreach($match_indexes as $i => $name)
-      $params[$name] = $matches[$i];
-
-    foreach(array('controller', 'action', 'format') as $r)
-      if($this->req[$r]) $params[$r] = $this->req[$r];
-
-    $request->dispatch($params);
-
     return true;
   }
 
-  public function buildPath($params) {
+  public function build_url($params) {
+
+    $current_request = Request::get_http_request();
 
     $path = array();
 
-    foreach(explode('/', $this->path) as $segment) {
+    foreach(explode('/', $this->pattern) as $segment) {
       if($segment == '') continue;
 
       # TODO : handle the '' path route
       if($segment[0] == ':') {
         $segment = substr($segment, 1);
-        array_push($path, $params[$segment]);
+        $value = isset($params[$segment]) ? 
+          $params[$segment] : 
+          $current_request->params[$segment];
+        array_push($path, $value);
       } else {
         array_push($path, $segment);
       }
@@ -145,19 +177,6 @@ class Route {
     }
        
     return $path;
-  }
-
-  public function testParams($params) {
-    foreach($this->req as $req => $regex) {
-      if(!$regex) continue;
-      if(!isset($params[$req])) return false;
-      if(!preg_match("#^$regex$#", $params[$req])) return false;
-    }
-    return true;
-  }
-
-  public function params() {
-    return $this->defaults;
   }
 
 }

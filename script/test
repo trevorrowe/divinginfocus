@@ -1,0 +1,24 @@
+#! /usr/bin/php
+<?php 
+
+namespace Pippa;
+
+define('APP_ROOT', realpath(dirname(__FILE__) . '/..'));
+define('APP_ENV', 'test');
+
+require(APP_ROOT . '/vendor/pippa/app.php');
+
+App::boot();
+
+switch(true) {
+  case $argc == 1:
+    echo "testing client application\n";
+    break;
+  case $argc == 2 && $argv[1] == 'pippa':
+    echo "testing pippa framework\n";
+    require(App::root . '/vendor/pippa/test/routes.php');
+    break;
+  default:
+    echo "invalid usage\n";
+    exit;
+}
