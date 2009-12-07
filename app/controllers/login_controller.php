@@ -1,6 +1,6 @@
 <?php
 
-class LoginController extends \Pippa\Controller {
+class LoginController extends ApplicationController {
   
   public function index_action() {
   }

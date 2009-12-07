@@ -1,6 +1,6 @@
 <?php
 
-class LogoutController extends \Pippa\Controller {
+class LogoutController extends ApplicationController {
   
   public function index_action() {
   }

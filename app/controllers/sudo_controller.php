@@ -1,6 +1,6 @@
 <?php
 
-class SudoController extends \Pippa\Controller {
+class SudoController extends ApplicationController {
   
   public function index_action() {
   }

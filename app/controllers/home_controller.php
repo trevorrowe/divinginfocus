@@ -1,6 +1,6 @@
 <?php
 
-class HomeController extends \Pippa\Controller {
+class HomeController extends ApplicationController {
 
   public function index_action($params) { 
   }

@@ -1,6 +1,6 @@
 <?php
 
-class IndexController extends \Pippa\Controller {
+class IndexController extends ApplicationController {
 
   public function index_action($params) { 
   }
