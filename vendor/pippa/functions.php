@@ -214,7 +214,7 @@ function url() {
   }
 
   if(!isset($params['controller']))
-    $params['controller'] = Request::get_http_request()->params['controller'];
+    $params['controller'] = \Pippa\Request::get_http_request()->params['controller'];
 
   if(!isset($params['action']))
     $params['action'] = 'index';
@@ -222,7 +222,7 @@ function url() {
   if(isset($params['id']) && is_object($params['id']))
     $params['id'] = $params['id']->to_param();
 
-  foreach(App::$routes as $route)
+  foreach(\Pippa\App::$routes as $route)
     if($route->matches_params($params))
       return $route->build_url($params);
 
@@ -303,5 +303,10 @@ function format_bytes($bytes, $precision = 2) {
   }
 }
 
-function h($str) {
+# shortend alias for htmlspecialchars
+function h() {
+  return htmlspecialchars(func_get_args);
+}
+
+function j($str) {
 }
