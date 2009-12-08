@@ -11,11 +11,6 @@
         <?php echo $content ?>
       </div>
       <div id="header">
-        <ul>  
-          <li>Photos</li>
-          <li>Videos</li>
-          <li>Blogs</li>
-        </ul>  
       </div>
       <div id="footer">
       </div>

@@ -40,20 +40,18 @@ class Log {
   }
 
   public static function timing($start, $stop) {
-    $ms = ($stop - $start) * 1000;
+    $ms = round(($stop - $start) * 1000);
     $time = self::format_time($ms);
-    $msg = "  \x1b[33m\x1b[1m[APP TIMING] ($time)\x1b[0m $ms";
-    App::$log->write($msg);
-    $url = Request::get_http_request()->url;
     $status = 200;
-    $msg = "Completed in $time ($ms) | $status [$url]";
+    $url = Request::get_http_request()->url;
+    $msg = "Completed in $time | $status [$url]";
     App::$log->write($msg);
   }
 
   protected static function format_time($ms) {
     switch(true) {
       case $ms < 1000: 
-        return sprintf("%d ms", floor($ms)); 
+        return sprintf("%dms", floor($ms)); 
       case $ms < (1000 * 60): 
         return sprintf("%.2f seconds", $ms / 1000); 
       default:

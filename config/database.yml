@@ -1,0 +1,25 @@
+development: &development
+  adapter: mysql
+  host: localhost
+  socket: /tmp/mysql.sock
+  database: divinginfocus
+  username: root
+  password:
+  reconnect: true
+
+lappy:
+  <<: *development
+
+staging:
+  adapter: mysql
+  host: mysql.divinginfocus.com
+  database: divinginfocus_staging
+  username: webdev
+  password: mrdalking
+
+production:
+  adapter: mysql
+  host: mysql.divinginfocus.com
+  database: divinginfocus_staging
+  username: webdev
+  password: mrdalking

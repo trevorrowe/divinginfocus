@@ -1,0 +1,25 @@
+#require(File.join(File.dirname(__FILE__), 'vendor', 'pippa', 'tasks', 'db.rake'))
+
+require 'rubygems'
+require 'active_record'
+require 'yaml'
+
+task :default => :migrate
+
+desc "Migrate the database"
+task :migrate => :environment do
+end
+
+task :environment do
+  APP_ENV = (ENV['APP_ENV'] ||= 'development')
+  dbconfig = YAML::load(File.open('config/database.yml'))[APP_ENV]
+  puts dbconfig.to_yaml
+  ActiveRecord::Base.establish_connection(dbconfig)
+  ActiveRecord::Base.colorize_logging = true
+  log = File.open("log/#{APP_ENV}", 'w')
+  ActiveRecord::Base.logger = Logger.new(logFile)
+end
+
+task :migrate => :environment do
+  #ActiveRecord::Migrator.migrate(’'igrations', ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
+end

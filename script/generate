@@ -1,0 +1,40 @@
+#! /usr/bin/php
+<?php 
+
+namespace Pippa;
+
+define('APP_ROOT', realpath(dirname(__FILE__) . '/..'));
+define('APP_ENV', getenv('APP_ENV') ? getenv('APP_ENV') : 'development');
+
+require(APP_ROOT . '/vendor/pippa/app.php');
+
+App::boot();
+
+switch($argv[1]) {
+  
+  case 'migration':
+
+    $migration_dir = App::root . '/db/migrate';
+    if(!file_exists($migration_dir))
+      mkdir($migration_dir, 0755, true);
+
+    $name = $argv[2];
+    $filename = $migration_dir . strftime("/%Y%m%d%H%M%S_$name.rb");
+    $contents = <<<EOT
+class $name < ActiveRecord::Migration
+
+  self.up
+  end
+
+  self.down
+  end
+
+end
+EOT;
+    file_put_contents($filename, $contents);
+    break;
+
+  default:
+    echo "unknown generator\n";
+    break;
+}

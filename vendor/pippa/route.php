@@ -46,7 +46,7 @@ class Route {
     if(!$params) 
       return false;
 
-    if(!Controller::exists($params['controller'])) 
+    if(!in_array($params['controller'], App::$controllers))
       return false;
 
     foreach($params as $k => $v)

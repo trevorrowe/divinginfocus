@@ -22,25 +22,34 @@ class App {
 
   public static $controllers = array();
 
-  public static function add_route($pattern, $options = array()) {
-    array_push(self::$routes, new Route($pattern, $options));
-  }
-
   public static function add_include_path($path) {
     set_include_path(get_include_path() . PATH_SEPARATOR . self::root . $path);
   }
 
   public static function autoload($class) {
-    # only autoload classes in the Pippa Framework
+
+    # Pippa classes
     if(substr($class, 0, 6) == 'Pippa\\') {
       $dir = self::root . '/vendor/';
       require($dir . strtolower(str_replace('\\', '/', $class)) . '.php');
+      return;
     }
+    
+    # controllers
+    if(substr($class, strlen($class) - 10) == 'Controller') {
+      $dir = self::root . '/app/controllers/';
+      require($dir . underscore($class) . '.php');
+      return;
+    }
+
   }
 
   public static function run() {
     self::boot();
+    Flash::setup();
+    ob_start();
     Router::dispatch(Request::get_http_request());
+    Flash::clean();
   }
 
   public static function boot() {
@@ -65,12 +74,14 @@ class App {
     self::add_include_path('/lib');
     self::add_include_path('/app/models');
 
-    self::$log = new Log($log_path);
-
-    require(self::root . '/vendor/pippa/helpers.php');
+    # TODO : clean this up, most of this should get autoloaded
+    #require(self::root . '/vendor/pippa/route.php');
+    require(self::root . '/vendor/pippa/functions.php');
     require(self::root . '/config/environment.php');
     require(self::root . '/config/environments/' . self::env . '.php');
     require(self::root . '/config/routes.php');
+
+    self::$log = new Log($log_path);
 
     # determine the complete list of routeable controllers 
 
@@ -85,5 +96,6 @@ class App {
     }
 
   }
-
 }
+
+class Exception extends \Exception { }

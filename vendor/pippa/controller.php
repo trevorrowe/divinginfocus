@@ -182,6 +182,7 @@ class Controller {
   protected function _redirect() {
     header(self::$statuses[$this->_status ? $this->_status : 302]);
     header ("Location: {$this->_mode_data}");
+    App::$log->write("Redirected to {$this->_mode_data}");
   }
 
   protected function _render() {
@@ -315,10 +316,6 @@ class Controller {
 
   public static function controller_path($controller) {
     return App::root . "/app/controllers/{$controller}_controller.php";
-  }
-
-  public static function exists($controller) {
-    return in_array($controller, App::$controllers);
   }
 
 }
