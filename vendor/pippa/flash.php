@@ -20,7 +20,7 @@ class Flash {
     return isset(self::$data[$key]) ? self::$data[$key] : null;
   }
 
-  public static function setup() {
+  public static function init() {
     if(isset($_COOKIE[self::cookie_name]))
       self::$data = unserialize($_COOKIE[self::cookie_name]);
     self::$to_expire = array_keys(self::$data);

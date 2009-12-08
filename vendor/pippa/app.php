@@ -46,7 +46,7 @@ class App {
 
   public static function run() {
     self::boot();
-    Flash::setup();
+    Flash::init();
     ob_start();
     Router::dispatch(Request::get_http_request());
     Flash::clean();
@@ -71,8 +71,8 @@ class App {
     spl_autoload_register("\Pippa\App::autoload");
     spl_autoload_register();
 
-    self::add_include_path('/lib');
     self::add_include_path('/app/models');
+    self::add_include_path('/lib');
 
     # TODO : clean this up, most of this should get autoloaded
     #require(self::root . '/vendor/pippa/route.php');

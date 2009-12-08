@@ -41,14 +41,15 @@ class Log {
 
   public static function timing($start, $stop) {
     $ms = round(($stop - $start) * 1000);
-    $time = self::format_time($ms);
+    $time = self::format_ms($ms);
     $status = 200;
     $url = Request::get_http_request()->url;
-    $msg = "Completed in $time | $status [$url]";
+    $memory = format_bytes(memory_get_peak_usage(true));
+    $msg = "Completed in $time using $memory | $status [$url]";
     App::$log->write($msg);
   }
 
-  protected static function format_time($ms) {
+  protected static function format_ms($ms) {
     switch(true) {
       case $ms < 1000: 
         return sprintf("%dms", floor($ms)); 
