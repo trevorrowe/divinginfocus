@@ -22,26 +22,16 @@ class App {
 
   public static $controllers = array();
 
-  public static function add_include_path($path) {
-    set_include_path(get_include_path() . PATH_SEPARATOR . self::root . $path);
-  }
-
   public static function autoload($class) {
-
-    # Pippa classes
     if(substr($class, 0, 6) == 'Pippa\\') {
+      # pippa framework classes
       $dir = self::root . '/vendor/';
       require($dir . strtolower(str_replace('\\', '/', $class)) . '.php');
-      return;
-    }
-    
-    # controllers
-    if(substr($class, strlen($class) - 10) == 'Controller') {
+    } else if(substr($class, strlen($class) - 10) == 'Controller') {
+      # controllers
       $dir = self::root . '/app/controllers/';
       require($dir . underscore($class) . '.php');
-      return;
     }
-
   }
 
   public static function run() {
@@ -69,13 +59,8 @@ class App {
     ));
 
     spl_autoload_register("\Pippa\App::autoload");
-    spl_autoload_register();
-
-    self::add_include_path('/app/models');
-    self::add_include_path('/lib');
 
     # TODO : clean this up, most of this should get autoloaded
-    #require(self::root . '/vendor/pippa/route.php');
     require(self::root . '/vendor/pippa/functions.php');
     require(self::root . '/config/environment.php');
     require(self::root . '/config/environments/' . self::env . '.php');

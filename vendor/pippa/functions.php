@@ -23,6 +23,37 @@ function flash_now($key, $payload) {
   \Pippa\Flash::set($key, $payload, true);
 }
 
+function flash_messages($levels = null) {
+
+  if(is_null($levels)) 
+    $levels = array('error', 'warn', 'notice', 'info');
+
+  $flashes = array();
+  foreach($levels as $level) {
+    if($msg = flash($level)) {
+      if(is_array($msg))
+        $msg = tag('ul', collect($msg, function($n) { return "<li>$n</li>"; }));
+      else
+        $msg = tag('p', $msg);
+      $flashes[] = tag('div', $msg, array('class' => "$level flash"));
+    }
+  }
+
+  return empty($flashes) ? 
+    null : 
+    tag('div', $flashes, array('id' => 'flashes'));
+
+}
+
+### iterators
+
+function collect($array, $callback) {
+  $results = array();
+  foreach($array as $array_index => $array_element)
+    $results[] = $callback($array_element, $array_index);
+  return $results;
+}
+
 ### string inflectors
 
 function camelize($lower_case_and_underscored_word) {
@@ -233,6 +264,50 @@ function url() {
 
 ### view helpers
 
+# alias for htmlspecialchars
+function h() {
+  return htmlspecialchars(func_get_args());
+}
+
+# if not prepended by a protocol or / then its prepended with /stylessheets/
+# .css is auto-postpended unless already present
+function css_tag($asset, $opts = array()) {
+  if($asset[0] == '/' or preg_match('#^https?://#', $asset, $matches))
+    $url = $asset;
+  else
+    $url = "/stylesheets/$asset.css";
+  $media = isset($opts['media']) ? $opts['media'] : 'screen';
+  return "<link href='$url' media='$media' rel='stylesheet' type='text/css' />";
+}
+
+function js_tag($asset) {
+  if($asset[0] == '/' or preg_match('#^https?://#', $asset, $matches))
+    $url = $asset;
+  else
+    $url = "/javascripts/$asset.js";
+  return "<script src='$url' type='text/javascript'></script>";
+}
+
+function tag($name, $content = null, $attributes = array()) {
+
+  # determine if this is a self closing html tag
+  # TODO : why are input tags not typically self closed?
+  $self_closing_tags = array('meta', 'img', 'link', 'script', 'br', 'hr');
+  #$self_closing = in_array($name, $self_closing_tags) || empty($content);
+  $self_closing = in_array($name, $self_closing_tags);
+
+  # build the attributes
+  $attr = array();
+  foreach($attributes as $key => $value)
+    $attr[] = "$key='$value'";
+  $attr = empty($attr) ? '' : ' ' . implode(' ', $attr);
+
+  if(is_array($content))
+    $content = implode('', $content); 
+
+  return $self_closing ? "<$name$attr />" : "<$name$attr>$content</$name>";
+}
+
 function cycle() {
 
   static $indexes = array();
@@ -260,6 +335,10 @@ function route($pattern, $options = array()) {
 }
 
 ### miscellany
+
+function add_include_path($path) {
+  set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+}
 
 function debug($obj, $stop = true) {
   echo '<pre>';
@@ -301,12 +380,4 @@ function format_bytes($bytes, $precision = 2) {
     default:
       return sprintf("%.{$precision}f YB", $bytes / $yb);
   }
-}
-
-# shortend alias for htmlspecialchars
-function h() {
-  return htmlspecialchars(func_get_args);
-}
-
-function j($str) {
 }

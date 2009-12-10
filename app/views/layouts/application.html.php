@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><?php echo isset($title) ? "$title : Diving in Focus" : 'Diving in Focus' ?></title>
+  <meta charset='UTF-8'>
+  <?php echo css_tag('layouts/application') ?>
+  <?php echo js_tag('prototype') ?>
+</head>
+<body>
+  <div id='cntl' class='<?php echo $params['controller'] ?>'>
+    <div id='actn' class='<?php echo $params['action'] ?>'>
+      <?php echo flash_messages() ?>
+      <div id='content'>
+        <?php echo $content ?>
+      </div>
+      <div id='header'>
+      </div>
+      <div id='footer'>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

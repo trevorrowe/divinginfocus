@@ -1,4 +1,3 @@
-RewriteEngine On
 
 # server maintenance check
 #RewriteCond %{DOCUMENT_ROOT}/maintenance.php -f
@@ -6,5 +5,12 @@ RewriteEngine On
 #RewriteCond %{SCRIPT_FILENAME} !^/images/maintenance
 #RewriteRule ^.*$ /maintenance.php [L]
 
+RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /index.php
+
+# Asset Expiration
+#ExpiresActive On
+#<FilesMatch "\.(ico|gif|jpe?g|png|js|css)$">
+#  ExpiresDefault "access plus 1 year"
+#</FilesMatch>

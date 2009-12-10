@@ -11,6 +11,11 @@ require(APP_ROOT . '/vendor/pippa/app.php');
 App::boot();
 
 switch($argv[1]) {
+
+  case 'secret':
+    $secret = "371041ed72652baedca4b0e5bd8e43ceb1d6081c8feb895dc4fef9218ec3343589bb8de232ec5b9687e4f3b57fe132bbf9ea0badd3c1727c3002b22cb09739a4";
+    echo "$secret\n";
+    break;
   
   case 'migration':
 

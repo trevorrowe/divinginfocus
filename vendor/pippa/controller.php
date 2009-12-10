@@ -225,7 +225,7 @@ class Controller {
 
   protected function _render_text($page) {
 
-    $default = 'default';
+    $default = 'application';
     $layout = $this->_layout;
 
     switch(true) {

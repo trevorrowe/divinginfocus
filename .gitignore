@@ -1,3 +1,5 @@
+app/stylesheets/.sass-cache
+public/stylesheets/*
 log/*
 *.swp
 *.swo
