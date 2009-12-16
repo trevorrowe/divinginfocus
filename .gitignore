@@ -1,3 +1,4 @@
+vendor/sculpt
 app/stylesheets/.sass-cache
 public/stylesheets/*
 log/*
