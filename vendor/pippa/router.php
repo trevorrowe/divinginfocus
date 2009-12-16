@@ -13,7 +13,7 @@ class Router {
 
         # route matched, load the controller and dispatch the request to the
         # appropriate action
-        Log::request($request);
+        App::$log->request($request);
         
         $controller = $request->params['controller'];
 
@@ -23,7 +23,6 @@ class Router {
         \Hopnote::$action = $request->params['action'];
 
         # build the controller object and run the action
-        require_once(Controller::controller_path($controller));
         $controller_class = Controller::class_name($controller);
         $controller = new $controller_class($request);
         $controller->run();

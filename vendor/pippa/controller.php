@@ -224,7 +224,7 @@ class Controller {
   }
 
   protected function _render_text($page) {
-
+    
     $default = 'application';
     $layout = $this->_layout;
 
@@ -307,15 +307,21 @@ class Controller {
   #
   #   admin/directory_pages_controller => Admin_DirectoryPagesController
   #
+  # TODO : create a string inflector for this
   public static function class_name($controller) {
-    $class_name = '';
+    $parts = array();
     foreach(explode('/', $controller) as $part)
-      $class_name .= ucfirst($part);
-    return $class_name . 'Controller';
+      $parts[] = camelize($part);
+    $c = implode('_', $parts) . 'Controller';
+    return implode('_', $parts) . 'Controller';
   }
 
-  public static function controller_path($controller) {
-    return App::root . "/app/controllers/{$controller}_controller.php";
+  public static function controller_path($class_name) {
+    $parts = array();
+    foreach(explode('_', $class_name) as $part)
+      $parts[] = underscore($part);
+    $path = implode('/', $parts);
+    return App::root . "/app/controllers/{$path}.php";
   }
 
 }

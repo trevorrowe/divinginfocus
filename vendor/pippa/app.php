@@ -28,9 +28,7 @@ class App {
       $dir = self::root . '/vendor/';
       require($dir . strtolower(str_replace('\\', '/', $class)) . '.php');
     } else if(substr($class, strlen($class) - 10) == 'Controller') {
-      # controllers
-      $dir = self::root . '/app/controllers/';
-      require($dir . underscore($class) . '.php');
+      require Controller::controller_path($class);
     }
   }
 
@@ -60,13 +58,18 @@ class App {
 
     spl_autoload_register("\Pippa\App::autoload");
 
+    self::$log = new Logger($log_path);
+
     # TODO : clean this up, most of this should get autoloaded
     require(self::root . '/vendor/pippa/functions.php');
+
     require(self::root . '/config/environment.php');
     require(self::root . '/config/environments/' . self::env . '.php');
-    require(self::root . '/config/routes.php');
 
-    self::$log = new Log($log_path);
+    foreach(glob(self::root . '/config/initializers/*.php') as $file)
+      require($file);
+
+    require(self::root . '/config/routes.php');
 
     # determine the complete list of routeable controllers 
 

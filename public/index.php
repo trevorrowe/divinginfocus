@@ -11,4 +11,4 @@ require(APP_ROOT . '/vendor/pippa/app.php');
 
 App::run();
 
-Log::timing($start, microtime(true));
+App::$log->timing(microtime(true) - $start);

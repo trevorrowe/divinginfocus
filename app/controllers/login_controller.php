@@ -1,6 +1,6 @@
 <?php
 
-class LoginController extends ApplicationController {
+class LoginController extends PublicBaseController {
   
   public function index_action() {
   }

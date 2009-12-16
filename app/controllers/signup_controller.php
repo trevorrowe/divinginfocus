@@ -1,6 +1,6 @@
 <?php
 
-class SignupController extends ApplicationController {
+class SignupController extends PublicBaseController {
   
   public function index_action() {
   }

@@ -47,6 +47,11 @@ function flash_messages($levels = null) {
 
 ### iterators
 
+#function each($array, $callback) {
+#  foreach($array as $array_index => $array_element)
+#    $callback($array_element, $array_index);
+#}
+
 function collect($array, $callback) {
   $results = array();
   foreach($array as $array_index => $array_element)
@@ -66,7 +71,6 @@ function capitalize($word) {
 }
 
 function classify($word) {
-  # TODO : should this return the actual class instead? I'm leaning that way
   return camelize(singularize($word));
 }
 
@@ -260,6 +264,11 @@ function url() {
   $msg = "Unable to build a url from: ";
   throw new Exception($msg . print_r($args, true));
 
+}
+
+function link_to($label, $url, $opts = array()) {
+  $opts['href'] = url($url);
+  return tag('a', $label, $opts);
 }
 
 ### view helpers
