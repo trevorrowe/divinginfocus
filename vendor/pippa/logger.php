@@ -4,25 +4,22 @@ namespace Pippa;
 
 class Logger {
 
-  protected $path;
-
-  protected $stream;
+  public $stream;
 
   public function __construct($path) {
-    $this->path = $path;
     $url = "file://$path";
     if(!$this->stream = @fopen($url, 'a', false))
       throw new Exception('Unable to write to log: ' . $this->path);
+  }
+
+  public function log($msg) {
+    $this->write($msg);
   }
 
   public function write($msg) {
     # TODO : rework this, not a fan of the @ infront of fwrite
     if(false === @fwrite($this->stream, $msg . "\n"))
       throw new Exception('Unable to write to log: ' . $this->path);
-  }
-
-  public function log($msg) {
-    $this->write($msg);
   }
   
   public function request($request) {

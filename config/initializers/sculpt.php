@@ -1,10 +1,11 @@
 <?php
 
-require(\Pippa\App::root . '/vendor/sculpt/Sculpt.php');
+use \Pippa\App;
 
-$dsn = 'mysql://root@localhost/divinginfocus;unix_socket=/tmp/mysql.sock';
+require(App::root . '/vendor/sculpt/Sculpt.php');
 
-\Sculpt\connect($dsn);
+\Sculpt\Logger::set_logger(App::$log);
 
-\Sculpt\Sculpt::$logger = \Pippa\App::$log;
+\Sculpt\Connections::add_by_ini_file(App::root . '/config/sculpt.ini');
 
+\Sculpt\Connections::set_default(App::env);
