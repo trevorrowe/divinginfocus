@@ -4,44 +4,54 @@ class Admin_UsersController extends Admin_BaseController {
 
   public function index_action($params) {
     $page = isset($params['page']) ? $params['page'] : 1;
-    $this->locals['users'] = User::find()->paginate($page);
-    #$this->locals['users'] = User::find()->all();
-    #$this->locals['users'] = User::find()->other->paginate($page);
-    #$this->locals['users'] = User::find()->cool->asc_by_username->paginate($page);
+    $this->users = User::find()->paginate($page);
+  }
+
+  public function admins_action($params) {
+    $page = isset($params['page']) ? $params['page'] : 1;
+    $this->users = User::admin()->paginate($page);
+    $this->render('index');
   }
 
   public function show_action($params) {
-    $this->locals['user'] = User::get($params['id']);
+    $this->user = User::get($params['id']);
   }
 
   public function new_action($params) {
-    $this->locals['user'] = new User();
+    $this->user = new User();
   }
 
   public function create_action($params) {
-    $user = new User($params['user']);
+
+    $user = new User($params['user'], false);
+    if($user->password == '')
+      $user->randomize_password();
+
     if($user->save()) {
       flash('notice', 'User added.');
       $this->redirect('show', $user);
     } else {
-      flash('error', 'Unable to add user, see errors below.');
-      $this->locals['user'] = $user;
+      flash_now('error', 'Unable to add user, see errors below.');
+      flash_now('error', $user->errors->full_messages());
+      $this->user = $user;
       $this->render('new');
     }
   }
 
   public function edit_action($params) {
-    $this->locals['user'] = User::get($params['id']);
+    $this->user = User::get($params['id']);
   }
 
   public function update_action($params) {
     $user = User::get($params['id']);
-    if($user->update_attribute($params['user'])) {
+    $user->set_attributes($params['user'], false);
+    debug($user->changes());
+    if($user->update_attributes($params['user'], false)) {
       flash('notice', 'User updated.');
       $this->redirect('show', $user);
     } else {
       flash('error', 'Unable to update user, see errors below.');
-      $this->locals['user'] = $user;
+      $this->user = $user;
       $this->render('edit');
     }
   }
@@ -49,7 +59,7 @@ class Admin_UsersController extends Admin_BaseController {
   public function destroy_action($params) {
     $user = User::get($params['id']);
     $user->destroy();
-    flash('notice', 'User removed.');
+    flash('notice', 'User deleted.');
     $this->redirect('index');
   }
 

@@ -1,3 +1,11 @@
+#DREAMHOST Options +ExecCGI
+#DREAMHOST AddHandler php-cgi .php
+#DREAMHOST Action php-cgi /cgi-bin/php.cgi
+#DREAMHOST <FilesMatch "^php5?\.(ini|cgi)$">
+#DREAMHOST   Order Deny,Allow
+#DREAMHOST   Deny from All
+#DREAMHOST   Allow from env=REDIRECT_STATUS
+#DREAMHOST </FilesMatch>
 
 # server maintenance check
 #RewriteCond %{DOCUMENT_ROOT}/maintenance.php -f
@@ -8,9 +16,3 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /index.php
-
-# Asset Expiration
-#ExpiresActive On
-#<FilesMatch "\.(ico|gif|jpe?g|png|js|css)$">
-#  ExpiresDefault "access plus 1 year"
-#</FilesMatch>

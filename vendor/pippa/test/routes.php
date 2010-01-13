@@ -6,10 +6,10 @@ App::$routes = array();
 
 route('/');
 route(':controller');
-route(':controller/:action');
 route(':controller/:action/:id');
+route(':controller/:action');
 
-$request = new Request('/index/index/edit');
+$request = new Request('/admin/users/edit');
 
 foreach(App::$routes as $route) {
   if($route->matches_request($request)) {

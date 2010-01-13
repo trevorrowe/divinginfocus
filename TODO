@@ -1,0 +1,28 @@
+* provide a method for rendering a template from within a template
+* fix url generation from routes, its picking not-so-pretty urls at times
+  (see admin/users/1 -> edit action link)
+* routing bug, not trimming trailing slash from url before matching
+
+improve controller rendering options
+-------------------------------------
+
+* render($what);
+* render_text($what)
+
+* render_to_string();
+* render_to_string('edit');
+* render_to_string('forms/details')
+* render_to_string('/login/form')
+
+* render_text($str);
+
+
+
+In production mode:
+===================
+
+  * check for the presence of a combined file stored in tmp
+    of all the standard loadable files, such as routes, environment, etc,
+    these files would get combined into a single php file and cached
+
+    good or bad idea?

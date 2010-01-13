@@ -1,13 +1,5 @@
 <?php
 
-# App catchable errors
-#
-# - missing environments/env.php file
-# - missing view template
-# - missing view partial
-# - bad route configuration
-#
-
 namespace Pippa;
 
 class App {
@@ -24,10 +16,11 @@ class App {
 
   public static function autoload($class) {
     if(substr($class, 0, 6) == 'Pippa\\') {
-      # pippa framework classes
+      ## pippa framework classes
       $dir = self::root . '/vendor/';
       require($dir . strtolower(str_replace('\\', '/', $class)) . '.php');
     } else if(substr($class, strlen($class) - 10) == 'Controller') {
+      ## controllers
       require Controller::controller_path($class);
     }
   }
@@ -46,22 +39,15 @@ class App {
 
     ini_set('error_log', $log_path);
 
-    require(self::root . '/vendor/hopnote/Hopnote.php');
-    \Hopnote::register_handlers('72f3e257342bd683d986a4ef5f70be84', array(
-      'environment' => self::env,
-      'deployed' => self::env == 'production',
-      'fatals' => TRUE,
-      'root' => self::root,
-      'errors' => E_ALL | E_STRICT,
-      'fivehundred' => self::root . '/public/500.html',
-    ));
-
     spl_autoload_register("\Pippa\App::autoload");
 
     self::$log = new Logger($log_path);
 
-    # TODO : clean this up, most of this should get autoloaded
+    # TODO : why is this line here?
+    require(self::root . '/vendor/pippa/exception.php');
+
     require(self::root . '/vendor/pippa/functions.php');
+    require(self::root . '/app/helpers/application_helper.php');
 
     require(self::root . '/config/environment.php');
     require(self::root . '/config/environments/' . self::env . '.php');
@@ -70,6 +56,14 @@ class App {
       require($file);
 
     require(self::root . '/config/routes.php');
+
+    ## add standard include paths
+
+    set_include_path(App::root . '/app/models');
+    add_include_path(App::root . '/lib');
+    spl_autoload_register(function($class) {
+      spl_autoload($class, '.php');
+    });
 
     # determine the complete list of routeable controllers 
 
@@ -85,5 +79,3 @@ class App {
 
   }
 }
-
-class Exception extends \Exception { }

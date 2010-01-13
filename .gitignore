@@ -1,7 +1,9 @@
+vendor/hopnote
+vendor/simpletest
 vendor/sculpt
+log/*
 app/stylesheets/.sass-cache
 public/stylesheets/*
-log/*
 *.swp
 *.swo
 .DS_Store

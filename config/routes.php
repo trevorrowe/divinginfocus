@@ -1,7 +1,12 @@
 <?php
 
-route('/', array('controller' => 'home'));
-route(':controller');
-route(':controller/:id', array('id' => "\d+(-.+)?", 'action' => 'show'));
-route(':controller/:action');
-route(':controller/:action/:id');
+use Pippa\Route;
+
+Route::add('/admin', array('controller' => 'admin/users'));
+
+Route::add('/users/:username', array(
+  'controller' => 'users', 
+  'action' => 'show',
+));
+
+Route::defaults();

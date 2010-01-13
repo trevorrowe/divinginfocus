@@ -4,11 +4,30 @@ namespace Pippa;
 
 class Request {
 
-  protected $data;
+  public $url;
+
+  public $uri;
+
+  public $protocol;
+
+  public $host;
+
+  public $port;
+
+  public $method;
+
+  public $time;
+
+  public $format;
+
+  public $params;
+
+  public $routeable_path;
 
   public function __construct($uri, $opts = array()) {
 
     $defaults = array(
+      'uri'      => $uri,
       'protocol' => 'http',
       'host'     => 'localhost',
       'port'     => 80,
@@ -19,35 +38,29 @@ class Request {
 
     foreach($defaults as $k => $default) {
       if(isset($opts[$k]))
-        $this->data[$k] = $opts[$k];
+        $this->$k = $opts[$k];
       else
-        $this->data[$k] = $default;
+        $this->$k = $default;
     }
 
     $parts = explode('?', $uri);
     $parts = explode('.', $parts[0]);
-    $this->data['route_path'] = ltrim($parts[0], '/');
+    $this->routeable_path = trim($parts[0], '/');
 
     if(isset($parts[1])) {
-      $this->data['format'] = $parts[1];
-      $this->data['params']['format'] = $parts[1];
+      $this->format = $parts[1];
+      $this->params['format'] = $parts[1];
     } else {
-      $this->data['format'] = 'html';
+      $this->format = 'html';
     }
 
-    $this->data['uri'] = $uri;
-    $this->data['url'] = $this->data['protocol']."://{$this->data['host']}$uri";
+    $this->uri = $uri;
+    $this->url = $this->protocol . "://{$this->host}$uri";
 
-  }
-
-  public function &__get($what) {
-    if(isset($this->data[$what]))
-      return $this->data[$what];
-    throw new Exception("Undefined Request property: $what");
   }
 
   public function dispatch($route_params) {
-    $this->data['params'] = array_merge($this->data['params'], $route_params);
+    $this->params = array_merge($this->params, $route_params);
   }
 
   public static function &get_http_request() {

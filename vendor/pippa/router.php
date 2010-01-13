@@ -14,6 +14,7 @@ class Router {
         # route matched, load the controller and dispatch the request to the
         # appropriate action
         App::$log->request($request);
+        App::$log->params($request->params);
         
         $controller = $request->params['controller'];
 
@@ -30,9 +31,7 @@ class Router {
 
       }
     }
-
-    # TODO : throw a 404 exception here instead
-    die("no possible routes");
+    throw new NoMatchingRouteException($request);
   }
 
 }

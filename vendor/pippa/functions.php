@@ -32,7 +32,7 @@ function flash_messages($levels = null) {
   foreach($levels as $level) {
     if($msg = flash($level)) {
       if(is_array($msg))
-        $msg = tag('ul', collect($msg, function($n) { return "<li>$n</li>"; }));
+        $msg = tag('ul', collect($msg, function($k, $v) { return "<li>$v</li>"; }));
       else
         $msg = tag('p', $msg);
       $flashes[] = tag('div', $msg, array('class' => "$level flash"));
@@ -54,8 +54,8 @@ function flash_messages($levels = null) {
 
 function collect($array, $callback) {
   $results = array();
-  foreach($array as $array_index => $array_element)
-    $results[] = $callback($array_element, $array_index);
+  foreach($array as $key => $value)
+    $results[] = $callback($key, $value);
   return $results;
 }
 
@@ -179,57 +179,59 @@ function underscore($camel_cased_word) {
 
 ### url
 
-# Examples:
+# Shorthand url syntax
 # 
-#   url('photos', 'show', 123);
-#   url($photo);
+#   url('new')                        (current_controller, action))
+#   url('show', 123);                 (current_controller, action, id)
+#   url('photos', 'show', 123);       (controller, action, id)
+#   url(array('photos', 'show', 123)) (controller, action, id)
 #
-# controller = CURRENT_CONTROLLER
-# action = new
-#
-#   url('new');  
-#   url(array('action' => 'new'));
-#
-# controller = CURRENT_CONTROLLER
-# action = edit
-# id = 123
-#
-#   url('edit', $photo);
-#   url(array('action' => 'edit', 'id' => 123));
-#
-# controller = profiles
-# action = show
-# id = 456
-#
-#   url('profiles', 'show', 456);
-#   url(array('controller' => 'profiles', 'action' => 'show', 'id' => 456));
-#
-# controller = home
-#
-#   url(array('controller' => 'home'));
-#
-# Returns all of the following w/out modification:
+# Fixed urls, no transformation done
 #
 #   url('/logout');
 #   url('https://foo.com');
 #   url('http://foo.com');
 #   url('ftp://bar.com');
 #
+#   url('show', $user, array('only_path' => false))
+#   url(
+#
+
+/**
+ * Builds a url string
+ *
+ *
+ */
 function url() {
 
   $argc = func_num_args();
   $args = func_get_args();
 
-  # single arguments that start with a / or a protocol (like http://) are
-  # returned unmofied as they are already valid urls
-  if($argc == 1 && !is_array($args[0]))
+  #$options = array('only_path', 'anchor', 'host', 'protocol', 'port');
+
+  # get the options hash from the end of the passed arguments
+  if($argc > 1 && is_assoc($args[$argc - 1])) {
+    $opts = array_pop($args);
+    $argc -= 1;
+  } else {
+    $opts = array();
+  }
+
+  # When this function is called with a single argument that is a string
+  # that looks like '/some/url/path' or 'http://someurl.com', we will
+  # return that url unmodified.  These need no transformation.
+  if($argc == 1 && is_string($args[0]))
     if($args[0][0] == '/' || preg_match('#^[a-z]+://#', $args[0]))
       return $args[0];
 
-  $params = array();
   switch($argc) {
     case 1:
-      $params = is_array($args[0]) ? $args[0] : array('action' => $args[0]);
+      if(is_assoc($args[0]))
+        $params = $args[0];
+      else if(is_array($args[0]))
+        return call_user_func_array('url', $args[0]);
+      else
+        $params = array('action' => $args[0]);
       break;
     case 2:
       $params = array(
@@ -257,25 +259,47 @@ function url() {
   if(isset($params['id']) && is_object($params['id']))
     $params['id'] = $params['id']->to_param();
 
-  foreach(\Pippa\App::$routes as $route)
-    if($route->matches_params($params))
-      return $route->build_url($params);
+  $url_path = null;
+  foreach(\Pippa\App::$routes as $route) {
+    if($route->matches_params($params)) {
+      $url_path = $route->build_url($params);
+      break;
+    }
+  }
 
-  $msg = "Unable to build a url from: ";
-  throw new Exception($msg . print_r($args, true));
+  if(is_null($url_path)) {
+    $msg = "Unable to build a url from: ";
+    throw new Exception($msg . print_r($args, true));
+  }
+
+  # TODO : use options to add things like protocol, anchor, etc
+
+  return $url_path;
 
 }
 
 function link_to($label, $url, $opts = array()) {
+
   $opts['href'] = url($url);
+
+  if(isset($opts['confirm']) && $opts['confirm']) {
+    $msg = $opts['confirm'];
+    if($msg === true)
+      $msg = 'Are your sure?';
+    else
+      $msg = str_replace('\'', '\\\'', $msg);
+    unset($opts['confirm']);
+    $opts['onclick'] = "return confirm('$msg');";
+  }
+
   return tag('a', $label, $opts);
 }
 
 ### view helpers
 
 # alias for htmlspecialchars
-function h() {
-  return htmlspecialchars(func_get_args());
+function h($str) {
+  return htmlspecialchars($str);
 }
 
 # if not prepended by a protocol or / then its prepended with /stylessheets/
@@ -290,25 +314,30 @@ function css_tag($asset, $opts = array()) {
 }
 
 function js_tag($asset) {
-  if($asset[0] == '/' or preg_match('#^https?://#', $asset, $matches))
-    $url = $asset;
-  else
-    $url = "/javascripts/$asset.js";
+
+  $url = $asset;
+  if(!str_ends_with($url, '.js'))
+    $url .= '.js';
+
+  if($url[0] != '/' && !preg_match('#^https?://#', $asset, $matches))
+    $url = "/javascripts/$url";
+
   return "<script src='$url' type='text/javascript'></script>";
 }
 
 function tag($name, $content = null, $attributes = array()) {
 
-  # determine if this is a self closing html tag
-  # TODO : why are input tags not typically self closed?
-  $self_closing_tags = array('meta', 'img', 'link', 'script', 'br', 'hr');
-  #$self_closing = in_array($name, $self_closing_tags) || empty($content);
-  $self_closing = in_array($name, $self_closing_tags);
+  $self_closing = in_array($name, array(
+    'meta', 'img', 'link', 'script', 'br', 'hr',
+  ));
 
   # build the attributes
   $attr = array();
   foreach($attributes as $key => $value)
-    $attr[] = "$key='$value'";
+    if(!is_null($value)) {
+      $value = htmlspecialchars($value, ENT_QUOTES);
+      $attr[] = "$key='$value'";
+    }
   $attr = empty($attr) ? '' : ' ' . implode(' ', $attr);
 
   if(is_array($content))
@@ -345,14 +374,49 @@ function route($pattern, $options = array()) {
 
 ### miscellany
 
+function str_begins_with($string, $search) {
+  return strncmp($string, $search, strlen($search)) == 0;
+}
+
+function str_ends_with($string, $search) {
+  return substr($string, strlen($string) - strlen($search)) == $search;
+}
+
+/**
+ * Returns true if the argument is an associative array (hash).
+ *
+ * @param array $array the array to test
+ * @return boolean 
+ */
+function is_assoc($array) {
+  return is_array($array) && array_diff_key($array, array_keys(array_keys($array)));
+}
+
+function array_delete(&$array, $key) {
+  if(isset($array[$key])) {
+    $value = $array[$key];
+    unset($array[$key]);
+    return $value;
+  }
+  return null;
+}
+
+function uuid() {
+  return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+    mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+    mt_rand( 0, 0x0fff ) | 0x4000,
+    mt_rand( 0, 0x3fff ) | 0x8000,
+    mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ) );
+}
+
 function add_include_path($path) {
   set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 }
 
 function debug($obj, $stop = true) {
   echo '<pre>';
-  #var_dump($obj);
-  print_r($obj);
+  var_dump($obj);
+  #print_r($obj);
   echo "</pre>\n";
   if($stop)
     exit();
@@ -389,4 +453,18 @@ function format_bytes($bytes, $precision = 2) {
     default:
       return sprintf("%.{$precision}f YB", $bytes / $yb);
   }
+}
+
+function format_y_n($bool) {
+  if(is_null($bool))
+    return '';
+  else
+    return $bool ? 'Y' : 'N';
+}
+
+function format_yes_no($bool) {
+  if(is_null($bool))
+    return '';
+  else
+    return $bool ? 'Yes' : 'No';
 }

@@ -3,21 +3,23 @@
 <head>
   <title><?php echo isset($title) ? "$title : Diving in Focus" : 'Diving in Focus' ?></title>
   <meta content='text/html;charset=UTF-8' http-equiv='content-type' />
-  <?php echo css_tag('layouts/application') ?>
-  <?php echo js_tag('prototype') ?>
+  <?php echo css_tag('layouts/public') ?>
+  <?php echo css_tag("controllers/{$params['controller']}") ?>
 </head>
 <body>
   <div id='cntl' class='<?php echo $params['controller'] ?>'>
-    <div id='actn' class='<?php echo $params['action'] ?>'>
+    <div id='actn' class='<?php echo $params['action'] ?> content'>
       <?php echo flash_messages() ?>
-      <div id='content'>
-        <h1>Public Layout</h1>
-        <?php echo $content ?>
-      </div>
-      <div id='header'>
-      </div>
-      <div id='footer'>
-      </div>
+      <?php echo $_content ?>
+    </div>
+  </div>
+  <div id='header'>
+    <div class="content">
+      <h2>Diving in Focus</h2>
+    </div>
+  </div>
+  <div id='footer'>
+    <div class="content">
     </div>
   </div>
 </body>

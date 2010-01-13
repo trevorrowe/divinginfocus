@@ -2,20 +2,15 @@
 
 namespace Pippa;
 
-# TODO : add request logging (ala rails request logging)
-# TODO : add 404 responses
-
 class Controller {
   
   const MODE_RENDER_TMPL = 1;
   const MODE_RENDER_TEXT = 2;
   const MODE_REDIRECT = 3;
 
+  protected $view;
+
   protected $request;
-
-  protected $params;
-
-  protected $locals = array();
 
   protected $_mode;
 
@@ -77,43 +72,69 @@ class Controller {
     504 => "HTTP/1.1 504 Gateway Time-out"
   );
 
-  public function __construct(Request $request) {
+  public function __construct($request) {
+
+    $cntl = $request->params['controller'];
+    $this->view = new View($cntl, $request->format);
+
     $this->request = $request;
-    $this->params = &$request->params;
-    $this->locals['request'] = &$this->request;
-    $this->locals['params'] = &$this->params;
+
+    $this->view->request = $this->request;
+    $this->view->params = $this->request->params;
+
+  }
+
+  public function __set($name, $value) {
+    $this->view->$name = $value;
+  }
+
+  public function __get($name) {
+    return $this->view->$name;
+  }
+
+  public function __call($method, $args) {
+    if(str_ends_with($method, 'action')) {
+      throw new UndefinedActionException($this->request);
+    } else {
+      $class = get_called_class();
+      throw new Exception("undefined method $class::$method");
+    }
   }
 
   # called by the Router during dispatch
   public function run() {
-    $action_method = $this->params['action'] . '_action';
-    $this->$action_method($this->params, $this->request);
+    $action_method = $this->request->params['action'] . '_action';
+    $this->$action_method($this->request->params, $this->request);
     $this->_render_or_redirect();
   }
 
-  public function layout($which) {
+  public function add_helper($name) {
+    require(App::root . "/app/helpers/{$name}_helper.php");
+  }
+
+  protected function layout($which) {
     $this->_layout = $which;
   }
 
-  public function status($status) {
+  protected function status($status) {
     $this->_status = $status;
   }
 
-  public function render($what, $opts = array()) {
+  protected function render($what, $opts = array()) {
     $this->_check_render_redirect();
     $this->_parse_std_options($opts);
     $this->_mode = self::MODE_RENDER_TMPL;
     $this->_mode_data = $what;
   }
 
-  public function render_text($text, $opts = array()) {
+  protected function render_text($text, $opts = array()) {
     $this->_check_render_redirect();
     $this->_parse_std_options($opts);
     $this->_mode = self::MODE_RENDER_TEXT;
     $this->_mode_data = $text;
   }
 
-  public function redirect() {
+  protected function redirect() {
 
     $this->_check_render_redirect();
 
@@ -125,112 +146,60 @@ class Controller {
       $argc -= 1;
     }
 
-    switch(true) {
-
-      case $argc == 1 && is_array($args[0]): # redirect($params_hash)
-      case $argc == 1 && $args[0][0] == '/': # redirect('/some/url/path')
-        $where = $args[0];
-        break;
-
-      case $argc == 1: # redirect(:action)
-        $where = array(
-          'controller' => $this->params['controller'],
-          'action' => $args[0],
-        );
-        break;
-
-      case $argc == 2: # redirect(:action, :id)
-        $where = array(
-          'controller' => $this->params['controller'],
-          'action' => $args[0],
-          'id' => $args[1],
-        );
-        break;
-
-      case $argc == 3: # redirect(:controller, :action, :id);
-        $where = array(
-          'controller' => $args[0],
-          'action' => $args[1],
-          'id' => $args[2],
-        );
-        break;
-
-      default:
-        throw new Exception('Invalid redirect params: ' . print_r($args, true));
-
-    }
     $this->_mode = self::MODE_REDIRECT;
-    $this->_mode_data = url($where);
+    $this->_mode_data = call_user_func_array('url', $args);
+
   }
 
-  protected function _render_or_redirect() {
+  private function _render_or_redirect() {
     
     # if the user called neither render or redirect then the default 
     # is rendering the template by the same name as the current action
     if(is_null($this->_mode)) {
       $this->_mode = self::MODE_RENDER_TMPL;
-      $this->_mode_data = $this->params['action'];
+      $this->_mode_data = $this->request->params['action'];
     }
-    
-    if($this->_mode == self::MODE_REDIRECT)
-      $this->_redirect();
-    else
-      $this->_render();
 
-  }
+    if($this->_mode == self::MODE_REDIRECT) {
 
-  protected function _redirect() {
-    header(self::$statuses[$this->_status ? $this->_status : 302]);
-    header ("Location: {$this->_mode_data}");
-    App::$log->write("Redirected to {$this->_mode_data}");
-  }
+      ## redirect 
 
-  protected function _render() {
-    switch($this->_mode) {
-      case self::MODE_RENDER_TMPL:
-        $this->_render_tmpl();
-        break;
-      case self::MODE_RENDER_TEXT:
-        $this->_render_text($this->_mode_data);
-        break;
-      default:
-        throw new Exception("Unknown render mode: {$this->_mode}");
+      header(self::$statuses[$this->_status ? $this->_status : 302]);
+      header ("Location: {$this->_mode_data}");
+      App::$log->write("Redirected to {$this->_mode_data}");
+
+    } else {
+
+      ## render
+
+      switch($this->_mode) {
+        case self::MODE_RENDER_TMPL:
+          $this->_render_template();
+          break;
+        case self::MODE_RENDER_TEXT:
+          $this->_render_text($this->_mode_data);
+          break;
+        default:
+          throw new Exception("Unknown render mode: {$this->_mode}");
+      }
     }
   }
 
-  protected function _render_tmpl() {
-
-    $cntl = $this->params['controller'];
-    $actn = $this->params['action'];
-    $suffix = $this->_tmpl_suffix();
-
+  private function _render_template() {
     $tmpl = $this->_mode_data;
-
-    switch(true) {
-      case is_null($tmpl):
-        $tmpl = App::root . "/app/views/$cntl/$actn$suffix";
-        break;
-      case $tmpl[0] == '/':
-        $tmpl = App::root . "/app/views/$tmpl$suffix";
-        break;
-      default:
-        $tmpl = App::root . "/app/views/$cntl/$tmpl$suffix";
-    }
-
-    if(!file_exists($tmpl))
-      throw new \Exception("Missing template file $tmpl"); 
-
+    if(is_null($tmpl))
+      $tmpl = $this->request->params['action'];
     $this->_render_text($this->_include_with_locals($tmpl));
   }
 
-  protected function _render_text($page) {
+  private function _render_text($page) {
     
-    $default = 'application';
+    $default = static::$layout;
     $layout = $this->_layout;
 
     switch(true) {
       case $layout === NULL:
-        $layout = $this->_format() == 'html' ? $default : FALSE;
+        $layout = $this->request->format == 'html' ? $default : FALSE;
         break;
       case $layout === FALSE:
         $layout = FALSE;
@@ -245,69 +214,41 @@ class Controller {
     # set the http status header
     header(self::$statuses[$this->_status ? $this->_status : 200]);
 
-    # set the content type header
-    header('Content-type: ' . $this->_content_type());
+    ## set the content type header
 
-    # display the page
-    if($layout) {
-      $file = App::root . "/app/views/layouts/$layout" . $this->_tmpl_suffix();
-      echo $this->_include_with_locals($file, $page);
-    } else {
-      echo $page;
-    }
-
-  }
-
-  protected function _content_type() {
-    $format = $this->_format();
+    $format = $this->request->format;
     if(!isset(self::$content_types[$format]))
       throw new Exception("Unknown content type for format: $format");
-    return self::$content_types[$format];
+    $content_type = self::$content_types[$format];
+    header("Content-type: $content_type");
+
+    ## display the page
+
+    if($layout)
+      echo $this->_include_with_locals("/layouts/$layout", $page);
+    else
+      echo $page;
+
   }
 
-  protected function _format() {
-    return isset($this->params['format']) ? $this->params['format'] : 'html';
+  private function _include_with_locals($file, $content = NULL) {
+    $this->view->_content = $content;
+    return $this->view->render_to_string($file);
   }
 
-  protected function _tmpl_suffix() {
-    return '.' . $this->_format() . '.php';
-  }
-
-  protected function _include_with_locals($file, $content = NULL) {
-
-    foreach($this->locals as $name => &$value)
-      $$name = &$value;
-
-    ob_start();
-    include($file);
-    $results = ob_get_clean();
-    ob_end_flush();
-
-    return $results;
-  }
-
-  protected function _check_render_redirect() {
+  private function _check_render_redirect() {
     if($this->_mode != NULL) {
       $msg = "render or redirect has already been called for this action";
       throw new Exception($msg);
     }
   }
 
-  protected function _parse_std_options($options) {
+  private function _parse_std_options($options) {
     foreach(array('layout', 'status') as $option_name) 
       if(isset($options[$option_name]))
         $this->$option_name($options[$option_name]);
   }
 
-  public function __call($method, $args) {
-    # 404 page, action not found
-  }
-
-  # TODO : this function needs to support $controller values like:
-  #
-  #   admin/directory_pages_controller => Admin_DirectoryPagesController
-  #
-  # TODO : create a string inflector for this
   public static function class_name($controller) {
     $parts = array();
     foreach(explode('/', $controller) as $part)

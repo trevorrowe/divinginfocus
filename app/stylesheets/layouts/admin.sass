@@ -1,0 +1,340 @@
+@import base.sass
++blueprint-typography
+//+blueprint-utilities
+//+blueprint-interaction
+//+blueprint-form
+
+body
+  :font-family Helvetica Neue, Arial, Helvetica, sans-serif
+  :line-height 1.5
+  :color #333333
+  :font-size 75%
+  :background-color #ECF2F6
+
+h1, h2, h3, h4
+  :font-weight normal
+  :color #222222
+  :font-size 2em
+  :line-height 1
+  :margin 0.5em 0
+h2
+  :margin 30px 0 0 20px
+
+ul, ol
+  :list-style-type none
+  :margin 0
+
+//=============================================================================
+// chrome
+//=============================================================================
+
+#actn
+  :position relative
+
+#menu
+  :position absolute
+  :top 0
+  :right 0px
+  :left 0px
+  :height 40px
+  :border-top 1px solid #ccc
+  :border-left 1px solid #ccc
+  :border-bottom 1px solid #ccc
+  li
+    :float left
+    :text-align center
+    :border-right 1px solid #ccc
+  a
+    :display block
+    :font-size 20px
+    :width 120px
+    :height 40px
+    :line-height 40px
+    :text-decoration none
+
+#sidebar
+  :position absolute
+  :top 50px
+  :left 5px
+  :width 200px
+  .nav 
+    :padding-top 15px
+    li
+      :margin 0 0 6px 20px
+  h2 + .nav
+    :margin-left 20px
+
+#content
+  :position absolute
+  :top 50px
+  :right 5px
+  :left 215px
+
+#content_box
+  :padding 10px 20px 20px 20px
+  :border 1px solid #aaa
+  :background-color white
+  +rounded(10px)
+  +box-shadow(0px, 3px, 5px, #888)
+
+#footer
+  :padding 5px
+  :text-align right
+
+//=============================================================================
+// fieldsets
+//=============================================================================
+
+fieldset
+  :padding 20px
+  :border 1px solid #ccc
+  +rounded(5px)
+  :margin 0 0 10px 0
+legend
+  :font-size 16px
+  :padding 0 10px
+
+//=============================================================================
+// tables
+//=============================================================================
+
+table
+  :border-top 1px solid #BCBDC0
+  :border-right 1px solid #BCBDC0
+
+td, th
+  :border-bottom 1px solid #BCBDC0
+  :border-left 1px solid #BCBDC0
+
+th
+  :text-align center
+  :vertical-align middle
+
+//=============================================================================
+// dl table
+//=============================================================================
+
+dl.table
+  dt, dd
+    :display block
+    :min-height 1.5em
+    :padding .4em
+    :border-top 1px solid #ccc
+    :border-collapse collapse
+  dt
+    :font-weight bold
+    :clear left
+    :float left
+    :width 140px
+  dd
+    :border-left 1px solid #ccc
+    :margin-left 150px
+  dd.yes
+    :color green
+  dd.no
+    :color red
+
+!label_width = 150px
+!label_margin = 10px
+!field_width = 400px
+
+form 
+  .row
+    :clear both
+    :overflow hidden
+    :padding= 0 0 0 !label_width + !label_margin
+    :margin-bottom 10px
+      
+    input.text, input.password,
+    input[type=text], input[type=password],
+    textarea, select
+      :width = !field_width
+      :padding 5px
+      :margin 0
+      :border 1px solid #bbb
+
+    input.text:focus, input.title:focus, textarea:focus, select:focus
+      :border 1px solid #666
+
+    input.text, input.password, textarea
+      :width = !field_width
+      :padding 4px
+
+    textarea
+      :height 150px
+
+    input.invalid, textarea.invalid, select.invalid
+      :border 1px solid red
+
+    select
+      :padding 3px
+
+    label
+      :float left
+      :display inline
+      :line-height 24px
+      :text-align right
+      :margin= 0 0 0 ((!label_width + !label_margin) * -1)
+      :width = !label_width
+      :font-weight normal
+
+    .error, .hint
+      :color #777
+      :font-size 11px
+      :margin 3px 0 0 0
+      :width = !field_width
+
+    .error 
+      :color red
+      :padding 0
+      :border none
+      :background-color inherit
+
+    .required_symbol
+      :padding 0 5px 0 0
+      :color red
+      :font-weight normal
+
+  .row.required label
+    :font-weight bold
+
+  .row.invalid
+    input.text, input.password, textarea, select
+      :border 1px solid red
+
+  .row.checkbox_list ul
+    :margin 0
+
+  .row.agreement_checkbox
+    :position relative
+    label
+      :position absolute
+      :left 345px
+      :top 1px
+      :width auto
+
+form .vertical 
+  .row
+    :padding-left 0
+    label
+      :display block
+      :text-align left
+      :float none
+      :margin 0
+      :width auto
+  .row.checkbox 
+    :position relative
+    label
+      :margin-left 25px
+    input.checkbox
+      :position absolute
+      :top 1px
+      :left 0px
+.row
+  :padding 0 0 0 160px
+  :margin-bottom 10px
+  :overflow hidden
+      
+  input.text, input.password, textarea, select
+    :margin 0
+    :border 1px solid #bbb
+
+  input.text:focus, input.title:focus, textarea:focus, select:focus
+    :border 1px solid #666
+
+  input.text, input.password, textarea
+    :width 460px
+    :padding 4px
+
+  textarea
+    :height 150px
+
+  input.invalid, textarea.invalid, select.invalid
+    :border 1px solid red
+
+  select
+    :padding 3px
+
+  label
+    :float left
+    :display inline
+    :line-height 24px
+    :text-align right
+    // form row left-padding * -1
+    :margin 0 0 0 -160px
+    // left margin - desired (label & input) gap
+    :width 150px
+    :font-weight normal
+
+  .error, .hint
+    :color #777
+    :font-size 11px
+    :margin 3px 0 0 0
+    :width 460px
+
+  .error 
+    :color red
+    :padding 0
+    :border none
+    :background-color inherit
+
+  .required_symbol
+    :padding 0 5px 0 0
+    :color red
+    :font-weight normal
+
+.row.required label
+  :font-weight bold
+
+.row.invalid
+  input.text, input.password, textarea, select
+    :border 1px solid red
+
+.row.checkbox_list ul
+  :margin 0
+
+.row.plain
+  :line-height 26px
+
+.fieldset
+  :padding 10px
+  :border 1px solid #ccc
+  +rounded(5px)
+  :overflow hidden
+  :margin 10px 0
+  .legend
+    :font-weight normal
+    :font-size 16px
+.fieldset.fields
+  :background-color #eee
+.fieldset.add_field
+  :background-color lightYellow
+
+
+#flashes 
+  a
+    :color blue
+  p, dl
+    :padding 12px 12px 12px 37px
+    :font-weight bold
+    :margin 12px 0px
+  .notice
+    :color green
+    :background #cfc url('/images/icons/silk/accept.png') no-repeat 10px center
+    :border 1px solid green
+  .warning
+    :color orange
+    :background #ffc url('/images/icons/silk/error.png') no-repeat 10px center
+    :border 1px solid orange
+  .error
+    :color red
+    :background #fcc url('/images/icons/silk/exclamation.png') no-repeat 10px center
+    :border 1px solid red
+  .ssl
+    :color blue
+    :background #ccf url('/images/icons/silk/information.png') no-repeat 10px center
+    :border 1px solid blue
+  .debug
+    :color blue
+    :background #ccf url('/images/icons/silk/information.png') no-repeat 10px center
+    :border 1px solid blue

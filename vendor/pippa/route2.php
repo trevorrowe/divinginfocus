@@ -16,11 +16,16 @@ class Route {
 
   protected $match_indexes = array();
 
-  public function __construct($name, $pattern, $params = array()) {
+  public function __construct($pattern, $options = array()) {
 
-    $this->name = $name;
     $this->pattern = trim($pattern, '/');
-    $this->req = $params;
+
+    # all entries in $options are routing requirements except for 'name'
+    if(isset($options['name'])) {
+      $this->name = $options['name'];
+      unset($options['name']);
+    }
+    $this->req = $options;
 
     foreach(array('controller', 'action') as $req) {
       # controller and action may be provided in only one place
@@ -117,10 +122,8 @@ class Route {
       }
       else if($segment == 'controller')
         array_push($regex, '(\w[/\w]*)');
-      else if($segment == 'action')
-        array_push($regex, '(\w+)');
       else
-        array_push($regex, '([^/]+)');
+        array_push($regex, '(\w+)');
     }
 
     $regex = implode('/', $regex);
@@ -164,7 +167,7 @@ if(!isset($params[$segment]) && !isset($current_reqeust->params[$segment])) {
   debug($current_request, false);
   debug($params, false);
   debug($this, false);
-  throw new Exception('oops');
+  exit;
 }
         $value = isset($params[$segment]) ? 
           $params[$segment] : 
@@ -202,31 +205,6 @@ if(!isset($params[$segment]) && !isset($current_reqeust->params[$segment])) {
             $this->required_params[] = ltrim($segment, ':');
     }
     return $this->required_params;
-  }
-
-  public static function add($pattern, $params = array()) {
-    self::name(null, $pattern, $params);
-  }
-
-  public static function name($name, $pattern, $params = array()) {
-    array_push(App::$routes, new Route($name, $pattern, $params));
-  }
-
-  public static function root($controller, $action = 'index') {
-    self::name('root', '/', array(
-      'controller' => $controller,
-      'action' => $action,
-    ));
-  }
-
-  public static function defaults() {
-    $id_regex = '\d+(-.+)?';
-    self::root('home');
-    self::add(':controller/:id', array('action' => 'show', 'id' => $id_regex));
-    self::add(':controller/:id/:action', array('id' => $id_regex));
-    self::add(':controller');
-    self::add(':controller/:action/:id');
-    self::add(':controller/:action');
   }
 
 }
