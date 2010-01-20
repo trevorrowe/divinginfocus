@@ -8,6 +8,8 @@ class App {
 
   const env = APP_ENV;
 
+  public static $cfg;
+
   public static $log;
 
   public static $routes = array();
@@ -16,11 +18,11 @@ class App {
 
   public static function autoload($class) {
     if(substr($class, 0, 6) == 'Pippa\\') {
-      ## pippa framework classes
-      $dir = self::root . '/vendor/';
-      require($dir . strtolower(str_replace('\\', '/', $class)) . '.php');
+      # pippa framework classes
+      $dir = self::root . '/vendor/pippa/lib/';
+      require($dir . strtolower(substr($class, 6)) . '.php');
     } else if(substr($class, strlen($class) - 10) == 'Controller') {
-      ## controllers
+      # controllers
       require Controller::controller_path($class);
     }
   }
@@ -43,14 +45,7 @@ class App {
 
     self::$log = new Logger($log_path);
 
-    # TODO : why is this line here?
-    require(self::root . '/vendor/pippa/exception.php');
-
-    require(self::root . '/vendor/pippa/functions.php');
-    require(self::root . '/app/helpers/application_helper.php');
-
-    require(self::root . '/config/environment.php');
-    require(self::root . '/config/environments/' . self::env . '.php');
+    require(self::root . '/vendor/pippa/PippaFunctions.php');
 
     foreach(glob(self::root . '/config/initializers/*.php') as $file)
       require($file);

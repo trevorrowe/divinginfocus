@@ -23,6 +23,12 @@ class View {
     $this->_locals[$name] = $value;
   }
 
+  # cheater method, figure out a better way to do this
+  public function title($title) {
+    $this->title = $title;
+    echo tag('h1', $title);
+  }
+
   public function render($template) {
     echo $this->render_to_string($template);
   }

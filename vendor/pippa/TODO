@@ -1,4 +1,0 @@
-- Need a simple method to set the layout for a controller and all of its
-  (see PublicBaseController and Admin_BaseController)
-- Need to render the controller and action in the hopnote error page
-- Need to render the params in the error page
