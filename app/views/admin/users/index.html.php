@@ -6,26 +6,30 @@
       <th>Username</th>
       <th>Email</th>
       <th>UUID</th>
-      <th>Admin</th>
       <th>Validated</th>
-      <th>Created</th>
-      <th>Updated</th>
-      <th>&nbsp;</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th colspan='3'>&nbsp;</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach($users as $user): ?>
-      <tr class='<?php echo cycle('odd', 'even') ?>'>
+    <?php foreach($users as $i => $user): ?>
+      <tr class='<?php echo $i % 2 == 1 ? 'even' : 'odd' ?>'>
         <td><?php echo $user->id ?></td>
-        <td><?php echo link_to($user->username, url('show', $user)) ?></td>
+        <td><?php echo link_tag($user->username, url('show', $user)) ?></td>
         <td><?php echo h($user->email) ?></td>
-        <td><?php echo $user->uuid ?></td>
-        <td><?php echo format_y_n($user->admin) ?></td>
-        <td><?php echo $user->activated_at ?></td>
-        <td><?php echo $user->created_at ?></td>
-        <td><?php echo $user->updated_at ?></td>
-        <td>
-          <?php echo link_to('Delete', url('destroy', $user), array('class' => 'delete icon_only', 'confirm' => true)) ?>
+        <td class='uuid'><?php echo $user->uuid ?></td>
+        <td class='boolean'><?php echo format_y_n($user->is_validated()) ?></td>
+        <td class='timestamp'><?php echo format_datetime($user->created_at) ?></td>
+        <td class='timestamp'><?php echo format_datetime($user->updated_at) ?></td>
+        <td class='action'>
+          <?php echo link_tag('View', url('show', $user), array('class' => 'show icon_only')) ?>
+        </td>
+        <td class='action'>
+          <?php echo link_tag('Edit', url('edit', $user), array('class' => 'edit icon_only')) ?>
+        </td>
+        <td class='action'>
+          <?php echo link_tag('Delete', url('destroy', $user), array('class' => 'destroy icon_only', 'confirm' => true)) ?>
         </td>
       </tr>
     <?php endforeach; ?>

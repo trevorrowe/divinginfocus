@@ -1,16 +1,16 @@
 <?php echo form_errors($user, 'base') ?>
 
-<?php echo text_row($user, 'username', array(
+<?php echo text_field_row($user, 'username', array(
   'required' => true,
-  'hint' => 'letters and numbers only')) ?>
+  'hint' => 'Letters and numbers only')) ?>
 
-<?php echo text_row($user, 'email', array('required' => true)) ?>
+<?php echo text_field_row($user, 'email', array('required' => true)) ?>
 
-<?php echo password_row($user, 'password', array(
-  'hint' => 'if blank, a password will be auto-generated.')) ?>
+<?php echo password_field_row($user, 'password', array(
+  'hint' => 'If left blank, a password will be auto-generated.')) ?>
 
-<?php echo password_row($user, 'password_confirmation') ?>
+<?php echo password_field_row($user, 'password_confirmation') ?>
 
-<?php echo checkbox_row($user, 'admin') ?>
+<?php echo checkbox_field_row($user, 'admin') ?>
 
-<?php echo submit_row('Save') ?>
+<?php echo submit_button_row('Save') ?>

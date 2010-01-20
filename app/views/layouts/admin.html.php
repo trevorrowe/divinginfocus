@@ -25,7 +25,7 @@
 </div><!-- end sidebar -->
 
 <ul id='menu'>
-  <li><?php echo link_to('Users', array('controller' => 'admin/users')) ?></li>
+  <li><?php echo link_tag('Users', array('controller' => 'admin/users')) ?></li>
 </ul>
 
 </div><!-- end actn -->

@@ -9,11 +9,11 @@ function nested_menu($config_tree, $opts = array()) {
   foreach($config_tree as $section) {
     $current = '';
     $li = array("<li class='{$current}section' onmouseover='$over' onmouseout='$out'>");
-    $li[] = link_to($section['label'], $section['url']);
+    $li[] = link_tag($section['label'], $section['url']);
     if(!empty($section['links'])) {
       $li[] = '<ul>';
       foreach($section['links'] as $link_label => $link_url)
-        $li[] = tag('li', link_to($link_label, $link_url), array(
+        $li[] = tag('li', link_tag($link_label, $link_url), array(
           'class' => 'menu_subsection'
         ));
       $li[] = '</ul>';

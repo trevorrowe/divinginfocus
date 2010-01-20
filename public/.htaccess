@@ -1,18 +1,10 @@
-#DREAMHOST Options +ExecCGI
-#DREAMHOST AddHandler php-cgi .php
-#DREAMHOST Action php-cgi /cgi-bin/php.cgi
-#DREAMHOST <FilesMatch "^php5?\.(ini|cgi)$">
-#DREAMHOST   Order Deny,Allow
-#DREAMHOST   Deny from All
-#DREAMHOST   Allow from env=REDIRECT_STATUS
-#DREAMHOST </FilesMatch>
+RewriteEngine On
 
 # server maintenance check
-#RewriteCond %{DOCUMENT_ROOT}/maintenance.php -f
-#RewriteCond %{SCRIPT_FILENAME} !maintenance.php
-#RewriteCond %{SCRIPT_FILENAME} !^/images/maintenance
-#RewriteRule ^.*$ /maintenance.php [L]
+RewriteCond %{DOCUMENT_ROOT}/system/maintenance.php -f
+RewriteCond %{SCRIPT_FILENAME} !/system/maintenance.php
+RewriteCond %{SCRIPT_FILENAME} !^/images/maintenance
+RewriteRule ^.*$ /system/maintenance.php [L]
 
-RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /index.php

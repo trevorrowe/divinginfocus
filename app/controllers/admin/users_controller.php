@@ -22,11 +22,9 @@ class Admin_UsersController extends Admin_BaseController {
   }
 
   public function create_action($params) {
-
     $user = new User($params['user'], false);
-    if($user->password == '')
+    if(!$user->password)
       $user->randomize_password();
-
     if($user->save()) {
       flash('notice', 'User added.');
       $this->redirect('show', $user);
@@ -45,7 +43,6 @@ class Admin_UsersController extends Admin_BaseController {
   public function update_action($params) {
     $user = User::get($params['id']);
     $user->set_attributes($params['user'], false);
-    debug($user->changes());
     if($user->update_attributes($params['user'], false)) {
       flash('notice', 'User updated.');
       $this->redirect('show', $user);

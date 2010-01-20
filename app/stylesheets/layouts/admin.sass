@@ -24,6 +24,9 @@ ul, ol
   :list-style-type none
   :margin 0
 
+.uuid
+  :font-family monospace
+
 //=============================================================================
 // chrome
 //=============================================================================
@@ -105,6 +108,7 @@ table
 td, th
   :border-bottom 1px solid #BCBDC0
   :border-left 1px solid #BCBDC0
+  :padding 4px
 
 th
   :text-align center
@@ -129,10 +133,6 @@ dl.table
   dd
     :border-left 1px solid #ccc
     :margin-left 150px
-  dd.yes
-    :color green
-  dd.no
-    :color red
 
 !label_width = 150px
 !label_margin = 10px
@@ -318,23 +318,35 @@ form .vertical
     :padding 12px 12px 12px 37px
     :font-weight bold
     :margin 12px 0px
-  .notice
-    :color green
-    :background #cfc url('/images/icons/silk/accept.png') no-repeat 10px center
-    :border 1px solid green
-  .warning
-    :color orange
-    :background #ffc url('/images/icons/silk/error.png') no-repeat 10px center
-    :border 1px solid orange
   .error
     :color red
     :background #fcc url('/images/icons/silk/exclamation.png') no-repeat 10px center
     :border 1px solid red
-  .ssl
+  .warn
+    :color orange
+    :background #ffc url('/images/icons/silk/error.png') no-repeat 10px center
+    :border 1px solid orange
+  .notice
+    :color green
+    :background #cfc url('/images/icons/silk/accept.png') no-repeat 10px center
+    :border 1px solid green
+  .info
     :color blue
     :background #ccf url('/images/icons/silk/information.png') no-repeat 10px center
     :border 1px solid blue
-  .debug
-    :color blue
-    :background #ccf url('/images/icons/silk/information.png') no-repeat 10px center
-    :border 1px solid blue
+
+dl.table
+  dd.yes
+    :color green
+  dd.no
+    :color red
+  dd.uuid
+    :line-height 20px
+    :font-size 12px
+    :color #777
+
+td.boolean, td.timestamp, td.uuid, td.action
+  :text-align center
+td.action a
+  :display block
+  :margin auto

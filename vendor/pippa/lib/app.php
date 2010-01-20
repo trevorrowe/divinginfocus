@@ -45,7 +45,8 @@ class App {
 
     self::$log = new Logger($log_path);
 
-    require(self::root . '/vendor/pippa/PippaFunctions.php');
+    foreach(glob(self::root . '/vendor/pippa/lib/helpers/*.php') as $file)
+      require($file);
 
     foreach(glob(self::root . '/config/initializers/*.php') as $file)
       require($file);
