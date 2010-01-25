@@ -18,9 +18,13 @@ class App {
 
   public static function autoload($class) {
     if(substr($class, 0, 6) == 'Pippa\\') {
-      # pippa framework classes
-      $dir = self::root . '/vendor/pippa/lib/';
-      require($dir . strtolower(substr($class, 6)) . '.php');
+      if(substr($class, strlen($class) - 9) == 'Exception') {
+        require(self::root . '/vendor/pippa/lib/exceptions.php');
+      } else {
+        $dir = self::root . '/vendor/pippa/lib/';
+        require($dir . strtolower(substr($class, 6)) . '.php');
+      }
+
     } else if(substr($class, strlen($class) - 10) == 'Controller') {
       # controllers
       require Controller::controller_path($class);

@@ -1,4 +1,4 @@
-<?php echo form_errors($user, 'base') ?>
+<?php echo base_errors($user) ?>
 
 <?php echo text_field_row($user, 'username', array(
   'required' => true,
@@ -11,6 +11,6 @@
 
 <?php echo password_field_row($user, 'password_confirmation') ?>
 
-<?php echo checkbox_field_row($user, 'admin') ?>
+<?php echo checkbox_row($user, 'admin') ?>
 
-<?php echo submit_button_row('Save') ?>
+<?php echo submit_row('Save') ?>

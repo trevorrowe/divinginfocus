@@ -37,14 +37,7 @@ class Logger {
   }
 
   public function params($params) {
-    $param_string = 'array(';
-    $param_string .= implode(', ', collect($params, function($k,$v) {
-      $v = str_replace('\\', '\\\\', $v);
-      $v = str_replace('\'', '\\\'', $v);
-      return "'$k' => '$v'";
-    }));
-    $param_string .= ')';
-    $this->write('Parameters: ' . $param_string);
+    $this->write('Parameters: ' . (string) $params);
   }
 
   public function timing($seconds) {

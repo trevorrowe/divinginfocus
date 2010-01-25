@@ -1,11 +1,11 @@
 <?php
 
-/**
- * Builds a url string
- *
- *
- */
 function url() {
+ 
+  # TODO : provide a 'relative' option
+  # TODO : provide an 'anchor' option
+  # TODO : provide a 'port' option
+  # TODO : provide a 'protocol' option
 
   $argc = func_num_args();
   $args = func_get_args();

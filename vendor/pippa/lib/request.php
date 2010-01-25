@@ -33,7 +33,7 @@ class Request {
       'port'     => 80,
       'method'   => 'GET',
       'time'     => time(),
-      'params'   => array(),
+      'params'   => new Params(),
     );
 
     foreach($defaults as $k => $default) {
@@ -42,6 +42,9 @@ class Request {
       else
         $this->$k = $default;
     }
+
+    if(is_array($this->params))
+      $this->params = new Params($this->params);
 
     $parts = explode('?', $uri);
     $parts = explode('.', $parts[0]);
@@ -57,6 +60,14 @@ class Request {
     $this->uri = $uri;
     $this->url = $this->protocol . "://{$this->host}$uri";
 
+  }
+
+  public function is_get() {
+    return $this->method == 'GET';
+  }
+
+  public function is_post() {
+    return $this->method == 'GET';
   }
 
   public function dispatch($route_params) {

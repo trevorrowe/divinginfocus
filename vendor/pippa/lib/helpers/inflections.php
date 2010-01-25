@@ -22,7 +22,7 @@ function foreign_key($class_name) {
 }
 
 function humanize($word) {
-  if(count(\Pippa\Inflect::$humans) > 0) {
+  if(count(\Pippa\Inflect::$human) > 0) {
     $original = $word;   
     foreach(\Pippa\Inflect::$human as $rule) {
       list($regex, $replace) = $rule;
@@ -106,7 +106,7 @@ function tableize($class_name) {
 }
 
 function titleize($word) {
-  return ucwords(humanize(underscore($$word)));
+  return ucwords(humanize(underscore($word)));
 }
 
 function underscore($camel_cased_word) {

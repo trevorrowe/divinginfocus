@@ -77,7 +77,7 @@ class User extends \Sculpt\Model {
       for($i = 0; $i < 32; ++$i)
         $salt .= chr(rand(33,126));
       $this->password_salt = $salt;
-      $this->password_hash = hash('sha256', $password . $salt . self::$secret);
+      $this->password_hash = self::hash_password($password, $salt);
     }
   }
 
@@ -154,6 +154,27 @@ class User extends \Sculpt\Model {
     $random_password = $this->random_password();
     $this->password = $random_password;
     $this->password_confirmation = $random_password;
+  }
+
+  public function verify_password($password) {
+    $hash = self::hash_password($password, $this->password_salt);
+    return $this->password_hash == $hash;
+  }
+
+  public static function hash_password($password, $salt) {
+    return hash('sha256', $password . $salt . self::$secret);
+  }
+
+  public static function authenticate(&$user) {
+    $username = $user->username;
+    $password = $user->password;
+    if($match = User::username_is($username)->first) {
+      if($match->verify_password($password)) {
+        $user = $match;
+        return true;
+      }
+    }
+    return false;
   }
 
 }

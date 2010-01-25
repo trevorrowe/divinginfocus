@@ -4,16 +4,19 @@ class LoginController extends PublicBaseController {
   
   public function index_action($params, $request) {
 
-    if($request->method == 'POST') {
-      if($user = User::username_is($params['user']['username'])->first) {
-      }
+    $this->user = new User($params->user, false);
+
+    if($request->is_get())
+      return;
+
+    if(User::authenticate($this->user)) {
+      # TODO : log the user into a session
+      flash('notice', "Welcome back, {$this->user->username}");
+      $this->redirect('/');
+    } else {
+      flash_now('error', 'Invalid username and/or password.');
+      $this->render('index');
     }
-
-    if(is_null($user))
-      $user = new User($params['user'], false);
-
-    $this->user = $user;
-
   }
 
 }
