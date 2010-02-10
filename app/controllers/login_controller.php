@@ -6,16 +6,15 @@ class LoginController extends PublicBaseController {
 
     $this->user = new User($params->user, false);
 
-    if($request->is_get())
-      return;
+    if($request->is_get()) return;
 
-    if(User::authenticate($this->user)) {
-      # TODO : log the user into a session
-      flash('notice', "Welcome back, {$this->user->username}");
+    $username = $this->user->username;
+    $password = $this->user->password;
+    if($user = User::authenticate($username, $password)) {
+      $this->login($user, $params->remember_me);
       $this->redirect('/');
     } else {
-      flash_now('error', 'Invalid username and/or password.');
-      $this->render('index');
+      $this->flash_now('error', 'Invalid username and/or password.');
     }
   }
 

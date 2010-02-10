@@ -3,8 +3,8 @@
 <head>
   <title><?php echo isset($title) ? "$title - " : '' ?>DivingInFocus.com Admin</title>
   <meta content='text/html;charset=UTF-8' http-equiv='content-type' />
-  <?php echo css_tag('layouts/admin') ?>
-  <?php echo js_tag('jquery-1.3.2.min') ?>
+  <?php echo $this->css_tag('admin') ?>
+  <?php echo $this->js_tag('jquery-1.3.2.min') ?>
 </head>
 <body>
 <div id='cntl' class='<?php echo $params['controller'] ?>'>
@@ -12,7 +12,7 @@
 
 <div id='content'>
   <div id='content_box'>
-    <?php echo flash_messages() ?>
+    <?php echo $this->flash_messages() ?>
     <?php echo $_content ?>
   </div><!-- end content_box -->
   <div id='footer'>
@@ -25,7 +25,7 @@
 </div><!-- end sidebar -->
 
 <ul id='menu'>
-  <li><?php echo link_tag('Users', array('controller' => 'admin/users')) ?></li>
+  <li><?php echo $this->link_to('Users', array('controller' => 'admin/users')) ?></li>
 </ul>
 
 </div><!-- end actn -->

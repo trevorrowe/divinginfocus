@@ -1,6 +1,6 @@
 <?php
 
-class SudoController extends PublicBaseController {
+class SudoController extends Admin_BaseController {
   
   public function index_action() {
   }

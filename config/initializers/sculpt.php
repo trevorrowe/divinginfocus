@@ -1,11 +1,20 @@
 <?php
 
-use \Pippa\App;
+namespace Sculpt;
 
-require(App::root . '/vendor/sculpt/Sculpt.php');
+require(\App::root . '/vendor/sculpt/Sculpt.php');
 
-\Sculpt\Logger::set_logger(App::$log);
+Logger::set_logger(\App::$log);
 
-\Sculpt\Connection::load_ini_file(App::root . '/config/database.ini');
+#\Sculpt\Connection::load_ini_file(App::root . '/config/database.ini');
 
-\Sculpt\Connection::set_default(App::env);
+\App::$cache->set('database_connections', function() {
+  $ini_path = \App::root . '/config/database.ini';
+  return parse_ini_file($ini_path, true);
+});
+
+foreach(\App::$cache->get('database_connections') as $name => $details) {
+  Connection::add($name, $details);
+}
+
+Connection::set_default(\App::env);

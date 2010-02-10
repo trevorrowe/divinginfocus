@@ -1,0 +1,5 @@
+* available in both the controller and views
+* support passing values between partials and layouts
+* support having params, request, local variables, etc
+  available to all helper methods
+* support "user extensions" of adding additional methods

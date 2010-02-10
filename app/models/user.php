@@ -12,7 +12,7 @@ class User extends \Sculpt\Model {
   ## validations
   ##
 
-  protected function validate() {
+  public function validate() {
 
     $this->validate_presence_of(
       'username', 'email', 'password_salt', 'password_hash'
@@ -112,7 +112,7 @@ class User extends \Sculpt\Model {
   ##
 
   public static $scopes = array(
-    'admin' => array('admin' => true),
+    'admin' => array('where' => array('admin' => true)),
     'validated' => array('where' => 'validated_at IS NOT NULL'),
   );
 
@@ -132,7 +132,29 @@ class User extends \Sculpt\Model {
     return !is_null($this->validated_at);
   }
 
-  public function random_password() {
+  ##
+  ## password methods
+  ##
+
+  public function randomize_password() {
+    $random_password = self::random_password();
+    $this->password = $random_password;
+    $this->password_confirmation = $random_password;
+  }
+
+  public function verify_password($password) {
+    $hash = self::hash_password($password, $this->password_salt);
+    return $this->password_hash == $hash;
+  }
+
+  public static function reset_password() {
+    $this->randomize_password();
+    $this->savex();
+    # TODO : send the new email
+    #UserMailer::deliver_new_password($this);
+  }
+
+  public static function random_password() {
     $words = array(
       'scuba', 'dive', 'diving', 'fish', 'photo', 'camera', 'digital',
       'water', 'underwater', 'focus', 'shot', 'flash', 'strobe',
@@ -150,30 +172,14 @@ class User extends \Sculpt\Model {
     return $words[rand(0, count($words) - 1)] . rand(1,1000);
   }
 
-  public function randomize_password() {
-    $random_password = $this->random_password();
-    $this->password = $random_password;
-    $this->password_confirmation = $random_password;
-  }
-
-  public function verify_password($password) {
-    $hash = self::hash_password($password, $this->password_salt);
-    return $this->password_hash == $hash;
-  }
-
   public static function hash_password($password, $salt) {
     return hash('sha256', $password . $salt . self::$secret);
   }
 
-  public static function authenticate(&$user) {
-    $username = $user->username;
-    $password = $user->password;
-    if($match = User::username_is($username)->first) {
-      if($match->verify_password($password)) {
-        $user = $match;
-        return true;
-      }
-    }
+  public static function authenticate($username, $password) {
+    if($user = User::username_is($username)->first)
+      if($user->verify_password($password))
+        return $user;
     return false;
   }
 

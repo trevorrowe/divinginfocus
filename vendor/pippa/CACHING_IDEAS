@@ -1,0 +1,4 @@
+* cache a list of routeable controllers
+* cache a list of available helpers
+* cache a list of routeable actions by controller
+* cache a list of helper methods per helper

@@ -1,0 +1,27 @@
+#! /usr/bin/php
+<?php 
+
+namespace Pippa;
+
+define('APP_ROOT', realpath(dirname(__FILE__) . '/..'));
+define('APP_ENV', getenv('APP_ENV') ? getenv('APP_ENV') : 'development');
+
+require(APP_ROOT . '/vendor/pippa/lib/app.php');
+
+App::boot();
+
+switch($argv[1]) {
+
+  case 'warm':
+    App::$cache->save();
+    break;
+
+  case 'clean':
+    App::$cache->clean();
+    break;
+
+  default:
+    throw new Exception("don't know how to {$argv[1]}");
+
+}
+

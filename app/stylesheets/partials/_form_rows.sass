@@ -1,0 +1,146 @@
+= form_rows(!label_width = 150px, !label_margin = 15px, !field_width = 400px)
+  form 
+    .row
+      :clear both
+      :overflow hidden
+      :padding= 0 0 0 !label_width + !label_margin
+      :margin-bottom 10px
+        
+      input.text, input.password,
+      input[type=text], input[type=password],
+      textarea, select
+        :width = !field_width
+        :padding 5px
+        :margin 0
+        :border 1px solid #bbb
+
+      input.text:focus, input.title:focus, textarea:focus, select:focus
+        :border 1px solid #666
+
+      input.text, input.password, textarea
+        :width = !field_width
+        :padding 4px
+
+      textarea
+        :height 150px
+
+      input.invalid, textarea.invalid, select.invalid
+        :border 1px solid red
+
+      select
+        :padding 3px
+
+      label
+        :float left
+        :display inline
+        :line-height 24px
+        :text-align right
+        :margin= 0 0 0 ((!label_width + !label_margin) * -1)
+        :width = !label_width
+        :font-weight normal
+
+      .error, .hint
+        :color #777
+        :font-size 11px
+        :margin 3px 0 0 0
+        :width = !field_width
+
+      .error 
+        :color red
+        :padding 0
+        :border none
+        :background-color inherit
+
+      .required_symbol
+        :padding 0 5px 0 0
+        :color red
+        :font-weight normal
+
+    .row.checkbox 
+      :position relative
+      label
+        :width auto
+        :margin-left 20px
+      input.checkbox
+        :position absolute
+        :top 1px
+        :left = !label_width + !label_margin - 5px
+
+    .row.required label
+      :font-weight bold
+
+    .row.invalid
+      input.text, input.password, textarea, select
+        :border 1px solid red
+
+  form .vertical 
+    .row
+      :padding-left 0
+      label
+        :display block
+        :text-align left
+        :float none
+        :margin 0
+        :width auto
+  .row
+    :padding 0 0 0 160px
+    :margin-bottom 10px
+    :overflow hidden
+        
+    input.text, input.password, textarea, select
+      :margin 0
+      :border 1px solid #bbb
+
+    input.text:focus, input.title:focus, textarea:focus, select:focus
+      :border 1px solid #666
+
+    input.text, input.password, textarea
+      :width 460px
+      :padding 4px
+
+    textarea
+      :height 150px
+
+    input.invalid, textarea.invalid, select.invalid
+      :border 1px solid red
+
+    select
+      :padding 3px
+
+    label
+      :float left
+      :display inline
+      :line-height 24px
+      :text-align right
+      // form row left-padding * -1
+      :margin 0 0 0 -160px
+      // left margin - desired (label & input) gap
+      :width 150px
+      :font-weight normal
+
+    .error, .hint
+      :color #777
+      :font-size 11px
+      :margin 3px 0 0 0
+      :width 460px
+
+    .error 
+      :color red
+      :padding 0
+      :border none
+      :background-color inherit
+
+    .required_symbol
+      :padding 0 5px 0 0
+      :color red
+      :font-weight normal
+
+  .row.required label
+    :font-weight bold
+
+  .row.invalid
+    input.text, input.password, textarea, select
+      :border 1px solid red
+
+  .row.plain
+    :line-height 26px
