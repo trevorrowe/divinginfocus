@@ -43,7 +43,7 @@ class Helper {
       if(method_exists($helper, $method))
         return call_user_func_array(array($helper, $method), $args);
     }
-    throw new UndefinedHelperException($method);
+    throw new Exceptions\UndefinedHelper($method);
   }
 
   public static function get($helper_class) {

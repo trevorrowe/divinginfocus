@@ -2,7 +2,8 @@
 
 namespace Pippa;
 
-class ConfigHash implements \Iterator, \Countable, \ArrayAccess {
+# TODO : provide a read-only mode (useful for request params)
+class MagicHash implements \Iterator, \Countable, \ArrayAccess {
   
   protected $data = array();
 
@@ -11,8 +12,24 @@ class ConfigHash implements \Iterator, \Countable, \ArrayAccess {
       $this->offsetSet($key, $value);
   }
 
+  public function __set($key, $value) {
+    $this->offsetSet($key, $value);
+  }
+
   public function __get($key) {
     return $this->offsetGet($key);
+  }
+
+  public function __isset($key) {
+    return $this->valid($key);
+  }
+
+  public function __unset($key) {
+    $this->offsetUnset($key);
+  }
+
+  public function __toString() {
+    return $this->to_string($this->data);
   }
 
   public function offsetExists($key) {
@@ -25,7 +42,7 @@ class ConfigHash implements \Iterator, \Countable, \ArrayAccess {
 
   public function offsetSet($key, $value) {
     if(is_array($value))
-      $this->data[$key] = new ConfigHash($value);
+      $this->data[$key] = new MagicHash($value);
     else
       $this->data[$key] = $value;
   }
@@ -54,13 +71,20 @@ class ConfigHash implements \Iterator, \Countable, \ArrayAccess {
     return !is_null(key($this->data));
   }
 
+  public function count() {
+    return count($this->data);
+  }
+
   protected function to_string($array) {
     $values = array();
     foreach($array as $k => $v) {
-      if(is_object($v) && get_class($v) == 'Pippa\ConfigHash') {
-        $values[] = "'$k' => " . $this->to_string($v);
-      } else if(is_numeric($v)) {
-        $values[] = "'$k' => {$v}";
+      if(is_object($v)) {
+        if(is_a($v, 'Pippa\MagicHash'))
+          $values[] = "'$k' => " . $this->to_string($v);
+        else
+          $values[] = "'$k' => " . (string) $v;
+      } else if(!is_string($v) && is_numeric($v)) {
+        $values[] = "'$k' => $v";
       } else {
         $v = str_replace('\\', '\\\\', $v);
         $v = str_replace('\'', '\\\'', $v);
@@ -69,14 +93,6 @@ class ConfigHash implements \Iterator, \Countable, \ArrayAccess {
     }
     $values = implode(', ', $values);
     return "array($values)";
-  }
-
-  public function __toString() {
-    return $this->to_string($this->data);
-  }
-
-  public function count() {
-    return count($this->data);
   }
 
 }

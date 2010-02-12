@@ -10,12 +10,12 @@
   <dt>Admin</dt>
   <dd class="<?php echo $user->admin ? 'yes' : 'no' ?>"><?php echo format_yes_no($user->admin) ?></dd>
   <dt>Enabled</dt>
-  <dd class="<?php echo $user->enabled ? 'yes' : 'no' ?>"><?php echo format_yes_no($user->enabled) ?></dd>
-  <dt>Validated?</dt>
-  <?php if($user->is_validated()): ?>
+  <dd class="<?php echo $user->disabled ? 'no' : 'yes' ?>"><?php echo format_yes_no(!$user->disabled) ?></dd>
+  <dt>Verified?</dt>
+  <?php if($user->is_verified()): ?>
     <dd class='yes'>Yes</dd>
-    <dt>Validated On</dt>
-    <dd><?php echo format_datetime($user->validated_at) ?></dd>
+    <dt>Verified On</dt>
+    <dd><?php echo format_datetime($user->verified_at) ?></dd>
   <?php else: ?>
     <dd class='no'>No</dd>
   <?php endif; ?>

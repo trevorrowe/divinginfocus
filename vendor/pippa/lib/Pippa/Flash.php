@@ -2,6 +2,7 @@
 
 namespace Pippa;
 
+# TODO : Pippa\Flash should extend / use Pippa\Cookie\TamperProof
 class Flash {
 
   const cookie_name = '_pippa_flash';

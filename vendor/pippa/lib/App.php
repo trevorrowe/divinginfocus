@@ -25,10 +25,7 @@ class App {
 
   public static function autoload($class) {
 
-    if($class == 'Pippa\App') {
-      throw new Exception($class);
-    }
-
+    # loading framework classes
     if(substr($class, 0, 6) == 'Pippa\\') {
       $class_path = str_replace('\\', '/', $class);
       require(App::root . "/vendor/pippa/lib/{$class_path}.php");
@@ -37,7 +34,7 @@ class App {
 
     # loading application controllers
     if(substr($class, strlen($class) - 10) == 'Controller') {
-      require \Pippa\Controller::controller_path($class);
+      require(\App::root . '/app/controllers/' . underscore($class) . '.php');
       return;
     }
 
@@ -56,8 +53,6 @@ class App {
   }
 
   public static function run() {
-
-    self::boot();
 
     self::$session = new \Pippa\Session();
 
@@ -148,6 +143,5 @@ class App {
 
     foreach(glob(App::root . '/config/initializers/*.php') as $file)
       require($file);
-
   }
 }

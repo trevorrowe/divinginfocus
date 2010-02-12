@@ -11,18 +11,20 @@
     <div id='actn' class='<?php echo $params->action ?> content'>
       <?php echo $this->flash_messages() ?>
       <?php echo $_content ?>
+      <dl>
+        <dt>Params</dt>
+        <dd><?php echo $params ?></dd>
+        <dt>Session</dt>
+        <dd><?php echo App::$session ?></dd>
+        <dt>Remember Me Cookie</dt>
+        <dd><?php echo RememberMeCookie::get() ?></dd>
+      </dl>
     </div>
   </div>
   <div id='header'>
     <div class="content">
       <h2>Diving in Focus</h2>
-      <div id="login_logout">
-        <?php if($this->logged_in()): ?>
-        <?php echo $this->link_to('Logout', url('logout', 'index', null)) ?>
-        <?php else: ?>
-        <?php echo $this->link_to('Login', url('login', 'index', null)) ?>
-        <?php endif; ?>
-      </div>
+      <?php $this->render('/shared/user_links') ?>
     </div>
   </div>
   <div id='footer'>

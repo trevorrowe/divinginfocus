@@ -1,5 +1,6 @@
 @import base
 @import mixins
+@import partials/login_logout
 
 +form_rows
 
@@ -33,9 +34,20 @@ ul, ol
 #actn
   :position relative
 
+#header
+  :background-color black
+  :height 30px
+  h2
+    :margin 0
+    :float left
+    :font-size 12px
+    :line-height 15px
+    :color white
+    :margin 7px 0 0 10px
+
 #menu
   :position absolute
-  :top 0
+  :top 30px
   :right 0px
   :left 0px
   :height 40px
@@ -56,7 +68,7 @@ ul, ol
 
 #sidebar
   :position absolute
-  :top 50px
+  :top 80px
   :left 5px
   :width 200px
   .nav 
@@ -68,7 +80,7 @@ ul, ol
 
 #content
   :position absolute
-  :top 50px
+  :top 80px
   :right 5px
   :left 215px
 

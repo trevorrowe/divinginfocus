@@ -11,6 +11,22 @@ class ApplicationController extends \Pippa\Controller {
   ## filters
   ##
 
+  public function require_user_filter() {
+    $this->authenticate_or_redirect();
+  }
+
+  public function require_admin_filter() {
+    if($this->authenticate_or_redirect())
+      if(!$this->current_user()->admin)
+        $this->render_error_page(403);
+  }
+
+  public function require_sudoer_filter() {
+    if($this->authenticate_or_redirect())
+      if(!$this->user_can_sudo())
+        $this->render_error_page(403);
+  }
+
   public function login_from_cookie_filter() {
 
     # stop here if the user did not present a login cookie
@@ -19,7 +35,7 @@ class ApplicationController extends \Pippa\Controller {
       return;
 
     # find the matching cookie in our db
-    $db_cookie = LoginCookie::matching_token($cookie)->first;
+    $db_cookie = LoginCookie::matching_token($cookie)->first();
 
     # a perfect match found, we will log the user in
     if($db_cookie) {
@@ -51,9 +67,9 @@ class ApplicationController extends \Pippa\Controller {
   public function login($user, $remember) {
     
     # log the user into the session
-    \Pippa\App::$session->clear();
-    \Pippa\App::$session['user_id'] = $user->id;
-    \Pippa\App::$session['timestamp'] = time();
+    App::$session->clear();
+    App::$session->user_id = $user->id;
+    App::$session->timestamp = time();
 
     $cookie = RememberMeCookie::get();
     if($remember) {
@@ -76,10 +92,6 @@ class ApplicationController extends \Pippa\Controller {
 
     }
 
-    # save their username in a js accessible cookie
-    $domain = '.' . $_SERVER['HTTP_HOST'];
-    setcookie('username', $user->username, '0', '/', $domain, false, false);
-
     # create a record of the login
     $login = new Login();
     $login->user_id = $user->id;
@@ -90,15 +102,22 @@ class ApplicationController extends \Pippa\Controller {
   public function logout() {
 
     # clear the session
-    \Pippa\App::$session->clear();
+    App::$session->clear();
 
     # get rid of any persistant login cookies
-    RememberMeCookie::get()->delete();
+    $cookie = RememberMeCookie::get();
+    LoginCookie::matching_series($cookie)->delete_all();
+    $cookie->delete();
+  }
 
-    # blank out the username
-    $domain = '.' . $_SERVER['HTTP_HOST'];
-    setcookie('username', false, 0, '/', $domain, false, false);
-
+  protected function authenticate_or_redirect() {
+    if(!$this->logged_in()) {
+      $warning = 'You must login to view the requested page.';
+      $this->flash('warn', $warning);
+      $this->redirect('/login');
+      return false;
+    } 
+    return true;
   }
 
 }

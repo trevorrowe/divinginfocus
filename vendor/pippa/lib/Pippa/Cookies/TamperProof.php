@@ -7,7 +7,7 @@ class TamperProof extends Basic {
   protected $hmac_key;
 
   public function __construct($name, $hmac_key, 
-    $expire = 0, $path = '', $domain = '', $secure = '')
+    $expire = 0, $path = '/', $domain = '', $secure = '')
   {
     $this->hmac_key = $hmac_key;
     parent::__construct($name, $expire, $path, $domain, $secure, true);

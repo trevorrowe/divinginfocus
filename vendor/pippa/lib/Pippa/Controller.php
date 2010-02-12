@@ -109,6 +109,17 @@ class Controller {
     array_unshift($this->_before_filters, array($filter, $opts));
   }
 
+  public function skip_before_filter($filter_name) {
+    foreach($this->_before_filters as $i => $filter) {
+      if($filter[0] == $filter_name) {
+        unset($this->_before_filters[$i]);
+        return;
+      }
+    }
+    $msg = "skip_before_filter called on a non-existant filter: $filter_name";
+    throw new Exception($msg);
+  }
+
   private function _run_before_filters() {
     foreach($this->_before_filters as $bf) {
 
@@ -368,10 +379,6 @@ class Controller {
 
   public static function class_name($controller) {
     return camelize("{$controller}_controller");
-  }
-
-  public static function controller_path($class_name) {
-    return \App::root . '/app/controllers/' . underscore($class_name) . '.php';
   }
 
 }

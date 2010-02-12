@@ -225,7 +225,7 @@ if(!isset($params[$segment]) && !isset($current_reqeust->params[$segment])) {
     $id_regex = '\d+(-.+)?';
     self::root('home');
     self::add(':controller/:id', array('action' => 'show', 'id' => $id_regex));
-    self::add(':controller/:id/:action', array('id' => $id_regex));
+    //self::add(':controller/:id/:action', array('id' => $id_regex));
     self::add(':controller');
     self::add(':controller/:action/:id');
     self::add(':controller/:action');

@@ -1,23 +1,21 @@
 #! /usr/bin/php
 <?php 
 
-namespace Pippa;
-
 define('APP_ROOT', realpath(dirname(__FILE__) . '/..'));
 define('APP_ENV', getenv('APP_ENV') ? getenv('APP_ENV') : 'development');
 
-require(APP_ROOT . '/vendor/pippa/lib/app.php');
+require(APP_ROOT . '/vendor/pippa/lib/App.php');
 
 App::boot();
 
 switch($argv[1]) {
 
   case 'warm':
-    App::$cache->save();
+    App::$cache->warm();
     break;
 
-  case 'clean':
-    App::$cache->clean();
+  case 'clear':
+    App::$cache->clear();
     break;
 
   default:

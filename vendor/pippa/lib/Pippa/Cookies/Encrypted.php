@@ -10,7 +10,7 @@ class Encrypted extends TamperProof {
   #protected $iv;
 
   public function __construct($name, $hmac_key, $secret_key, 
-    $expire = 0, $path = '', $domain = '', $secure = '')
+    $expire = 0, $path = '/', $domain = '', $secure = '')
   {
     $this->secret_key = $secret_key;
     parent::__construct($name, $hmac_key, $expire, $path, $domain, $secure);

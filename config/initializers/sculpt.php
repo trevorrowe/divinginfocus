@@ -1,20 +1,20 @@
 <?php
 
-namespace Sculpt;
+require(App::root . '/vendor/sculpt/Sculpt.php');
 
-require(\App::root . '/vendor/sculpt/Sculpt.php');
+\Sculpt\Connection::add('lappy', array(
+  'adapter' => 'mysql',
+  'username' => 'root',
+  'dsn' => 'mysql:host=localhost;dbname=divinginfocus;unix_socket=/tmp/mysql.sock',
+));
 
-Logger::set_logger(\App::$log);
+\Sculpt\Connection::add('produciton', array(
+  'adapter' => 'mysql',
+  'username' => 'webdev',
+  'password' => 'mrdalkin',
+  'dsn' => 'mysql:host=mysql.lanalot.com;dbname=divinginfocus',
+));
 
-#\Sculpt\Connection::load_ini_file(App::root . '/config/database.ini');
+\Sculpt\Connection::set_default(App::env);
 
-\App::$cache->set('database_connections', function() {
-  $ini_path = \App::root . '/config/database.ini';
-  return parse_ini_file($ini_path, true);
-});
-
-foreach(\App::$cache->get('database_connections') as $name => $details) {
-  Connection::add($name, $details);
-}
-
-Connection::set_default(\App::env);
+\Sculpt\Logger::set_logger(App::$log);

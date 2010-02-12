@@ -64,24 +64,6 @@ class User extends \Sculpt\Model {
   }
 
   ##
-  ## callbacks
-  ##
-
-  protected function before_validate_on_create() {
-    $this->uuid = uuid();
-  }
-
-  protected function before_validate() {
-    if($password = $this->password) {
-      $salt = '';
-      for($i = 0; $i < 32; ++$i)
-        $salt .= chr(rand(33,126));
-      $this->password_salt = $salt;
-      $this->password_hash = self::hash_password($password, $salt);
-    }
-  }
-
-  ##
   ## associations
   ##
 
@@ -112,24 +94,35 @@ class User extends \Sculpt\Model {
   ##
 
   public static $scopes = array(
-    'admin' => array('where' => array('admin' => true)),
-    'validated' => array('where' => 'validated_at IS NOT NULL'),
+    'verified' => array('where' => 'verified_at IS NOT NULL'),
+    'active' => array('verified', 'where' => 'disabled = 0'),
+    'admin' => array('active', 'where' => 'admin = 1'),
   );
 
-  public static function other_scope($scope) {
-    $scope->admin->validated->order('username ASC');
+  ##
+  ## callbacks
+  ##
+
+  protected function before_validate_on_create() {
+    $this->uuid = uuid();
   }
 
-  public static function scope_with_args_scope($scope, $name) {
-    $scope->username_is($name);
+  protected function before_validate() {
+    if($password = $this->password) {
+      $salt = '';
+      for($i = 0; $i < 32; ++$i)
+        $salt .= chr(rand(33,126));
+      $this->password_salt = $salt;
+      $this->password_hash = self::hash_password($password, $salt);
+    }
   }
 
   ##
   ## utility methods
   ##
 
-  public function is_validated() {
-    return !is_null($this->validated_at);
+  public function is_verified() {
+    return !is_null($this->verified_at);
   }
 
   ##

@@ -2,7 +2,7 @@
 
 namespace Pippa\Cookies;
 
-class Basic implements \Iterator, \Countable, \ArrayAccess {
+class Basic extends \Pippa\MagicHash {
 
   protected $name;
   protected $expire;
@@ -13,7 +13,7 @@ class Basic implements \Iterator, \Countable, \ArrayAccess {
   protected $data;
 
   public function __construct($name, 
-    $expire = 0, $path = '', $domain = '', $secure = '', $http_only = '') 
+    $expire = 0, $path = '/', $domain = '', $secure = '', $http_only = '') 
   {
 
     $this->name = $name;
@@ -26,62 +26,6 @@ class Basic implements \Iterator, \Countable, \ArrayAccess {
     $this->data = $this->exists() ? 
       $this->unmarshall($_COOKIE[$name]) : 
       array();
-  }
-
-  public function __set($key, $value) {
-    $this->offsetSet($key, $value);
-  }
-
-  public function __get($key) {
-    return $this->offsetGet($key);
-  }
-
-  public function __isset($key) {
-    return isset($this->data[$key]);
-  }
-
-  public function __unset($key) {
-    unset($this->data[$key]);
-  }
-
-  public function offsetExists($key) {
-    return array_key_exists($key, $this->data);
-  }
-
-  public function offsetGet($key) {
-    return array_key_exists($key, $this->data) ? $this->data[$key] : null;
-  }
-
-  public function offsetSet($key, $value) {
-    $this->data[$key] = $value;
-  }
-
-  public function offsetUnset($key) {
-    unset($this->data[$key]);
-  }
-
-  public function current() {
-    return current($this->data); 
-  }
-
-  public function key() {
-    return key($this->data);
-  }
-
-  public function next() {
-    return next($this->data);
-  }
-
-  public function rewind() {
-    return reset($this->data);  
-  }
-
-  public function valid() {
-    return !is_null(key($this->data));
-  }
-
-  public function count() {
-    return count($this->data);
   }
 
   public function as_array() {
