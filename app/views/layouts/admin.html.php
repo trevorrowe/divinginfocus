@@ -14,14 +14,6 @@
   <div id='content_box'>
     <?php echo $this->flash_messages() ?>
     <?php echo $_content ?>
-    <dl>
-      <dt>Params</dt>
-      <dd><?php echo $params ?></dd>
-      <dt>Session</dt>
-      <dd><?php echo App::$session ?></dd>
-      <dt>Remember Me Cookie</dt>
-      <dd><?php echo RememberMeCookie::get() ?></dd>
-    </dl>
   </div><!-- end content_box -->
   <div id='footer'>
     <p>&copy; 2009 DivingInFocus.com</p>

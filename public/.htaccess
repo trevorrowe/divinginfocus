@@ -6,5 +6,11 @@ RewriteCond %{SCRIPT_FILENAME} !/system/maintenance.php
 RewriteCond %{SCRIPT_FILENAME} !^/images/maintenance
 RewriteRule ^.*$ /system/maintenance.php [L]
 
+# send image requests to the thumbnailer
+RewriteCond %{REQUEST_URI} ^/photos/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /php/thumbnailer.php
+
+# static cache
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /index.php

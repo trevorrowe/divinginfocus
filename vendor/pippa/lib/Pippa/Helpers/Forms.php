@@ -17,6 +17,44 @@ class Forms extends \Pippa\Helper {
     return $this->form_row($this->submit_tag($label, $opts), $row_opts);
   }
 
+  public function hidden_field_tag($name, $value = null, $opts = array()) {
+    $opts['type'] = 'hidden'; 
+    $opts['value'] = $value;
+    return $this->tag('input', null, $opts);
+  }
+
+  public function hidden_field($obj, $attr, $opts = array()) {
+    $name = $this->form_field_name($obj, $attr);
+    $value = $obj->attribute_before_type_cast($attr);
+    return $this->hidden_field_tag($name, $value, $opts);
+  }
+
+  public function file_field_tag($name, $opts = array()) {
+    $opts['type'] = 'file';
+    $opts['name'] = $name;
+    $this->append_class_name($opts, 'file');
+    $this->append_default_form_field_id($opts, $name);
+    return $this->tag('input', null, $opts);
+  }
+
+  public function file_field($obj, $attr, $opts = array()) {
+    $name = $this->form_field_name($obj, $attr);
+    return $this->file_field_tag($name, $opts);
+  }
+
+  public function file_field_row($obj, $attr, $opts = array()) {
+
+    $row_opts = $this->form_row_opts($opts);
+    $row_opts['error'] = $this->errors_on($obj, $attr);
+    $row_opts['label'] = titleize($attr);
+    $this->append_class_name($row_opts, 'file');
+
+    $name = $this->form_field_name($obj, $attr);
+    $field = $this->file_field_tag($name, $opts);
+
+    return $this->form_row($field, $row_opts);
+  }
+
   public function checkbox_tag($name, $checked = false, $opts = array()) {
     $opts['type'] = 'checkbox';
     $opts['name'] = $name;
