@@ -5,17 +5,14 @@ namespace Phml;
 class Engine {
 
   protected $cache_dir;
-  protected $cache = false;
 
-  public function __construct($cache_dir, $options = array()) {
+  public function __construct($cache_dir) {
     $this->cache_dir = $cache_dir;
-    if(isset($options['cache']))
-      $this->cache = $options['cache'];
   }
 
   public function render($template_path) {
     $template = new Template($template_path);
-    return (string) $template;
+    return $template->render();
   }
 
 }
@@ -47,7 +44,7 @@ class Template {
     while(!feof($template)) {
 
       $line = fgets($template);
-      echo $line;
+echo $line;
 
       $line = new Line(++$num, $line);
       $this->check_indentation($prev_line, $line);
@@ -81,7 +78,7 @@ class Template {
       $max_indent = 0;
     }
     if($line->indent > $max_indent)
-      throw new Exception("invalid indentation on line {$line->num}");
+      throw new \Exception("invalid indentation on line {$line->num}");
   }
 
   protected function manage_stack(&$line) {
@@ -158,7 +155,7 @@ class Line {
 
       # phml comments and blank lines 
       case $this->begins_with('-#');
-      case $line == '':kk
+      case $line == '':
         $this->type = 'ignore';
         break;
 
@@ -216,7 +213,7 @@ class Line {
 
 }
 
-$t = '/Users/trowe/projects/divinginfocus/app/views/index/index.html.phml';
+$t = '/Users/trowe/projects/divinginfocus/app/views/photos/index.html.phml';
 
 $phml_engine = new Engine('foo');
 $output = $phml_engine->render($t);

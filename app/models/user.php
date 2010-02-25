@@ -67,6 +67,10 @@ class User extends \Sculpt\Model {
   ## associations
   ##
 
+  public function photos() {
+    return Photo::owner_id_is($this->id);
+  }
+
   static $has_one = array(
     array('profile'),
   );

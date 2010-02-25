@@ -1,0 +1,1 @@
+a:2:{s:16:"controller_names";a:15:{i:0;s:10:"admin/base";i:1;s:12:"admin/photos";i:2;s:11:"admin/users";i:3;s:11:"application";i:4;s:4:"home";i:5;s:5:"login";i:6;s:6:"logout";i:7;s:6:"photos";i:8;s:3:"php";i:9;s:11:"public_base";i:10;s:6:"signup";i:11;s:4:"sudo";i:12;s:10:"thumbnails";i:13;s:6:"upload";i:14;s:5:"users";}s:11:"error_pages";a:2:{i:0;i:404;i:1;i:500;}}

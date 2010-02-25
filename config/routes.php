@@ -2,9 +2,9 @@
 
 use Pippa\Route;
 
-Route::add('/photos/:version/:a/:b/:c/:d/:e/:f/:g/:h/:filename', array(
-  'controller' => 'photos',
-  'action' => 'thumbnail',
+Route::add('/photos/versions/:version/:id1/:id2/:id3/photo.jpg', array(
+  'controller' => 'thumbnails',
+  'action' => 'generate',
 ));
 
 Route::add('/admin', array('controller' => 'admin/users'));

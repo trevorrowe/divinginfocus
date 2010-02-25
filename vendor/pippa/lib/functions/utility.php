@@ -38,6 +38,15 @@ function str_ends_with($string, $search) {
   return substr($string, strlen($string) - strlen($search)) == $search;
 }
 
+function dump($obj, $stop = true) {
+  echo '<pre>';
+  #var_dump($obj);
+  print_r($obj);
+  echo "</pre>\n";
+  if($stop)
+    exit();
+}
+
 function debug($obj, $stop = true) {
   echo '<pre>';
   var_dump($obj);

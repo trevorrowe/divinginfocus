@@ -31,7 +31,7 @@ class Router {
 
       }
     }
-    throw new NoMatchingRouteException($request);
+    throw new Exceptions\NoMatchingRoute($request);
   }
 
 }

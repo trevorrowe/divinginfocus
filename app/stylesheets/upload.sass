@@ -1,0 +1,58 @@
+@import mixins
+
+//=============================================================================
+// buttons
+//=============================================================================
+
+=button_shaped
+  width: 100px
+  height: 40px
+  +rounded(5px)
+
+=button
+  float: left
+  position: relative
+  margin: 0 5px 5px 0
+  text-align: center
+  line-height: 40px
+  background-color: lightBlue
+  +button_shaped
+
+#add_button, #upload_button
+  +button
+
+#swf_overlay
+  +button_shaped
+  z-index: 2
+  position: absolute
+  top: 0
+
+#add_button_text
+  +button_shaped
+  z-index: 1
+  position: absolute
+  top: 0
+
+//=============================================================================
+// the file queue
+//=============================================================================
+
+#queue 
+  clear: left
+  table
+    width: 300px
+    border-top: 1px solid black
+    border-right: 1px solid black
+    td, th
+      white-space: nowrap
+      border-bottom: 1px solid black
+      border-left: 1px solid black
+    .progress
+      width: 200px
+      height: 8px
+      margin: 0 20px
+      background-color: #ccc
+      .bar
+        width: 0%
+        height: 8px
+        background-color: green

@@ -18,6 +18,12 @@ class Route {
 
   public function __construct($name, $pattern, $params = array()) {
 
+    # move the format from the pattern into the requirements
+    if(preg_match('/^(.+)\.(\w+)$/', $pattern, $matches)) {
+      $pattern = $matches[1];
+      $params['format'] = $matches[2];
+    }
+
     $this->name = $name;
     $this->pattern = trim($pattern, '/');
     $this->req = $params;
@@ -124,6 +130,7 @@ class Route {
     }
 
     $regex = implode('/', $regex);
+
     $this->regex = "#^$regex$#";
 
   }

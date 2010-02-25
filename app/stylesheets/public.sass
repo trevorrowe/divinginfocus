@@ -4,56 +4,39 @@
 
 +form_rows
 
-!page_width = 955px 
-!sidebar_width = 300px
-!gap = 15px
-!content_width = !page_width - !sidebar_width - !gap
+!link_color = #090
 
 body
   :font-family Helvetica Neue, Arial, Helvetica, sans-serif
   :line-height 1.5
-  :color #333333
+  :color #ccc
   :font-size 75%
+  :background-color #1E1E1E
 
 h1, h2, h3, h4
   :font-weight normal
-  :color #222222
-  :font-size 3em
+  :color #ccc
   :line-height 1
   :margin-bottom 0.5em
+h1
+  :font-size 33px
 h2
-  :font-size 2em
-  :margin-bottom 0.75em
-h3
-  :font-size 1.5em
-  :margin-bottom 1em
-h4
-  :font-size 1.2em
-  :margin-bottom 1.25em
+  :margin 30px 0 0 20px
 
 p
   :margin 0 0 1.5em
 
 a
   :text-decoration underline
-  :color #000099
+  :color = !link_color
   &:visited
-    :color #000066
+    :color = !link_color
   &:focus
-    :color black
+    :color = !link_color + #111
   &:hover
-    :color black
+    :color = !link_color + #222
   &:active
-    :color #cc0099
-
-fieldset
-  :padding 10px
-  :border 1px solid #ccc
-  +rounded(4px)
-  :margin 10px
-  legend
-    :padding 0 5px
-    :font-weight bold
+    :color = !link_color + #222
 
 blockquote
   :margin 1.5em
@@ -109,59 +92,29 @@ caption
   :background #eee
 
 //=============================================================================
-// sticky footer hack
-//=============================================================================
-
-html, body, #cntl
-  :height 100%
-
-body > #cntl 
-  :height auto
-  :min-height 100%
-
-#actn 
-  :padding 70px 0 165px 0
-
-#footer 
-  :position relative
-  // negative value of the footer height
-  :margin-top -150px
-  :height 150px
-  :clear both
-
-//=============================================================================
 // chrome
 //=============================================================================
 
-#header, #cntl, #footer
-  .content
-    :position relative
-    :width= !page_width
-    :margin 0 auto
-    :background-color #eee
-
 #cntl
-  :background-color white
-  h1
-    :margin-top 15px
-    :font-size 33px
+  :margin-top 40px
 
 #header
   :position absolute
   :top 0px
   :left 0px
   :right 0px
-  :height 60px
   :background-color black
+  :height 30px
   h2
-    :color #ccc
+    :margin 0
     :float left
-    :line-height 60px
-    :font-size 30px
-    :font-weight bold
+    :font-size 12px
+    :line-height 15px
+    :color white
+    :margin 7px 0 0 10px
 
 #footer
-  :background-color lightBlue
+  :text-align center
 
 #scripts
   :display none

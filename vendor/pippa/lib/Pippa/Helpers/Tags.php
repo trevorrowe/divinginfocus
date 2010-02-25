@@ -43,7 +43,9 @@ class Tags extends \Pippa\Helper {
     if(is_array($content))
       $content = implode('', $content); 
 
-    return $self_closing ? "<$name$attr />" : "<$name$attr>$content</$name>";
+    return ($self_closing && !$content)? 
+      "<$name$attr />" : 
+      "<$name$attr>$content</$name>";
   }
 
   public function link_to($label, $url, $opts = array()) {
@@ -65,6 +67,13 @@ class Tags extends \Pippa\Helper {
 
   public function get_opt($opts, $key, $default) {
     return array_key_exists($key, $opts) ? $opts[$key] : $default;
+  }
+
+  public function img_tag($url, $opts = array()) {
+    $opts['src'] = $url;
+    if(!isset($opts['alt']))
+      $opts['alt'] = $url;
+    return $this->tag('img', null, $opts);
   }
 
 }

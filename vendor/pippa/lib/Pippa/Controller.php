@@ -6,10 +6,11 @@ class Controller {
 
   static $layout = 'application';
   
-  const MODE_RENDER_TMPL = 1;
-  const MODE_RENDER_TEXT = 2;
-  const MODE_RENDER_FILE = 3;
-  const MODE_REDIRECT = 4;
+  const MODE_RENDER_TMPL    = 1;
+  const MODE_RENDER_TEXT    = 2;
+  const MODE_RENDER_FILE    = 3;
+  const MODE_RENDER_NOTHING = 4;
+  const MODE_REDIRECT       = 5;
 
   private $_before_filters = array();
   private $_after_filters = array();
@@ -229,9 +230,14 @@ class Controller {
 
   protected function render($what, $opts = array()) {
     $this->_check_render_redirect();
-    $this->_parse_std_options($opts);
-    $this->_mode = self::MODE_RENDER_TMPL;
-    $this->_mode_data = $what;
+    if($what == false) {
+      $this->_mode = self::MODE_RENDER_NOTHING;  
+      $this->_mode_data = null;
+    } else {
+      $this->_parse_std_options($opts);
+      $this->_mode = self::MODE_RENDER_TMPL;
+      $this->_mode_data = $what;
+    }
   }
 
   protected function render_text($text, $opts = array()) {
@@ -306,6 +312,8 @@ class Controller {
           break;
         case self::MODE_RENDER_FILE:
           $this->_render_text(file_get_contents($this->_mode_data));
+          break;
+        case self::MODE_RENDER_NOTHING:
           break;
         default:
           throw new Exception("Unknown render mode: {$this->_mode}");

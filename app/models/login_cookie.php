@@ -19,7 +19,7 @@ class LoginCookie extends \Sculpt\Model {
   ##
 
   public function user() {
-    return User::user_id_is($this->user_id)->get;
+    return User::get($this->user_id);
   }
 
   ##

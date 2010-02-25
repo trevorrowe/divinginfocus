@@ -44,7 +44,8 @@ class File {
 
   public function load() {
     # TODO : don't do anything unless app caching is enabled
-    $this->read();
+    if(\App::env == 'production')
+      $this->read();
   }
 
   public function clear() {

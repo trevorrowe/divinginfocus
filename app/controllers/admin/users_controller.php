@@ -3,7 +3,7 @@
 class Admin_UsersController extends Admin_BaseController {
 
   public function index_action($params) {
-    $this->users = User::find()->paginate($params->page);
+    $this->users = User::paginate($params->page);
   }
 
   public function show_action($params) {

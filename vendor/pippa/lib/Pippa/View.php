@@ -39,6 +39,7 @@ class View {
   protected function _include($template) {
 
     $suffix = ".{$this->_default_format}.php";
+    #$suffix = ".{$this->_default_format}.phml";
     if($template[0] == '/')
       $template = ltrim("$template$suffix", '/');
     else
@@ -51,7 +52,14 @@ class View {
       $$name = $value;
 
     ob_start();
+
+    #require_once(\App::root . '/vendor/phml/phml.php');
+    #$engine = new \Phml\Engine(\App::root . '/tmp/cache/phml');
+    #$ret = $engine->render(\App::root . "/app/views/$template");
+    #debug($reg);
+
     include(\App::root . "/app/views/$template");
+
     $results = ob_get_clean();
     return $results;
 
