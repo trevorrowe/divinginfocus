@@ -15,7 +15,7 @@ class UploadController extends PublicBaseController {
 
     $this->photo = new Photo($params->photo);
     $this->photo->set_uploaded_file();
-    $this->photo->owner_id = App::$session->user_id;
+    $this->photo->owner_id = App::$session->owner_id;
 
     if($this->photo->save()) {
       $this->flash('notice', 'Photo uploaded successfully'); 
@@ -29,7 +29,7 @@ class UploadController extends PublicBaseController {
   public function flash_upload_action($params) {
     $photo = new Photo();
     $photo->set_uploaded_file('Filedata');
-    $photo->owner_id = 23; # TODO : determine how to set the owner
+    $photo->owner_id = 23;
     $photo->savex();
     if($photo->save()) {
       $url = $photo->url('medium');

@@ -85,6 +85,33 @@ class Forms extends \Pippa\Helper {
     return $this->form_row($this->checkbox($obj, $attr, $opts), $row_opts);
   }
 
+  public function text_area_tag($name, $value = null, $opts = array()) {
+    $opts['name'] = $name;
+    if(!isset($opts['rows'])) $opts['rows'] = 5;
+    if(!isset($opts['cols'])) $opts['cols'] = 50;
+    $this->append_default_form_field_id($opts, $name);
+    return $this->tag('textarea', $value, $opts);
+  }
+
+  public function text_area($obj, $attr, $opts = array()) {
+    $name = $this->form_field_name($obj, $attr);
+    $value = $obj->attribute_before_type_cast($attr);
+    return $this->text_area_tag($name, $value, $opts);
+  }
+
+  public function text_area_row($obj, $attr, $opts = array()) {
+
+    $row_opts = $this->form_row_opts($opts);
+    $row_opts['error'] = $this->errors_on($obj, $attr);
+    $row_opts['label'] = titleize($attr);
+    $this->append_class_name($row_opts, 'textarea');
+
+    $field = $this->text_area($obj, $attr, $opts);
+
+    return $this->form_row($field, $row_opts);
+
+  }
+
   public function text_field_tag($name, $value = null, $opts = array()) {
     $opts['type'] = 'text';
     $opts['name'] = $name;
@@ -107,9 +134,7 @@ class Forms extends \Pippa\Helper {
     $row_opts['label'] = titleize($attr);
     $this->append_class_name($row_opts, 'text');
 
-    $name = $this->form_field_name($obj, $attr);
-    $value = $obj->attribute_before_type_cast($attr);
-    $field = $this->text_field_tag($name, $value, $opts);
+    $field = $this->text_field($obj, $attr, $opts);
 
     return $this->form_row($field, $row_opts);
 
@@ -234,7 +259,7 @@ class Forms extends \Pippa\Helper {
   }
 
   protected function append_default_form_field_id(&$opts, $form_field_name) {
-    if(!array_key_exists('id', $opts))
+    if(!array_key_exists('id', $opts) && $form_field_name)
       $opts['id'] = $this->form_field_id($form_field_name);
   }
 

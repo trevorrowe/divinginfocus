@@ -5,4 +5,8 @@
 
 <div id='splash'>
   <?php echo $this->photo_link($photo, 'homepage') ?>
+  <div id='info'>
+    <p class='title'><?php echo $photo->title ?></p>
+    <p class='caption'><?php echo $photo->caption ?></p>
+  </div>
 </div>

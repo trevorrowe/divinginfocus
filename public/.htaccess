@@ -1,15 +1,14 @@
 RewriteEngine On
 
 # server maintenance check
-RewriteCond %{DOCUMENT_ROOT}/system/maintenance.php -f
-RewriteCond %{SCRIPT_FILENAME} !/system/maintenance.php
-RewriteCond %{SCRIPT_FILENAME} !^/images/maintenance
-RewriteRule ^.*$ /system/maintenance.php [L]
+#RewriteCond %{DOCUMENT_ROOT}/system/maintenance.php -f
+#RewriteCond %{SCRIPT_FILENAME} !/system/maintenance.php
+#RewriteCond %{SCRIPT_FILENAME} !^/images/maintenance
+#RewriteRule ^.*$ /system/maintenance.php [L]
 
 # send image requests to the thumbnailer
-#RewriteCond %{REQUEST_URI} ^/photos/
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteRule ^photos/versions/(\w+)/(.*)/photo.jpg$ /photos/thumbnailer.php?version=$1&id_path=$2 [L]
+#RewriteRule ^photos/versions/original/000/000/011/photo.jpg$ /photos/original/11.jpg [L]
+#RewriteRule ^/photos/versions/original.* /photos/original/11.jpg [L]
 
 # static cache
 RewriteCond %{REQUEST_FILENAME} !-f

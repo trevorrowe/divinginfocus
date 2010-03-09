@@ -3,6 +3,7 @@
 <head>
   <title><?php echo isset($title) ? "$title : " : '' ?>DivingInFocus.com Admin Interface</title>
   <meta content='text/html;charset=UTF-8' http-equiv='content-type' />
+  <link rel="SHORTCUT ICON" href="/favicon.ico"/>
   <?php echo $this->css_tag('admin') ?>
   <?php echo $this->js_tag('jquery-1.3.2.min') ?>
 </head>
@@ -14,27 +15,37 @@
   <div id='content_box'>
     <?php echo $this->flash_messages() ?>
     <?php echo $_content ?>
-  </div><!-- end content_box -->
+  </div><!-- end #content_box -->
   <div id='footer'>
-    <p>&copy; 2009 DivingInFocus.com</p>
-  </div><!-- end footer -->
-</div><!-- end content -->
+    <p>&copy; <?php echo date('Y') ?> DivingInFocus.com</p>
+  </div><!-- end #footer -->
+</div><!-- end #content -->
 
 <div id='sidebar'>
   <?php $this->render('sidebar') ?>
-</div><!-- end sidebar -->
+</div><!-- end #sidebar -->
 
 <div id="header">
-  <h2>Diving In Focus &mdash; Admin Interface</h2>
+  <h2>
+    <?php echo $this->link_to('Diving In Focus', '/') ?>
+    &mdash; Admin Interface
+  </h2>
   <?php $this->render('/shared/user_links') ?>
   <?php if($this->current_user()->admin): ?>
     <ul id='menu'>
       <li><?php echo $this->link_to('Users', array('controller' => 'admin/users')) ?></li>
-    </ul><!-- end menu -->
+    </ul><!-- end #menu -->
   <?php endif; ?>
-</div><!-- end header -->
+</div><!-- end #header -->
 
-</div><!-- end actn -->
-</div><!-- end cntl -->
+</div><!-- end #actn -->
+</div><!-- end #cntl -->
+
+<div id='scripts'>
+  <?php echo $this->js_tag('jquery-1.4.1.min') ?>
+  <?php echo $this->js_tag('admin') ?>
+  <?php echo $this->js_tags ?>
+</div> <!-- end #scripts -->
+
 </body>
 </html>

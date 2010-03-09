@@ -23,9 +23,12 @@ function url() {
   # When this function is called with a single argument that is a string
   # that looks like '/some/url/path' or 'http://someurl.com', we will
   # return that url unmodified.  These need no transformation.
-  if($argc == 1 && is_string($args[0]))
+  if($argc == 1 && is_string($args[0])) {
+    if($args[0] == '')
+      return '';
     if($args[0][0] == '/' || preg_match('#^[a-z]+://#', $args[0]))
       return $args[0];
+  }
 
   switch($argc) {
     case 1:

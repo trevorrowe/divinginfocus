@@ -2,26 +2,16 @@
 
 namespace Pippa;
 
-class View {
-
-  protected $_locals;
+class View extends LocalsContainer {
 
   protected $_default_controller;
 
   protected $_default_format;
 
   public function __construct($default_controller, $default_format) {
-    $this->_locals = Locals::get();
+    parent::__construct();
     $this->_default_controller = $default_controller;
     $this->_default_format = $default_format;
-  }
-
-  public function __get($name) {
-    return $this->_locals->$name;
-  }
-
-  public function __set($name, $value) {
-    $this->_locals->$name = $value;
   }
 
   public function __call($method, $args) {
@@ -39,7 +29,6 @@ class View {
   protected function _include($template) {
 
     $suffix = ".{$this->_default_format}.php";
-    #$suffix = ".{$this->_default_format}.phml";
     if($template[0] == '/')
       $template = ltrim("$template$suffix", '/');
     else
@@ -47,16 +36,10 @@ class View {
 
     \App::$log->write("Rendering view: $template");
 
-    # TODO : decide if locals should be aliases like this or not
-    foreach($this->_locals as $name => $value)
-      $$name = $value;
+    foreach($this->locals() as $local_name => $local_value)
+      $$local_name = $local_value;
 
     ob_start();
-
-    #require_once(\App::root . '/vendor/phml/phml.php');
-    #$engine = new \Phml\Engine(\App::root . '/tmp/cache/phml');
-    #$ret = $engine->render(\App::root . "/app/views/$template");
-    #debug($reg);
 
     include(\App::root . "/app/views/$template");
 

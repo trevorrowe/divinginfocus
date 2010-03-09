@@ -26,9 +26,9 @@ class User extends \Sculpt\Model {
 
     $this->validate_length_of('username', array(
       'minimum' => 2,
-      'maximum' => 30,
+      'maximum' => 25,
       'too_short' => 'must be at least 2 characters long',
-      'too_long' => 'must be 30 or less characters long',
+      'too_long' => 'must be 25 or less characters long',
       'allow_null' => true,
     ));
 
@@ -124,6 +124,10 @@ class User extends \Sculpt\Model {
   ##
   ## utility methods
   ##
+
+  public function to_param() {
+    return $this->username;
+  }
 
   public function is_verified() {
     return !is_null($this->verified_at);

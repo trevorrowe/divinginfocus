@@ -4,6 +4,8 @@ class Photo extends \Sculpt\Model {
 
   protected $upload_error_code;
 
+  protected $exif;
+
   protected $tmp_filename;
 
   ##
@@ -12,9 +14,23 @@ class Photo extends \Sculpt\Model {
 
   public function validate() {
 
-    $this->validate_inclusion_of('content_type', array(
-      # TODO : support other image formats
-      'in' => array('image/jpeg'),
+    #$this->validate_inclusion_of('content_type', array(
+    #  # TODO : support other image formats
+    #  'in' => array('image/jpeg'),
+    #));
+
+    $this->validate_length_of('title', array(
+      'maximum' => 100,
+      'allow_null' => true,
+    ));
+
+    $this->validate_length_of('caption', array(
+      'maximum' => '2000',
+      'allow_null' => true,
+    ));
+
+    $this->validate_format_of('content_type', array(
+      'regex' => '/^image\/jpeg$/'
     ));
     
   }
@@ -74,9 +90,19 @@ class Photo extends \Sculpt\Model {
     return "/photos/versions/$version/" . $this->id_path() . '/photo.jpg';
   }
 
+  ##
+  ## exif data functions
+  ##
+
   public function exif_data() {
-    return exif_read_data(App::root . '/public' . $this->url());
+    if(is_null($this->exif))
+      $this->exif = exif_read_data(App::root . '/public' . $this->url());
+    return $this->exif;
   }
+
+  ##
+  ## pathing functions
+  ##
 
   protected function id_path() {
     return implode('/', str_split(str_pad($this->id, 9, '0', STR_PAD_LEFT), 3));

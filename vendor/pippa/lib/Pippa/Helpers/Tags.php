@@ -65,10 +65,6 @@ class Tags extends \Pippa\Helper {
     return $this->tag('a', $label, $opts);
   }
 
-  public function get_opt($opts, $key, $default) {
-    return array_key_exists($key, $opts) ? $opts[$key] : $default;
-  }
-
   public function img_tag($url, $opts = array()) {
     $opts['src'] = $url;
     if(!isset($opts['alt']))

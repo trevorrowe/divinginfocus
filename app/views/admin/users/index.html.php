@@ -22,14 +22,14 @@
         <td><?php echo $this->link_to($user->username, url('show', $user)) ?></td>
         <td><?php echo h($user->email) ?></td>
         <td class='uuid'><?php echo $user->uuid ?></td>
-        <td class='boolean'><?php echo format_y_n($user->admin) ?></td>
+        <td class='boolean'><?php echo $this->ajax_toggle($user, 'admin') ?></td>
         <td class='boolean'><?php echo format_y_n($user->is_verified()) ?></td>
         <td class='timestamp'><?php echo format_datetime($user->created_at) ?></td>
         <td class='action'>
-          <?php echo $this->icon_only_link('show', 'Details', url('show', $user)) ?></td>
+          <?php echo $this->icon_only_link('show', 'Details', url('show', $user)) ?>
         </td>
         <td class='action'>
-          <?php echo $this->icon_only_link('edit', 'Edit', url('edit', $user)) ?></td>
+          <?php echo $this->icon_only_link('edit', 'Edit', url('edit', $user)) ?>
         </td>
         <td class='action'>
           <?php echo $this->icon_only_link('destroy', 'Delete', url('destroy', $user), array('confirm' => true)) ?>

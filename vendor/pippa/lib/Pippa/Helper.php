@@ -2,26 +2,23 @@
 
 namespace Pippa;
 
-class Helper {
+class Helper extends LocalsContainer {
 
   private static $helper_classes = array();
 
   private static $helpers = array();
 
-  public function __get($key) {
-    return Locals::get()->$key;
-  }
-
-  public function __set($key, $value) {
-    Locals::get()->$key = $value;
-  }
-
   public function __call($method, $args) {
     return self::invoke($method, $args);
   }
 
-  public function get_opt($opts, $key, $default) {
-    return array_key_exists($key, $opts) ? $opts[$key] : $default;
+  public function get_opt(&$opts, $key, $default) {
+    if(array_key_exists($key, $opts)) {
+      $value = $opts[$key];
+      unset($opts[$key]);
+      return $value;
+    }
+    return $default;
   }
 
   public function append_class_name(&$opts, $class) {

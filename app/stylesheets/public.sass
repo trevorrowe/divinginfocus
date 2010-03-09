@@ -1,27 +1,26 @@
 @import base
 @import mixins
-@import partials/login_logout
 
 +form_rows
 
+!bg_main = #1E1E1E
+!bg_accent = !bg_main - #333
+
+!color = #C6C6C6
 !link_color = #090
 
 body
   :font-family Helvetica Neue, Arial, Helvetica, sans-serif
   :line-height 1.5
-  :color #ccc
   :font-size 75%
-  :background-color #1E1E1E
+  :color = !color
+  :background-color = !bg_main
 
-h1, h2, h3, h4
+h1
   :font-weight normal
-  :color #ccc
+  :font-size 33px
   :line-height 1
   :margin-bottom 0.5em
-h1
-  :font-size 33px
-h2
-  :margin 30px 0 0 20px
 
 p
   :margin 0 0 1.5em
@@ -40,7 +39,6 @@ a
 
 blockquote
   :margin 1.5em
-  :color #666
   :font-style italic
 
 sup, sub
@@ -96,6 +94,9 @@ caption
 //=============================================================================
 
 #cntl
+  :margin 0 auto
+  :overflow hidden
+  :width 960px
   :margin-top 40px
 
 #header
@@ -103,18 +104,26 @@ caption
   :top 0px
   :left 0px
   :right 0px
-  :background-color black
+  :background-color = !bg_accent
   :height 30px
+
+#crumbtrail
+  :line-height 25px
+  .crumb
+    :float left
+    :margin-left 5px
   h2
     :margin 0
     :float left
     :font-size 12px
-    :line-height 15px
-    :color white
-    :margin 7px 0 0 10px
+    :line-height 25px
 
 #footer
+  :clear both
   :text-align center
+  :padding-top 10px
+  :border-top 1px solid #333
+  :margin 10px
 
 #scripts
   :display none
@@ -144,3 +153,33 @@ caption
     color: blue
     background: #ccf url('/images/icons/16/flash_info.png') no-repeat 10px center
     border: 1px solid blue
+
+.pagination  
+  :float right
+  :font-weight normal
+  :overflow hidden
+  a, span
+    :padding .125em .5em
+    :display block
+    :float left
+    :margin-right 1px
+  span.disabled
+    :color #ccc
+    :border 1px solid #DDD
+  span.current
+    :font-weight bold
+    :color white
+  a
+    :text-decoration none
+    :border 1px solid #e5e5e5
+  a:hover, a:focus
+    :border-color #ccc
+  a.next_page, a.prev_page
+    :border-color #b2c2da
+
+.photos.quilt
+  :overflow hidden
+  a.photo
+    :float left
+    :margin-right 1px
+    :margin-bottom 1px

@@ -13,6 +13,11 @@ class ThumbnailsController extends ApplicationController {
     $version = $params->version;
     $id_path = "{$params->id1}/{$params->id2}/{$params->id3}";
 
+    if(!isset(Thumbnails::$cfg[$version])) {
+      $this->render_error_page('404');
+      return;
+    }
+
     # TODO : validate version and id path
 
     $pt = PhpThumb::getInstance();

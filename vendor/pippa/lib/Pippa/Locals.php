@@ -13,12 +13,25 @@ class Locals implements \Iterator, \Countable, \ArrayAccess {
       $this->offsetSet($key, $value);
   }
 
-  public function __get($key) {
-    return array_key_exists($key, $this->data) ? $this->data[$key] : null;
+  public function &__get($key) {
+    if(array_key_exists($key, $this->data)) {
+      return $this->data[$key];
+    } else {
+      $null = null;
+      return $null;
+    }
   }
 
   public function __set($key, $value) {
     $this->data[$key] = $value;
+  }
+
+  public function __isset($key) {
+    return isset($this->data[$key]);
+  }
+
+  public function __unset($key) {
+    unset($this->data[$key]);
   }
 
   public function offsetExists($key) {

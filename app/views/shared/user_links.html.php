@@ -4,6 +4,7 @@
     <li><?php echo $this->link_to('Logout', url('logout', 'index', null)) ?></li>
   <?php else: ?>
     <li><?php echo $this->link_to('Login', url('login', 'index', null)) ?></li>
+    <li><?php echo $this->link_to('Register', url('signup', 'index', null)) ?></li>
   <?php endif; ?>
   <?php if($this->user_can_sudo()): ?>
     <?php if($this->current_user()->admin): ?>

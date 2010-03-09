@@ -3,6 +3,7 @@
 <head>
   <title><?php echo isset($title) ? "$title : Diving in Focus" : 'Diving in Focus' ?></title>
   <meta content='text/html;charset=UTF-8' http-equiv='content-type' />
+  <link rel="SHORTCUT ICON" href="/favicon.ico"/>
   <?php echo $this->css_tag('public') ?>
   <?php echo $this->css_tag($params->controller) ?>
   <?php echo $this->head_tags ?>
@@ -19,12 +20,19 @@
 </div>
 
 <div id='header'>
-  <h2>Diving In Focus</h2>
+  <?php echo $this->crumbtrail() ?>
   <?php $this->render('/shared/user_links') ?>
 </div>
 
+<div id='menu'>
+  <ul>
+    <li><?php echo $this->link_to('Upload', '/upload') ?></li>
+    <li><?php echo $this->link_to('Photos', '/photos') ?></li>
+  </ul>
+</div>
+
 <div id='footer'>
-  &copy; <?php echo $this->link_to('DivingInFocus.com', '/') ?> &mdash; <?php echo date('Y') ?>
+  &copy; <?php echo date('Y') ?> DivingInFocus.com
 </div>
 
 <div id='scripts'>

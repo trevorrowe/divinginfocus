@@ -2,7 +2,7 @@
 
 namespace Pippa;
 
-class Controller {
+class Controller extends LocalsContainer {
 
   static $layout = 'application';
   
@@ -82,9 +82,10 @@ class Controller {
 
   public function __construct($request) {
 
-    $this->_locals = Locals::get();
-    $this->_locals->request = $request;
-    $this->_locals->params = $request->params;
+    parent::__construct();
+
+    $this->request = $request;
+    $this->params = $request->params;
 
     $cntl = $request->params['controller'];
 
@@ -150,7 +151,7 @@ class Controller {
           continue(1);
 
       # the guantlet having been run, we can now call the filter method
-      $this->$filter_method();
+      $this->$filter_method($this->params, $this->request);
 
       # halt the filter chain if $filter_method called render or redirect
       if($this->_render_or_redirect_called())
@@ -176,14 +177,6 @@ class Controller {
   ##
   ## magic methods that pass along to the helpers
   ##
-
-  public function __get($name) {
-    return $this->_locals->$name;
-  }
-
-  public function __set($name, $value) {
-    $this->_locals->$name = $value;
-  }
 
   public function __call($method, $args) {
     if(str_ends_with($method, '_action'))

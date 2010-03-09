@@ -1,6 +1,12 @@
 @import base
 @import mixins
-@import partials/login_logout
+
++blueprint-typography
+//+blueprint-typography
+//+blueprint-utilities
+//+blueprint-interaction
+//+blueprint-form
+
 
 +form_rows
 
@@ -11,14 +17,13 @@ body
   :font-size 75%
   :background-color #ECF2F6
 
-h1, h2, h3, h4
+h1
+  :float left
   :font-weight normal
   :color #222222
   :font-size 2em
   :line-height 1
   :margin 0.5em 0
-h2
-  :margin 30px 0 0 20px
 
 ul, ol
   :list-style-type none
@@ -44,6 +49,9 @@ ul, ol
     :line-height 15px
     :color white
     :margin 7px 0 0 10px
+    a
+      :text-decoration none
+      :color white
 
 #menu
   :position absolute
@@ -119,7 +127,8 @@ table
 td, th
   :border-bottom 1px solid #BCBDC0
   :border-left 1px solid #BCBDC0
-  :padding 4px
+  :padding 2px
+  :line-height 19px
 
 th
   :text-align center
@@ -130,6 +139,7 @@ th
 //=============================================================================
 
 dl.table
+  :clear both
   dt, dd
     :display block
     :min-height 1.5em
@@ -365,7 +375,9 @@ td.action a
 // pagination
 
 .pagination  
+  :float right
   :font-weight normal
+  :margin 15px 0 0 0
   a, span
     :padding .125em .5em
     :display block

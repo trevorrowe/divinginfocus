@@ -53,4 +53,11 @@ class Admin_UsersController extends Admin_BaseController {
     $this->redirect('index');
   }
 
+  public function toggle_admin_action($params) {
+    $user = User::get($params->id);
+    $user->admin = !$user->admin;
+    $user->savex();
+    $this->render(false);
+  }
+
 }

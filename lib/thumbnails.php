@@ -1,5 +1,10 @@
 <?php
 
+
+# for an iphone web view?
+# - iphone_large
+# - iphone_thumb
+
 class Thumbnails {
 
   public static $cfg = array(
@@ -8,7 +13,7 @@ class Thumbnails {
       'quality' => 80,
       'stretch' => true,
       'operations' => array(
-        'ar' => array(128,96),
+        'ar' => array(119,89),
       ),
     ),
 
@@ -43,7 +48,7 @@ class Thumbnails {
       'quality' => 90,
       'stretch' => false,
       'operations' => array(
-        'ar' => array(800,450),
+        'ar' => array(720,405),
       )
     ),
 

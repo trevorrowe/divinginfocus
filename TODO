@@ -1,3 +1,5 @@
+* allow setting output format from the action (esp with render_error_page)
+* 
 
 * implement before and after filters for controllers
 * implement some emailng system
