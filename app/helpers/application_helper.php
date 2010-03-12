@@ -61,8 +61,13 @@ class ApplicationHelper extends \Pippa\Helper {
   ##
 
   # return the url to the photo html page
-  public function photo_url($photo) {
-    return url('photos', 'show', $photo);
+  public function photo_url($photo, $action = 'show') {
+    return url(array(
+      'controller' => 'photos',
+      'action' => $action,
+      'username' => $photo->uploader_username,
+      'id' => $photo,
+    ));
   }
 
   # returns an image tag tailored for the photo
@@ -75,17 +80,24 @@ class ApplicationHelper extends \Pippa\Helper {
       # TODO : caclulate height based on the $photo->height
       $opts['width'] = $cfg[$version]['operations']['resize'][0];
     }
-    $opts['title'] = $photo->title;
-    $opts['alt'] = $photo->alt();
+    $opts['title'] = "{$photo->title} by {$photo->uploader_username}";
+    $opts['alt'] = $photo->caption;
     return $this->img_tag($photo->url($version), $opts);
   }
 
   # return a link to a photo page wrapping an img tag
   public function photo_link($photo, $version, $opts = array()) {
     $img = $this->photo_tag($photo, $version);
-    $opts['title'] = $photo->title;
     $this->append_class_name($opts, 'photo');
     return $this->link_to($img, $this->photo_url($photo), $opts);
+  }
+
+  public function photo_quilt($collection, $more_url, $opts = array()) {
+    $parts = array();
+    foreach($collection as $photo)  
+      $parts[] = $this->photo_link($photo, 'thumb');
+    $parts[] = $this->link_to('More &raquo;', $more_url);
+    return $this->tag('div', $parts, array('class' => 'photo_quilt'));
   }
 
   public function user_path($user, $opts = array()) {

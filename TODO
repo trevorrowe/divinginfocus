@@ -1,3 +1,8 @@
+TO FIX
+=======
+- Sculpt depends on the Inflection methods, break it out from pippa?
+
+
 * allow setting output format from the action (esp with render_error_page)
 * 
 

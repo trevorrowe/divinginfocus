@@ -9,6 +9,26 @@ class Photo extends \Sculpt\Model {
   protected $tmp_filename;
 
   ##
+  ## associations
+  ##
+
+  public static $associations = array(
+
+    'uploader' => array(
+      'type' => 'belongs_to',
+      'class' => 'User',
+      'local_key' => 'uploader_username',
+      'foreign_key' => 'username',
+    ),
+
+    'comments' => array(
+      'type' => 'has_many',
+      'class' => 'PhotoComment',
+    ),
+
+  );
+
+  ##
   ## validations
   ##
 
@@ -33,14 +53,6 @@ class Photo extends \Sculpt\Model {
       'regex' => '/^image\/jpeg$/'
     ));
     
-  }
-
-  ##
-  ## associations
-  ##
-
-  public function owner() {
-    return User::get($this->owner_id);
   }
 
   ##
@@ -79,7 +91,7 @@ class Photo extends \Sculpt\Model {
       return preg_replace('/\..+$/', '', $this->filename);
   }
 
-  public function alt() {
+  public function _caption() {
     if($caption = $this->_get('caption'))
       return $caption;
     else

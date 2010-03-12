@@ -7,6 +7,15 @@ Route::add('/photos/versions/:version/:id1/:id2/:id3/photo.jpg', array(
   'action' => 'generate',
 ));
 
+Route::add('/users/:username/photos/:id', array(
+  'controller' => 'photos',
+  'action' => 'show',
+));
+
+Route::add('/users/:username/photos/:id/:action', array(
+  'controller' => 'photos',
+));
+
 Route::add('/admin', array('controller' => 'admin/users'));
 
 Route::add('/users/:id', array('controller' => 'users', 'action' => 'show'));

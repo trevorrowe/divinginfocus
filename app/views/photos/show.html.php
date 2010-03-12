@@ -26,7 +26,7 @@ for owners
 
 <dl id='details'>
   <dt>Photographer</dt>
-  <dd><?php echo $this->user_link($photo->owner()) ?></dd>
+  <dd><?php echo $this->user_link($photo->uploader) ?></dd>
   <dt>Filename</dt>
   <dd><?php echo h($photo->filename) ?></dd>
   <dt>Uploaded</dt>
@@ -34,8 +34,8 @@ for owners
   <dt>File size</dt>
   <dd><?php echo format_bytes($photo->size) ?></dd>
 </dl>
-<?php if($this->current_user() == $photo->owner()): ?>
-  <?php echo $this->link_to('Edit Photo', url('edit', $photo), array('class' => 'edit')) ?>
+<?php if($this->current_user() == $photo->uploader): ?>
+  <?php echo $this->link_to('Edit Photo', $this->photo_url($photo, 'edit'), array('class' => 'edit')) ?>
 <?php endif ?>
 
 <!--

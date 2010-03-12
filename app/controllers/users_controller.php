@@ -12,11 +12,13 @@ class UsersController extends PublicBaseController {
     $this->users = User::paginate($params->page, 25);
   }
 
-  public function show_action($params) {}
+  public function show_action($params) {
+    $this->photos = $this->user->photos->paginate(1, 16);
+  }
 
   public function photos_action($params) {
     $this->add_crumb('Photos');
-    $this->photos = $this->user->photos()->paginate($params->page, 50);
+    $this->photos = $this->user->photos->paginate($params->page, 40);
   }
 
   public function load_user_filter($params) {

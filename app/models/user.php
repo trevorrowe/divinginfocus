@@ -9,6 +9,41 @@ class User extends \Sculpt\Model {
   static $attr_whitelist = array('email', 'password', 'password_confirmation');
 
   ##
+  ## associations
+  ##
+
+  static $associations = array(
+
+    'logins' => array(
+      'type' => 'has_many',
+    ),
+
+    'photos' => array(
+      'type' => 'has_many',
+      'local_key' => 'username',
+      'foreign_key' => 'uploader_username',
+    ),
+
+    'favorite_photos' => array(
+      'type' => 'has_and_belongs_to_many',
+      'class' => 'Photo',
+      'join_table' => 'photo_favorites',
+      'foreign_key' => 'favored_by',
+    ),
+
+  );
+
+  ##
+  ## scopes
+  ##
+
+  public static $scopes = array(
+    'verified' => array('where' => 'verified_at IS NOT NULL'),
+    'active' => array('verified', 'where' => 'disabled = 0'),
+    'admin' => array('active', 'where' => 'admin = 1'),
+  );
+
+  ##
   ## validations
   ##
 
@@ -62,46 +97,6 @@ class User extends \Sculpt\Model {
     $this->validate_length_of('password_hash', array('is' => 64));
 
   }
-
-  ##
-  ## associations
-  ##
-
-  public function photos() {
-    return Photo::owner_id_is($this->id);
-  }
-
-  static $has_one = array(
-    array('profile'),
-  );
-
-  static $has_many = array(
-    array('photos'),
-    array('vidoes'),
-    array('albums'),
-    array('photo_comments'),
-    array('video_comments'),
-    array('album_comments'),
-    array('logins'),
-    array('login_cookies'),
-  );
-
-  static $has_and_belongs_to_many = array(
-    array('favorite_photos'),
-    array('favorite_videos'),
-    array('favorite_albums'),
-    array('favorite_users'),
-  );
-
-  ##
-  ## scopes
-  ##
-
-  public static $scopes = array(
-    'verified' => array('where' => 'verified_at IS NOT NULL'),
-    'active' => array('verified', 'where' => 'disabled = 0'),
-    'admin' => array('active', 'where' => 'admin = 1'),
-  );
 
   ##
   ## callbacks

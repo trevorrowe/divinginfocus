@@ -35,8 +35,8 @@ class Pagination extends \Pippa\Helper {
   protected function page_link_or_span($collection, $page, $opts = array()) {
     $label = $this->get_opt($opts, 'label', $page);
     if($page && $page != $collection->page) {
-      #$page = $page == 1 ? null : $page;
-      return $this->link_to($label, url(array('page' => $page)), $opts);
+      $url = url($this->params->merge(array('page' => $page)));
+      return $this->link_to($label, $url, $opts);
     } else if($page) {
       $this->append_class_name($opts, 'current');
       return $this->tag('span', $label, $opts);

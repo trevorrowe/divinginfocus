@@ -5,18 +5,18 @@ class PhotosController extends PublicBaseController {
   public function init() {
     parent::init();
     $this->before_filter('require_user', array('only' => 'destroy'));
+    $this->before_filter('add_crumbs');
     $this->before_filter('load_photo');
-    $this->add_crumb('Photos', '/photos');
   }
 
   public function index_action($params) {
     $this->photos = Photo::paginate($params->page, 50);
   }
 
-  public function show_action($params) {}
+  public function show_action($params) {
+  }
 
   public function original_action($params) {
-    debug($params->id);
     $this->render(false);
   }
 
@@ -40,6 +40,14 @@ class PhotosController extends PublicBaseController {
     $this->current_user()->photos()->destroy($params->id);
     $this->flash('notice', 'Photo deleted.');
     $this->redirect('index');
+  }
+
+  public function add_crumbs_filter($params) {
+    if($params->username) {
+      $this->add_crumb('Users', '/users');
+      $this->add_crumb($params->username, "/users/{$params->username}");
+    }
+    $this->add_crumb('Photos', '/photos');
   }
 
   public function load_photo_filter($params) {

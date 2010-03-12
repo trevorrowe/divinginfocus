@@ -32,7 +32,9 @@ function url() {
 
   switch($argc) {
     case 1:
-      if(is_assoc($args[0]))
+      if(is_a($args[0], '\Pippa\MagicHash'))
+        $params = $args[0]->to_array();
+      else if(is_assoc($args[0]))
         $params = $args[0];
       else if(is_array($args[0]))
         return call_user_func_array('url', $args[0]);

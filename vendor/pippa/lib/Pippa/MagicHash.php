@@ -8,8 +8,7 @@ class MagicHash implements \Iterator, \Countable, \ArrayAccess {
   protected $data = array();
 
   public function __construct($data = array()) {
-    foreach($data as $key => $value)
-      $this->offsetSet($key, $value);
+    $this->merge($data);
   }
 
   public function __set($key, $value) {
@@ -73,6 +72,23 @@ class MagicHash implements \Iterator, \Countable, \ArrayAccess {
 
   public function count() {
     return count($this->data);
+  }
+
+  public function merge($data) {
+    foreach($data as $key => $value)
+      $this->offsetSet($key, $value);
+    return $this;
+  }
+
+  public function to_array() {
+    $array = Array();
+    foreach($this->data as $k => $v) {
+      if(is_a($v, '\Pippa\MagicHash'))
+        $array[$k] = $v->to_array();
+      else
+        $array[$k] = $v;
+    }
+    return $this->data;
   }
 
   protected function to_string($array) {
