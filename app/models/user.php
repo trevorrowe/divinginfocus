@@ -21,14 +21,15 @@ class User extends \Sculpt\Model {
     'photos' => array(
       'type' => 'has_many',
       'local_key' => 'username',
-      'foreign_key' => 'uploader_username',
+      'foreign_key' => 'username',
     ),
 
     'favorite_photos' => array(
       'type' => 'has_and_belongs_to_many',
-      'class' => 'Photo',
       'join_table' => 'photo_favorites',
-      'foreign_key' => 'favored_by',
+      'class' => 'Photo',
+      'owner_col' => 'username',
+      'owner_key' => 'username',
     ),
 
   );
@@ -119,10 +120,6 @@ class User extends \Sculpt\Model {
   ##
   ## utility methods
   ##
-
-  public function to_param() {
-    return $this->username;
-  }
 
   public function is_verified() {
     return !is_null($this->verified_at);

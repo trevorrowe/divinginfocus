@@ -3,11 +3,11 @@
 class LoginController extends PublicBaseController {
   
   public function index_action($params, $request) {
+    $this->user = new User();
+  }
 
+  public function authenticate_action($params) {
     $this->user = new User($params->user, false);
-
-    if($request->is_get()) return;
-
     $username = $this->user->username;
     $password = $this->user->password;
     if($user = User::authenticate($username, $password)) {
@@ -15,6 +15,7 @@ class LoginController extends PublicBaseController {
       $this->redirect('/');
     } else {
       $this->flash_now('error', 'Invalid username and/or password.');
+      $this->render('index');
     }
   }
 

@@ -22,18 +22,20 @@ class SudoController extends ApplicationController {
 
   public function login_as_action($params) {
 
+    $username = $params->id;
+
     # get the id of the user that is sudoing
-    $sudo_id = App::$session->sudo_id ? 
-      App::$session->sudo_id :
-      $this->current_user()->id;
+    $sudo_username = App::$session->sudo_username ? 
+      App::$session->sudo_username :
+      $this->current_user()->username;
 
     # get the target user
-    $target = User::active()->id_is($params->id)->get();
+    $target = User::active()->username_is($username)->get();
 
-    # clear the current session and set only the sudo_id and user_id
+    # clear the current session and set only the sudo_username and user_id
     App::$session->clear();
-    if($sudo_id != $target->id)
-      App::$session->sudo_id = $sudo_id;
+    if($sudo_username != $target->username)
+      App::$session->sudo_username = $sudo_username;
     App::$session->user_id = $target->id;
     App::$session->timestamp = time();
 

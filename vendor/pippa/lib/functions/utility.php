@@ -47,7 +47,15 @@ function dump($obj, $stop = true) {
     exit();
 }
 
+function d() {
+  $msg = array();
+  foreach(func_get_args() as $arg)
+    $msg[] = '<pre>' . print_r($arg, true) . '</pre>';
+  throw new Exception(implode("\n", $msg));
+}
+
 function debug($obj, $stop = true) {
+
   echo '<pre>';
   var_dump($obj);
   #print_r($obj);

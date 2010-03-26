@@ -255,7 +255,7 @@ class Forms extends \Pippa\Helper {
   }
 
   protected function form_field_name($obj, $attr) {
-    return strtolower(get_class($obj) . "[$attr]");
+    return underscore(get_class($obj)) . "[$attr]";
   }
 
   protected function append_default_form_field_id(&$opts, $form_field_name) {

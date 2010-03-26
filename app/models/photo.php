@@ -17,14 +17,21 @@ class Photo extends \Sculpt\Model {
     'uploader' => array(
       'type' => 'belongs_to',
       'class' => 'User',
-      'local_key' => 'uploader_username',
+      'local_key' => 'username',
       'foreign_key' => 'username',
     ),
 
-    'comments' => array(
-      'type' => 'has_many',
-      'class' => 'PhotoComment',
+    'favored_by' => array(
+      'type' => 'has_and_belongs_to_many',
+      'join_table' => 'photo_favorites',
+      'class' => 'User',
+      'target_col' => 'username',
+      'target_key' => 'username',
     ),
+
+    'identification' => array('type' => 'has_one'),
+
+    'comments' => array('type' => 'has_many', 'class' => 'PhotoComment'),
 
   );
 
@@ -91,11 +98,8 @@ class Photo extends \Sculpt\Model {
       return preg_replace('/\..+$/', '', $this->filename);
   }
 
-  public function _caption() {
-    if($caption = $this->_get('caption'))
-      return $caption;
-    else
-      return $this->title;
+  public function alt() {
+    return isset($this->caption) ? $this->caption : $this->title;
   }
 
   public function url($version = 'original') {

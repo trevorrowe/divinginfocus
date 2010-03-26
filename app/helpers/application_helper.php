@@ -8,26 +8,26 @@ class ApplicationHelper extends \Pippa\Helper {
 
   # return true if there is a user logged into the current session
   public function logged_in() {
-    return isset(App::$session['user_id']);
+    return isset(App::$session['username']);
   }
 
   # returns true if the current user is actually another user sudoing
   public function user_is_sudoed() {
-    return App::$session->sudo_id ? true : false;
+    return App::$session->sudo_username ? true : false;
   }
 
   # returns true if the current user has privileges to sudo
   public function user_can_sudo() {
     return (
       ($this->logged_in()) && 
-      ($this->current_user()->admin || App::$session->sudo_id));
+      ($this->current_user()->admin || App::$session->sudo_username));
   }
 
   # returns the current user object (if logged in), null otherwise
   public function current_user() {
     if($this->logged_in())
       if(is_null($this->current_user))
-        $this->current_user = User::get(App::$session->user_id);
+        $this->current_user = User::username_is(App::$session->username)->get();
     return $this->current_user;
   }
 
@@ -65,7 +65,7 @@ class ApplicationHelper extends \Pippa\Helper {
     return url(array(
       'controller' => 'photos',
       'action' => $action,
-      'username' => $photo->uploader_username,
+      'username' => $photo->username,
       'id' => $photo,
     ));
   }
@@ -80,8 +80,8 @@ class ApplicationHelper extends \Pippa\Helper {
       # TODO : caclulate height based on the $photo->height
       $opts['width'] = $cfg[$version]['operations']['resize'][0];
     }
-    $opts['title'] = "{$photo->title} by {$photo->uploader_username}";
-    $opts['alt'] = $photo->caption;
+    $opts['title'] = "{$photo->title} by {$photo->username}";
+    $opts['alt'] = $photo->alt();
     return $this->img_tag($photo->url($version), $opts);
   }
 
@@ -100,16 +100,23 @@ class ApplicationHelper extends \Pippa\Helper {
     return $this->tag('div', $parts, array('class' => 'photo_quilt'));
   }
 
-  public function user_path($user, $opts = array()) {
-    $opts['controller'] = 'users';
-    $opts['id'] = $user;
-    if(!isset($opts['action']))
-      $opts['action'] = 'show';
-    return url($opts);
+  public function user_path($user_or_username, $action = 'show') {
+    return url(array(
+      'controller' => 'users',
+      'action' => $action,
+      'username' => $this->username($user_or_username),
+    ));
   }
 
-  public function user_link($user) {
-    return $this->link_to($user->username, $this->user_path($user));
+  public function user_link($user_or_username) {
+    $username = $this->username($user_or_username);
+    return $this->link_to($username, $this->user_path($username));
+  }
+
+  private function username($user_or_username) {
+    return $username = is_a($user_or_username, 'User') ? 
+      $user_or_username->username : 
+      $user_or_username;
   }
 
   ##
@@ -165,6 +172,33 @@ class ApplicationHelper extends \Pippa\Helper {
     $opts['class'] = 'toggle';
     $opts['data-url'] = url("toggle_$attr", $obj);
     return $this->checkbox_tag(null, $obj->$attr, $opts);
+  }
+
+  ##
+  ## favorite photo link
+  ##
+
+  public function favorite_photo_link($photo) {
+    $user = $this->current_user();
+    if(!$user)
+      return '';
+    if($user->favorite_photos->contains($this->photo)) {
+      $iurl = '/images/photos/favored.png';
+      $text = 'Click to remove from favorites';
+      $img = $this->img_tag($iurl, array('alt' => $text));
+      $url = $this->photo_url($photo, 'unfavorite');
+      $class = 'remove';
+    } else {
+      $iurl = '/images/photos/unfavored.png';
+      $text = 'Click to add to favorites';
+      $img = $this->img_tag($iurl, array('alt' => $text));
+      $url = $this->photo_url($photo, 'favorite');
+      $class = 'add';
+    }
+    return $this->link_to($img, $url, array(
+      'class' => "$class favorite",
+      'title' => $text,
+    ));
   }
 
 }

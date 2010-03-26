@@ -22,7 +22,7 @@ class UsersController extends PublicBaseController {
   }
 
   public function load_user_filter($params) {
-    $this->user = User::username_is($params->id)->get();
+    $this->user = User::username_is($params->username)->get();
     $this->add_crumb($this->user->username, $this->user_path($this->user));
   }
 

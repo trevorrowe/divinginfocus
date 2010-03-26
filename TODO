@@ -1,5 +1,15 @@
+DNF
+==========
+- Add rss feeds (photos, photo comments, users, etc, global, etc)
+- add avatars (default to a photo frame, but allow users to upload their own)
+- add profile pages
+- add scores (based on photo uploads, comments, left, identifications, etc)
+- add dive reports / blog
+- add some *light* rich text editing for comments
+- simleys ???
+
 TO FIX
-=======
+==========
 - Sculpt depends on the Inflection methods, break it out from pippa?
 
 
@@ -13,7 +23,7 @@ TO FIX
 * 
 
 Big ideas
-===================
+==========
 * Support multiple view renders
 * The framework should provide a method to cache the following for production:
   - what error pages exist (403, 404, 500, etc)

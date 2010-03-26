@@ -17,7 +17,7 @@
       <li>
         <?php echo $this->link_to('Sudo', '/sudo') ?>
         <?php if($this->user_is_sudoed()): ?>
-          <?php echo $this->icon_only_link('revert', 'Login As Yourself', url('sudo', 'login_as', App::$session->sudo_id)) ?>
+          <?php echo $this->icon_only_link('revert', 'Login As Yourself', url('sudo', 'login_as', App::$session->sudo_username)) ?>
         <?php endif; ?>
       </li>
   <?php endif; ?>

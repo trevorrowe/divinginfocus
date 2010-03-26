@@ -4,11 +4,17 @@ class Login extends \Sculpt\Model {
 
 
   public function validate() {
-    $this->validate_presence_of('user_id');
+    $this->validate_presence_of('username');
   }
 
-  public function user() {
-    return User::id_is($this->user_id)->get();
-  }
+  public static $associations = array(
+
+    'user' => array(
+      'type' => 'belongs_to',
+      'local_key' => 'username',
+      'foreign_key' => 'username',
+    ),
+
+  );
 
 }

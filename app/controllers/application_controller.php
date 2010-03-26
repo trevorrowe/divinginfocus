@@ -68,10 +68,9 @@ class ApplicationController extends \Pippa\Controller {
     
     # log the user into the session
     App::$session->clear();
-    App::$session->user_id = $user->id;
+    App::$session->username = $user->username;
     App::$session->timestamp = time();
 
-    $cookie = RememberMeCookie::get();
     if($remember) {
 
       # $remember is either a boolean or an existing db login cookie
@@ -79,22 +78,23 @@ class ApplicationController extends \Pippa\Controller {
         $db_cookie = $remember;
       } else {
         $db_cookie = new LoginCookie();
-        $db_cookie->user_id = $user->id;
+        $db_cookie->username = $user->username;
         $db_cookie->series = uuid();
       }
       $db_cookie->token = uuid();
       $db_cookie->savex();
 
-      $cookie->user_id = $user->id;
-      $cookie->series = $db_cookie->series;
-      $cookie->token = $db_cookie->token;
-      $cookie->save();
+      $rmc = RememberMeCookie::get();
+      $rmc->username = $user->username;
+      $rmc->series = $db_cookie->series;
+      $rmc->token = $db_cookie->token;
+      $rmc->save();
 
     }
 
     # create a record of the login
     $login = new Login();
-    $login->user_id = $user->id;
+    $login->username = $user->username;
     $login->via = is_object($remember) ? 'cookie' : 'form';
     $login->savex();
   }

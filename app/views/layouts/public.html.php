@@ -28,6 +28,14 @@
   <ul>
     <li><?php echo $this->link_to('Upload', '/upload') ?></li>
     <li><?php echo $this->link_to('Photos', '/photos') ?></li>
+    <li><?php echo $this->link_to('Users', '/users') ?></li>
+    <li class='last'>
+    <?php if($this->logged_in()): ?>
+      <?php echo $this->link_to('Me', '/users') ?>
+    <?php else: ?>
+      <?php echo $this->link_to('Login / Register', '/login') ?>
+    <?php endif ?>
+    </li>
   </ul>
 </div>
 
