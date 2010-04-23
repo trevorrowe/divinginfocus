@@ -2,19 +2,23 @@
 
 use Pippa\Route;
 
-Route::add('/photos/versions/:version/:id1/:id2/:id3/photo.jpg', array(
+Route::add('/photos/versions/:version/:id1/:id2/:id3/:id4/photo.jpg', array(
   'controller' => 'thumbnails',
   'action' => 'generate',
 ));
 
-Route::add('/users/:username/photos/:id', array(
-  'controller' => 'photos',
-  'action' => 'show',
-));
+foreach(array('photos', 'videos') as $media) {
 
-Route::add('/users/:username/photos/:id/:action', array(
-  'controller' => 'photos',
-));
+  Route::add("/users/:username/$media/:id", array(
+    'controller' => $media,
+    'action' => 'show',
+  ));
+
+  Route::add("/users/:username/$media/:id/:action", array(
+    'controller' => $media,
+  ));
+
+}
 
 Route::add('/users/:username', array(
   'controller' => 'users', 'action' => 'show'

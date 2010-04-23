@@ -88,14 +88,25 @@ caption
 // chrome
 //=============================================================================
 
+body
+  :min-width 960px
+
 #cntl
-  :margin 0 auto
   :overflow hidden
-  :width 960px
   :margin-top 70px
+  //:border 1px solid blue
   h2
     :font-size 20px
     :margin 10px 0
+#actn
+  :width 1000px
+  :margin 0 auto
+  //:border 1px solid red
+
+#content
+  :width 960px
+  :margin 0 auto
+  :overflow hidden
 
 #header
   :position absolute
@@ -104,29 +115,29 @@ caption
   :right 0px
   :background-color = !bg_accent
   :height 30px
+  :min-width 960px
 
 #menu
   :position absolute
   :top 30px
   :left 0px
   :right 0px
+  :min-width 960px
   :height 30px
+  :background-color lightblue
   ul
-    :display block
-    :margin 0 auto
     :list-style-type none
-    :width 800px
-    :height 30px
+    :margin 0
   a
     :float left
     :border 1px solid white
     :border-right none
     :text-align center
-    :width 199px
+    :width 149px
     :line-height 28px
   li.last a
     :border-right 1px solid white
-    :width 198px
+    :width 148px
 
 #crumbtrail
   :line-height 25px
@@ -198,10 +209,10 @@ caption
   a.next_page, a.prev_page
     :border-color #b2c2da
 
-.photo_quilt
+.quilt
   :clear both
   :overflow hidden
-  a.photo
+  a
     :float left
     :margin-right 1px
     :margin-bottom 1px

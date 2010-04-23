@@ -13,7 +13,7 @@ class Thumbnails {
       'quality' => 80,
       'stretch' => true,
       'operations' => array(
-        'ar' => array(119,89),
+        'ar' => array(95,73),
       ),
     ),
 

@@ -230,7 +230,7 @@ if(!isset($params[$segment]) && !isset($current_reqeust->params[$segment])) {
 
   public static function defaults() {
     $id_regex = '\d+(-.+)?';
-    self::root('home');
+    self::root('index');
     self::add(':controller/:id', array('action' => 'show', 'id' => $id_regex));
     //self::add(':controller/:id/:action', array('id' => $id_regex));
     self::add(':controller');

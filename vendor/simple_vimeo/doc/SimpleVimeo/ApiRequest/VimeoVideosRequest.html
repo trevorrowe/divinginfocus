@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class VimeoVideosRequest</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class VimeoVideosRequest</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Vimeo Videos request handler class</p>
+<p class="description"><p>Implements all API queries in the vimeo.videos.* category</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_lib---class.vimeo.php.html">/lib/class.vimeo.php</a> (line <span class="field">1813</span>)
+		</p>
+		
+				
+		<pre><a href="../../SimpleVimeo/ApiRequest/VimeoRequest.html">VimeoRequest</a>
+   |
+   --VimeoVideosRequest</pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#PRIVACY_ANYBODY" title="details" class="const-name">PRIVACY_ANYBODY</a> = 					<span class="var-type"> 'anybody'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#PRIVACY_CONTACTS" title="details" class="const-name">PRIVACY_CONTACTS</a> = 					<span class="var-type"> 'contacts'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#PRIVACY_NOBODY" title="details" class="const-name">PRIVACY_NOBODY</a> = 					<span class="var-type"> 'nobody'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#PRIVACY_USERS" title="details" class="const-name">PRIVACY_USERS</a> = 					<span class="var-type"> 'users'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																												
+												<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosAddTagsResponse.html">VimeoVideosAddTagsResponse</a></span>
+										<a href="#addTags" title="details" class="method-name">addTags</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$mTags</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosCheckUploadStatusResponse.html">VimeoVideosCheckUploadStatusResponse</a></span>
+										<a href="#checkUploadStatus" title="details" class="method-name">checkUploadStatus</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sTicket</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">VimeoVideosClearTags</span>
+										<a href="#clearTags" title="details" class="method-name">clearTags</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosDeleteResponse.html">VimeoVideosDeleteResponse</a></span>
+										<a href="#delete" title="details" class="method-name">delete</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosCheckUploadStatusResponse.html">VimeoVideosCheckUploadStatusResponse</a></span>
+										<a href="#doUpload" title="details" class="method-name">doUpload</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sFilename</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$sTicket</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetAppearsInListResponse.html">VimeoVideosGetAppearsInListResponse</a></span>
+										<a href="#getAppearsInList" title="details" class="method-name">getAppearsInList</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">VimeoVideosGetContactsLikeListResponse</span>
+										<a href="#getContactsLikeList" title="details" class="method-name">getContactsLikeList</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetContactsListResponse.html">VimeoVideosGetContactsListResponse</a></span>
+										<a href="#getContactsList" title="details" class="method-name">getContactsList</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetInfoResponse.html">VimeoVideosGetInfoResponse</a></span>
+										<a href="#getInfo" title="details" class="method-name">getInfo</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetLikeListResponse.html">VimeoVideosGetLikeListResponse</a></span>
+										<a href="#getLikeList" title="details" class="method-name">getLikeList</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetListResponse.html">VimeoVideosGetListResponse</a></span>
+										<a href="#getList" title="details" class="method-name">getList</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetListByTagResponse.html">VimeoVideosGetListByTagResponse</a></span>
+										<a href="#getListByTag" title="details" class="method-name">getListByTag</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sTag</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetSubscriptionsListResponse.html">VimeoVideosGetSubscriptionsListResponse</a></span>
+										<a href="#getSubscriptionsList" title="details" class="method-name">getSubscriptionsList</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetUploadedListResponse.html">VimeoVideosGetUploadedListResponse</a></span>
+										<a href="#getUploadedList" title="details" class="method-name">getUploadedList</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetUploadTicketResponse.html">VimeoVideosGetUploadTicketResponse</a></span>
+										<a href="#getUploadTicket" title="details" class="method-name">getUploadTicket</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosRemoveTagResponse.html">VimeoVideosRemoveTagResponse</a></span>
+										<a href="#removeTag" title="details" class="method-name">removeTag</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$iTagID</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosSearchResponse.html">VimeoVideosSearchResponse</a></span>
+										<a href="#search" title="details" class="method-name">search</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sQuery</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bContactsOnly</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosSetCaptionResponse.html">VimeoVideosSetCaptionResponse</a></span>
+										<a href="#setCaption" title="details" class="method-name">setCaption</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$sVideoCaption</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosSetFavoriteResponse.html">VimeoVideosSetFavoriteResponse</a></span>
+										<a href="#setFavorite" title="details" class="method-name">setFavorite</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bFavorite</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setPrivacy" title="details" class="method-name">setPrivacy</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$ePrivacy</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$mUsers</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosSetTitleResponse.html">VimeoVideosSetTitleResponse</a></span>
+										<a href="#setTitle" title="details" class="method-name">setTitle</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$sVideoTitle</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodaddTags" id="addTags"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addTags</span> (line <span class="line-number">2275</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add specified tags to the video, this does not replace any tags.</p>
+<p class="description"><p>Tags should be comma separated lists.</p><p>If the calling user is logged in, this will return information that calling  user has access to (including private videos). If the calling user is not authenticated,  this will only return public information, or a permission denied error if none is available.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosAddTagsResponse.html">VimeoVideosAddTagsResponse</a></span>
+		<span class="method-name">
+			addTags
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$mTags</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iVideoID</span><span class="var-description">: Video ID</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$mTags</span><span class="var-description">: Array with tags or Comma separated list of tags (&quot;lions, tigers, bears&quot;)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcheckUploadStatus" id="checkUploadStatus"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkUploadStatus</span> (line <span class="line-number">2173</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check the status of an upload started via the API</p>
+<p class="description"><p>This is how you get the video_id of a clip uploaded from the API  If you never call this to check in, we assume it was abandoned and don't process it</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosCheckUploadStatusResponse.html">VimeoVideosCheckUploadStatusResponse</a></span>
+		<span class="method-name">
+			checkUploadStatus
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sTicket</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sTicket</span><span class="var-description">: The ticket number of the upload</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodclearTags" id="clearTags"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">clearTags</span> (line <span class="line-number">2314</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove ALL of the tags from the video</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">VimeoVideosClearTags</span>
+		<span class="method-name">
+			clearTags
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iVideoID</span><span class="var-description">: Video ID</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddelete" id="delete"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">delete</span> (line <span class="line-number">2202</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Delete a video</p>
+<p class="description"><p>The authenticated user must own the video and have granted delete permission</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosDeleteResponse.html">VimeoVideosDeleteResponse</a></span>
+		<span class="method-name">
+			delete
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iVideoID</span><span class="var-description">: Video ID</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddoUpload" id="doUpload"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">doUpload</span> (line <span class="line-number">2189</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Simple video upload</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosCheckUploadStatusResponse.html">VimeoVideosCheckUploadStatusResponse</a></span>
+		<span class="method-name">
+			doUpload
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sFilename</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$sTicket</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sFilename</span><span class="var-description">: Absolute path to file</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sTicket</span><span class="var-description">: Existing ticket or false to generate a new one</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetAppearsInList" id="getAppearsInList"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAppearsInList</span> (line <span class="line-number">1940</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This gets a list of videos that the specified user appears in.</p>
+<p class="description"><p>If the calling user is logged in, this will return information that calling user has access  to (including private videos). If the calling user is not authenticated, this will only return  public information, or a permission denied error if none is available.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetAppearsInListResponse.html">VimeoVideosGetAppearsInListResponse</a></span>
+		<span class="method-name">
+			getAppearsInList
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iUserID</span><span class="var-description">: User ID, this can be the ID number (151542) or the username (ted)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iPage</span><span class="var-description">: Which page to show.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iItemsPerPage</span><span class="var-description">: How many results per page?</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetContactsLikeList" id="getContactsLikeList"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getContactsLikeList</span> (line <span class="line-number">2111</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a list of videos that the specified users contacts like.</p>
+<p class="description"><p>If the calling user is logged in, this will return information that calling user has  access to (including private videos). If the calling user is not authenticated, this will  only return public information, or a permission denied error if none is available.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">VimeoVideosGetContactsLikeListResponse</span>
+		<span class="method-name">
+			getContactsLikeList
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iUserID</span><span class="var-description">: User ID, this can be the ID number (151542) or the username (ted)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iPage</span><span class="var-description">: Which page to show.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iItemsPerPage</span><span class="var-description">: How many results per page?</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetContactsList" id="getContactsList"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getContactsList</span> (line <span class="line-number">2078</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a list of videos made by the contacts of a specific user.</p>
+<p class="description"><p>If the calling user is logged in, this will return information that calling user has  access to (including private videos). If the calling user is not authenticated, this will  only return public information, or a permission denied error if none is available.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetContactsListResponse.html">VimeoVideosGetContactsListResponse</a></span>
+		<span class="method-name">
+			getContactsList
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iUserID</span><span class="var-description">: User ID, this can be the ID number (151542) or the username (ted)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iPage</span><span class="var-description">: Which page to show.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iItemsPerPage</span><span class="var-description">: How many results per page?</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetInfo" id="getInfo"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getInfo</span> (line <span class="line-number">2142</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get all kinds of information about a photo.</p>
+<p class="description"><p>If the calling user is logged in, this will return information that calling user has  access to (including private videos). If the calling user is not authenticated, this will  only return public information, or a permission denied error if none is available.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetInfoResponse.html">VimeoVideosGetInfoResponse</a></span>
+		<span class="method-name">
+			getInfo
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iVideoID</span><span class="var-description">: Video ID</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetLikeList" id="getLikeList"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getLikeList</span> (line <span class="line-number">2045</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a list of videos that the specified user likes.</p>
+<p class="description"><p>If the calling user is logged in, this will return information that calling user has  access to (including private videos). If the calling user is not authenticated, this will  only return public information, or a permission denied error if none is available.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetLikeListResponse.html">VimeoVideosGetLikeListResponse</a></span>
+		<span class="method-name">
+			getLikeList
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iUserID</span><span class="var-description">: User ID, this can be the ID number (151542) or the username (ted)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iPage</span><span class="var-description">: Which page to show.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iItemsPerPage</span><span class="var-description">: How many results per page?</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetList" id="getList"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getList</span> (line <span class="line-number">1874</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This gets a list of videos for the specified user.</p>
+<p class="description"><p>This is the functionality of &quot;My Videos&quot; or &quot;Ted's Videos.&quot; At the moment, this is the same list  as vimeo.videos.getAppearsInList. If you need uploaded or appears in, those are available too.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetListResponse.html">VimeoVideosGetListResponse</a></span>
+		<span class="method-name">
+			getList
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iUserID</span><span class="var-description">: User ID, this can be the ID number (151542) or the username (ted)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iPage</span><span class="var-description">: Which page to show.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iItemsPerPage</span><span class="var-description">: How many results per page?</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetListByTag" id="getListByTag"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getListByTag</span> (line <span class="line-number">2008</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This gets a list of videos by tag</p>
+<p class="description"><p>If you specify a user_id, we'll only get video uploaded by that user with the specified tag.  If the calling user is logged in, this will return information that calling user has access  to (including private videos). If the calling user is not authenticated, this will only  return public information, or a permission denied error if none is available.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetListByTagResponse.html">VimeoVideosGetListByTagResponse</a></span>
+		<span class="method-name">
+			getListByTag
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sTag</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sTag</span><span class="var-description">: A single tag: &quot;cat&quot; &quot;new york&quot; &quot;cheese&quot;</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iUserID</span><span class="var-description">: User ID, this can be the ID number (151542) or the username (ted)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iPage</span><span class="var-description">: Which page to show.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iItemsPerPage</span><span class="var-description">: How many results per page?</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetSubscriptionsList" id="getSubscriptionsList"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSubscriptionsList</span> (line <span class="line-number">1973</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This gets a list of subscribed videos for a particular user.</p>
+<p class="description"><p>If the calling user is logged in, this will return information that calling user  has access to (including private videos). If the calling user is not authenticated,  this will only return public information, or a permission denied error if none is available.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetSubscriptionsListResponse.html">VimeoVideosGetSubscriptionsListResponse</a></span>
+		<span class="method-name">
+			getSubscriptionsList
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iUserID</span><span class="var-description">: User ID, this can be the ID number (151542) or the username (ted)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iPage</span><span class="var-description">: Which page to show.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iItemsPerPage</span><span class="var-description">: How many results per page?</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetUploadedList" id="getUploadedList"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUploadedList</span> (line <span class="line-number">1907</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This gets a list of videos uploaded by the specified user.</p>
+<p class="description"><p>If the calling user is logged in, this will return information that calling user has access to  (including private videos). If the calling user is not authenticated, this will only return  public information, or a permission denied error if none is available.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetUploadedListResponse.html">VimeoVideosGetUploadedListResponse</a></span>
+		<span class="method-name">
+			getUploadedList
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iPage</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iUserID</span><span class="var-description">: User ID, this can be the ID number (151542) or the username (ted)</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iPage</span><span class="var-description">: Which page to show.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iItemsPerPage</span><span class="var-description">: How many results per page?</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetUploadTicket" id="getUploadTicket"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUploadTicket</span> (line <span class="line-number">2159</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Generate a new upload Ticket.</p>
+<p class="description"><p>You'll need to pass this to the uploader. It's only good for one upload, only good for one user.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosGetUploadTicketResponse.html">VimeoVideosGetUploadTicketResponse</a></span>
+		<span class="method-name">
+			getUploadTicket
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodremoveTag" id="removeTag"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">removeTag</span> (line <span class="line-number">2298</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove specified tag from the video.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosRemoveTagResponse.html">VimeoVideosRemoveTagResponse</a></span>
+		<span class="method-name">
+			removeTag
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$iTagID</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iVideoID</span><span class="var-description">: Video ID</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iTagID</span><span class="var-description">: Tag ID, this should be a tag id returned by vimeo.videos.getInfo</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsearch" id="search"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">search</span> (line <span class="line-number">1834</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Search videos!</p>
+<p class="description"><p>If the calling user is logged in, this will return information that calling user  has access to (including private videos). If the calling user is not authenticated,  this will only return public information, or a permission denied error if none is available.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosSearchResponse.html">VimeoVideosSearchResponse</a></span>
+		<span class="method-name">
+			search
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sQuery</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iUserID</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bContactsOnly</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iItemsPerPage</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sQuery</span><span class="var-description">: Search query</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iUserID</span><span class="var-description">: User ID, this can be the ID number (151542) or the username (ted)</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bContactsOnly</span><span class="var-description">: If TRUE, we'll only search the users contacts. If this is set, you must specifiy a User ID. Otherwise it will be ignored without error.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iItemsPerPage</span><span class="var-description">: ow many results per page?</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetCaption" id="setCaption"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCaption</span> (line <span class="line-number">2235</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set a new caption for a video (overwrites previous caption)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosSetCaptionResponse.html">VimeoVideosSetCaptionResponse</a></span>
+		<span class="method-name">
+			setCaption
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$sVideoCaption</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iVideoID</span><span class="var-description">: Video ID</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sVideoCaption</span><span class="var-description">: Caption</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetFavorite" id="setFavorite"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setFavorite</span> (line <span class="line-number">2252</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set a video as a favorite.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosSetFavoriteResponse.html">VimeoVideosSetFavoriteResponse</a></span>
+		<span class="method-name">
+			setFavorite
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bFavorite</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iVideoID</span><span class="var-description">: Video ID</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bFavorite</span><span class="var-description">: TRUE to favorite, FALSE to return to normal</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetPrivacy" id="setPrivacy"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setPrivacy</span> (line <span class="line-number">2330</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the privacy of the video</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setPrivacy
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$ePrivacy</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$mUsers</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iVideoID</span><span class="var-description">: Video ID</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$ePrivacy</span><span class="var-description">: Privacy enum see VimeoVideosRequest::PRIVACY_*</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$mUsers</span><span class="var-description">: Array or comma separated list of users who can view the video. PRIVACY_USERS must be set.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetTitle" id="setTitle"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setTitle</span> (line <span class="line-number">2218</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the title of a video (overwrites previous title)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoVideosSetTitleResponse.html">VimeoVideosSetTitleResponse</a></span>
+		<span class="method-name">
+			setTitle
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iVideoID</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$sVideoTitle</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iVideoID</span><span class="var-description">: Video ID</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sVideoTitle</span><span class="var-description">: Title</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constPRIVACY_ANYBODY" id="PRIVACY_ANYBODY"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PRIVACY_ANYBODY</span>
+			 = <span class="const-default"> 'anybody'</span>
+			(line <span class="line-number">1815</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constPRIVACY_CONTACTS" id="PRIVACY_CONTACTS"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PRIVACY_CONTACTS</span>
+			 = <span class="const-default"> 'contacts'</span>
+			(line <span class="line-number">1816</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constPRIVACY_NOBODY" id="PRIVACY_NOBODY"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PRIVACY_NOBODY</span>
+			 = <span class="const-default"> 'nobody'</span>
+			(line <span class="line-number">1817</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constPRIVACY_USERS" id="PRIVACY_USERS"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PRIVACY_USERS</span>
+			 = <span class="const-default"> 'users'</span>
+			(line <span class="line-number">1818</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Sun, 06 Jul 2008 17:08:24 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

@@ -2,7 +2,7 @@
 
 require(App::root . '/vendor/sculpt/Sculpt.php');
 
-\Sculpt\Connection::add('lappy', array(
+\Sculpt\Connection::add('trowe', array(
   'adapter' => 'mysql',
   'username' => 'root',
   'dsn' => 'mysql:host=localhost;dbname=divinginfocus;unix_socket=/tmp/mysql.sock',

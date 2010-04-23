@@ -1,14 +1,15 @@
-//= require <yui/yahoo-dom-event>
-//= require <yui/element>
-//= require <yui/uploader>
-//= require <jquery>
-//= require <templates>
+// yui/yahoo-dom-event
+// yui/element
+// yui/uploader
+// jquery
 
 YAHOO.widget.Uploader.SWFURL = '/yui/uploader.swf';
 
 var uploader = new YAHOO.widget.Uploader('swf_overlay'); 
 
 var $upload_button = $('#upload_button');
+
+var batch = $('#batch').val();
 
 uploader.addListener('contentReady', contentReadyHandler);
 uploader.addListener('fileSelect', fileSelectHandler);
@@ -24,8 +25,7 @@ uploader.addListener('uploadProgress', uploadProgressHandler);
 uploader.addListener('uploadStart', uploadStartHandler);
 
 $upload_button.click(function() {
-  var vars = {};
-  uploader.uploadAll('/upload/flash_upload.json', 'POST', vars);
+  uploader.uploadAll('/upload/flash_upload.json', 'POST', { 'batch':batch });
 });
 
 /**
@@ -76,7 +76,7 @@ function fileSelectHandler(event) {
   $.each(files, function() {
     // we have to prepend (instead of append) the rows to our visual queue
     // because that is the order YUI uploader will upload them.
-    $new_row = $(" <tr> <td class='filename'></td> <td class='filesize'></td> <td><div class='progress'><div class='bar'></div></div></td> </tr>");
+    $new_row = $("<tr><td class='filename'></td><td class='filesize'></td><td><div class='progress'><div class='bar'></div></div></td></tr>");
     $new_row.attr('id', this.id);
     $new_row.find('td.filename').text(this.name);
     $new_row.find('td.filesize').text(this.size);
@@ -214,4 +214,3 @@ function find_dupe(files, file) {
   });
   return dupe;
 }
-

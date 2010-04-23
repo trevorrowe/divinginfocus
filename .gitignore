@@ -1,7 +1,9 @@
 vendor/hopnote
 vendor/simpletest
 vendor/sculpt
-public/photos/*
+public/photos/versions
+public/photos/originals
+public/videos/originals
 log/*
 app/stylesheets/.sass-cache
 public/stylesheets/*

@@ -28,6 +28,8 @@
   <ul>
     <li><?php echo $this->link_to('Upload', '/upload') ?></li>
     <li><?php echo $this->link_to('Photos', '/photos') ?></li>
+    <li><?php echo $this->link_to('Videos', '/videos') ?></li>
+    <li><?php echo $this->link_to('Dive Reports', '/users') ?></li>
     <li><?php echo $this->link_to('Users', '/users') ?></li>
     <li class='last'>
     <?php if($this->logged_in()): ?>

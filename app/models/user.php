@@ -24,6 +24,18 @@ class User extends \Sculpt\Model {
       'foreign_key' => 'username',
     ),
 
+    'videos' => array(
+      'type' => 'has_many',
+      'local_key' => 'username',
+      'foreign_key' => 'username',
+    ),
+
+    'albums' => array(
+      'type' => 'has_many',
+      'local_key' => 'username',
+      'foreign_key' => 'username',
+    ),
+
     'favorite_photos' => array(
       'type' => 'has_and_belongs_to_many',
       'join_table' => 'photo_favorites',

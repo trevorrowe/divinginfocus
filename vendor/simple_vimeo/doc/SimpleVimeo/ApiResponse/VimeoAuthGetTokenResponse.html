@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class VimeoAuthGetTokenResponse</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class VimeoAuthGetTokenResponse</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|													<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Vimeo Auth GetToken response handler class</p>
+<p class="description"><p>Handles the API response for vimeo.auth.getToken queries.</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_lib---class.vimeo.php.html">/lib/class.vimeo.php</a> (line <span class="field">1662</span>)
+		</p>
+		
+				
+		<pre><a href="../../SimpleVimeo/ApiResponse/VimeoResponse.html">VimeoResponse</a>
+   |
+   --VimeoAuthGetTokenResponse</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleVimeo/ApiResponse/VimeoAuthCheckTokenResponse.html">VimeoAuthCheckTokenResponse</a></td>
+					<td>
+											Vimeo Auth CheckToken response handler class
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																				
+												<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">stdClass</span>&nbsp;<span class="var-name">$aResponse</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">permission</span>
+										<a href="#getPermission" title="details" class="method-name">getPermission</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">token</span>
+										<a href="#getToken" title="details" class="method-name">getToken</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/Entities/VimeoUserEntity.html">VimeoUserEntity</a></span>
+										<a href="#getUser" title="details" class="method-name">getUser</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">1677</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor</p>
+<p class="description"><p>Parses the API response</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">stdClass</span>&nbsp;<span class="var-name">$aResponse</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">stdClass</span>
+				<span class="var-name">$aResponse</span><span class="var-description">: API response</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleVimeo/ApiResponse/VimeoResponse.html#method__construct">VimeoResponse::__construct()</a></dt>
+						<dd>Constructor</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetPermission" id="getPermission"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPermission</span> (line <span class="line-number">1703</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get permission value</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">permission</span>
+		<span class="method-name">
+			getPermission
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetToken" id="getToken"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getToken</span> (line <span class="line-number">1692</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get token value</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">token</span>
+		<span class="method-name">
+			getToken
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetUser" id="getUser"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUser</span> (line <span class="line-number">1713</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get user information object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/Entities/VimeoUserEntity.html">VimeoUserEntity</a></span>
+		<span class="method-name">
+			getUser
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../SimpleVimeo/ApiResponse/VimeoResponse.html">VimeoResponse</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../SimpleVimeo/ApiResponse/VimeoResponse.html#method__construct">VimeoResponse::__construct()</a></span><br>
+													<span class="method-name"><a href="../../SimpleVimeo/ApiResponse/VimeoResponse.html#methodgetError">VimeoResponse::getError()</a></span><br>
+													<span class="method-name"><a href="../../SimpleVimeo/ApiResponse/VimeoResponse.html#methodgetPerformance">VimeoResponse::getPerformance()</a></span><br>
+													<span class="method-name"><a href="../../SimpleVimeo/ApiResponse/VimeoResponse.html#methodgetStatus">VimeoResponse::getStatus()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Sun, 06 Jul 2008 17:08:21 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

@@ -1,0 +1,54 @@
+#actn.show
+  h1
+    :font-size 24px
+  #title
+    :float right
+    :width 310px
+    :margin-top 15px
+  #photo, #comments, dl.exif.table
+    :float left
+    :width 640px
+    :margin-right 10px
+    :margin-top 15px
+  #comments
+    textarea
+      :display block
+      :border= 1px 'solid' !border_color
+      :padding 4px
+      :width 630px
+      :height 70px
+      :background-color= !bg_main
+      :color= !color
+
+    dt.avatar img
+      :float left
+      :clear left
+      :margin 10px 10px 10px 0
+      :width 32px
+      :height 32px
+      :border none
+    dt.username, dd
+      :margin 0
+      :float left
+      :width 575px
+    dt.username
+      :margin-top 10px
+
+  dl.table
+    :float left
+    :overflow hidden
+    :width= 960px - 650px
+    dt, dd
+      :display block
+      :min-height 1.5em
+      :padding .4em
+      :border-top= 1px solid !border_color
+      :border-collapse collapse
+    dt
+      :font-weight bold
+      //:clear left
+      :float left
+      :width 100px
+    dd
+      :border-left 1px solid #444
+      :margin-left 110px

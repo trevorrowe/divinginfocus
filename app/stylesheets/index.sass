@@ -1,0 +1,30 @@
+@import mixins
+
+#intro
+  :text-align center
+  p
+    :font-style italic
+
+#splash
+  :position relative
+  :width 736px
+  :margin auto
+  :text-align center
+  dt a
+    :position absolute
+    :bottom 12px
+    :left 8px
+    :right 8px
+    :line-height 40px
+    :padding 0 0 0 10px
+    :background-color black
+    +opacity(0.5)
+    :font-size 13px
+    :font-weight bold
+    :color white
+    :text-decoration none
+  dd
+    :margin 0
+  img
+    :border 8px solid white
+    +rounded(4px)

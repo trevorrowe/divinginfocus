@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page class.vimeo.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/lib/class.vimeo.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-classes">Classes</a>
+			|									<a href="#sec-constants">Constants</a>
+										</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">SimpleVimeo</p>
+<p class="description"><p>API Framework for vimeo.com</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Adrian Rudnik &lt;<a href="mailto:adrian@periocode.de">adrian@periocode.de</a>&gt;</li>
+				<li><span class="field">link:</span> <a href="http://code.google.com/p/php5-simplevimeo/">http://code.google.com/p/php5-simplevimeo/</a></li>
+			</ul>
+		
+			</div>
+</div>
+		
+	<a name="sec-classes"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Classes</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Classes</span>
+			|										<a href="#sec-constants">Constants</a>
+															</div>
+		<div class="info-box-body">	
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Base/VimeoBase.html">VimeoBase</a>
+					</td>
+					<td>
+											Vimeo base class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoBaseException.html">VimeoBaseException</a>
+					</td>
+					<td>
+											Vimeo base exception class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoRequestException.html">VimeoRequestException</a>
+					</td>
+					<td>
+											Vimeo request exception class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoUploadException.html">VimeoUploadException</a>
+					</td>
+					<td>
+											Vimeo upload exception class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Base/VimeoMethod.html">VimeoMethod</a>
+					</td>
+					<td>
+											Vimeo API method handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoMethodException.html">VimeoMethodException</a>
+					</td>
+					<td>
+											Vimeo method exception class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoException.html">VimeoException</a>
+					</td>
+					<td>
+											Vimeo exception class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Base/VimeoObjectList.html">VimeoObjectList</a>
+					</td>
+					<td>
+											Vimeo array of object handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiRequest/VimeoRequest.html">VimeoRequest</a>
+					</td>
+					<td>
+											Vimeo request class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoResponse.html">VimeoResponse</a>
+					</td>
+					<td>
+											Vimeo response class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Entities/VimeoErrorEntity.html">VimeoErrorEntity</a>
+					</td>
+					<td>
+											Vimeo API error entity class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Entities/VimeoUserEntity.html">VimeoUserEntity</a>
+					</td>
+					<td>
+											Vimeo API user entity class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Entities/VimeoVideoEntity.html">VimeoVideoEntity</a>
+					</td>
+					<td>
+											Vimeo API video entity class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Lists/VimeoVideoList.html">VimeoVideoList</a>
+					</td>
+					<td>
+											Vimeo API video list class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Entities/VimeoTagEntity.html">VimeoTagEntity</a>
+					</td>
+					<td>
+											Vimeo API tag entity class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Lists/VimeoTagList.html">VimeoTagList</a>
+					</td>
+					<td>
+											Vimeo API tag list class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Entities/VimeoThumbnailEntity.html">VimeoThumbnailEntity</a>
+					</td>
+					<td>
+											Vimeo API thumbnail entity class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Lists/VimeoThumbnailList.html">VimeoThumbnailList</a>
+					</td>
+					<td>
+											Vimeo API thumbnail list class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiRequest/VimeoTestRequest.html">VimeoTestRequest</a>
+					</td>
+					<td>
+											Vimeo Test request handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoTestLoginResponse.html">VimeoTestLoginResponse</a>
+					</td>
+					<td>
+											Vimeo Test Login response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoTestLoginException.html">VimeoTestLoginException</a>
+					</td>
+					<td>
+											Vimeo Test Login exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoTestEchoResponse.html">VimeoTestEchoResponse</a>
+					</td>
+					<td>
+											Vimeo Test Echo response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoTestEchoException.html">VimeoTestEchoException</a>
+					</td>
+					<td>
+											Vimeo Test Echo exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoTestNullResponse.html">VimeoTestNullResponse</a>
+					</td>
+					<td>
+											Vimeo Test Null response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoTestNullException.html">VimeoTestNullException</a>
+					</td>
+					<td>
+											Vimeo Test Null exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiRequest/VimeoAuthRequest.html">VimeoAuthRequest</a>
+					</td>
+					<td>
+											Vimeo Auth request handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoAuthGetTokenResponse.html">VimeoAuthGetTokenResponse</a>
+					</td>
+					<td>
+											Vimeo Auth GetToken response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoAuthGetTokenException.html">VimeoAuthGetTokenException</a>
+					</td>
+					<td>
+											Vimeo Auth GetToken exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoAuthCheckTokenResponse.html">VimeoAuthCheckTokenResponse</a>
+					</td>
+					<td>
+											Vimeo Auth CheckToken response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoAuthCheckTokenException.html">VimeoAuthCheckTokenException</a>
+					</td>
+					<td>
+											Vimeo Auth CheckToken exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoAuthGetFrobResponse.html">VimeoAuthGetFrobResponse</a>
+					</td>
+					<td>
+											Vimeo Auth GetFrob response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoAuthGetFrobException.html">VimeoAuthGetFrobException</a>
+					</td>
+					<td>
+											Vimeo Auth GetFrob exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiRequest/VimeoVideosRequest.html">VimeoVideosRequest</a>
+					</td>
+					<td>
+											Vimeo Videos request handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosSearchResponse.html">VimeoVideosSearchResponse</a>
+					</td>
+					<td>
+											Vimeo Videos Search response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosSearchException.html">VimeoVideosSearchException</a>
+					</td>
+					<td>
+											Vimeo Videos Search exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosGetListResponse.html">VimeoVideosGetListResponse</a>
+					</td>
+					<td>
+											Vimeo Videos GetList response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosGetListException.html">VimeoVideosGetListException</a>
+					</td>
+					<td>
+											Vimeo Videos Search exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosGetUploadedListResponse.html">VimeoVideosGetUploadedListResponse</a>
+					</td>
+					<td>
+											Vimeo Videos GetUploadedList response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosGetUploadedListException.html">VimeoVideosGetUploadedListException</a>
+					</td>
+					<td>
+											Vimeo Videos GetUploadedList exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosGetAppearsInListResponse.html">VimeoVideosGetAppearsInListResponse</a>
+					</td>
+					<td>
+											Vimeo Videos GetAppearsInList response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosGetAppearsInListException.html">VimeoVideosGetAppearsInListException</a>
+					</td>
+					<td>
+											Vimeo Videos GetAppearsInList exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosGetSubscriptionsListResponse.html">VimeoVideosGetSubscriptionsListResponse</a>
+					</td>
+					<td>
+											Vimeo Videos GetSubscriptionsList response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosGetSubscriptionsListException.html">VimeoVideosGetSubscriptionsListException</a>
+					</td>
+					<td>
+											Vimeo Videos GetSubscriptionsList exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosGetListByTagResponse.html">VimeoVideosGetListByTagResponse</a>
+					</td>
+					<td>
+											Vimeo Videos GetListByTag response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosGetListByTagException.html">VimeoVideosGetListByTagException</a>
+					</td>
+					<td>
+											Vimeo Videos GetListByTag exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosGetLikeListResponse.html">VimeoVideosGetLikeListResponse</a>
+					</td>
+					<td>
+											Vimeo Videos GetLikeList response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosGetLikeListException.html">VimeoVideosGetLikeListException</a>
+					</td>
+					<td>
+											Vimeo Videos GetLikeList exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosGetContactsListResponse.html">VimeoVideosGetContactsListResponse</a>
+					</td>
+					<td>
+											Vimeo Videos GetContactsList response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosGetContactsListException.html">VimeoVideosGetContactsListException</a>
+					</td>
+					<td>
+											Vimeo Videos GetContactsList exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosgetContactsLikeListResponse.html">VimeoVideosgetContactsLikeListResponse</a>
+					</td>
+					<td>
+											Vimeo Videos getContactsLikeList response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosGetContactsLikeListException.html">VimeoVideosGetContactsLikeListException</a>
+					</td>
+					<td>
+											Vimeo Videos getContactsLikeList exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosGetInfoResponse.html">VimeoVideosGetInfoResponse</a>
+					</td>
+					<td>
+											Vimeo Videos GetInfo response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosGetInfoException.html">VimeoVideosGetInfoException</a>
+					</td>
+					<td>
+											Vimeo Videos GetInfo exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosGetUploadTicketResponse.html">VimeoVideosGetUploadTicketResponse</a>
+					</td>
+					<td>
+											Vimeo Videos getUploadTicket response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosGetUploadTicketException.html">VimeoVideosGetUploadTicketException</a>
+					</td>
+					<td>
+											Vimeo Videos getUploadTicket exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosCheckUploadStatusResponse.html">VimeoVideosCheckUploadStatusResponse</a>
+					</td>
+					<td>
+											Vimeo Videos checkUploadStatus response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosCheckUploadStatusException.html">VimeoVideosCheckUploadStatusException</a>
+					</td>
+					<td>
+											Vimeo Videos checkUploadStatus exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosDeleteResponse.html">VimeoVideosDeleteResponse</a>
+					</td>
+					<td>
+											Vimeo Videos delete response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosDeleteException.html">VimeoVideosDeleteException</a>
+					</td>
+					<td>
+											Vimeo Videos delete exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosSetTitleResponse.html">VimeoVideosSetTitleResponse</a>
+					</td>
+					<td>
+											Vimeo Videos setTitle response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosSetTitleException.html">VimeoVideosSetTitleException</a>
+					</td>
+					<td>
+											Vimeo Videos setTitle exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosSetCaptionResponse.html">VimeoVideosSetCaptionResponse</a>
+					</td>
+					<td>
+											Vimeo Videos setCaption response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosSetCaptionException.html">VimeoVideosSetCaptionException</a>
+					</td>
+					<td>
+											Vimeo Videos setCaption exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosSetFavoriteResponse.html">VimeoVideosSetFavoriteResponse</a>
+					</td>
+					<td>
+											Vimeo Videos setFavorite response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosSetFavoriteException.html">VimeoVideosSetFavoriteException</a>
+					</td>
+					<td>
+											Vimeo Videos setFavorite exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosAddTagsResponse.html">VimeoVideosAddTagsResponse</a>
+					</td>
+					<td>
+											Vimeo Videos addTags response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosAddTagsException.html">VimeoVideosAddTagsException</a>
+					</td>
+					<td>
+											Vimeo Videos addTags exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosRemoveTagResponse.html">VimeoVideosRemoveTagResponse</a>
+					</td>
+					<td>
+											Vimeo Videos removeTag response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosRemoveTagException.html">VimeoVideosRemoveTagException</a>
+					</td>
+					<td>
+											Vimeo Videos removeTag exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosClearTagsResponse.html">VimeoVideosClearTagsResponse</a>
+					</td>
+					<td>
+											Vimeo Videos clearTags response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosClearTagsException.html">VimeoVideosClearTagsException</a>
+					</td>
+					<td>
+											Vimeo Videos clearTags exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoVideosSetPrivacyResponse.html">VimeoVideosSetPrivacyResponse</a>
+					</td>
+					<td>
+											Vimeo Videos setPrivacy response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoVideosSetPrivacyException.html">VimeoVideosSetPrivacyException</a>
+					</td>
+					<td>
+											Vimeo Videos setPrivacy exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiRequest/VimeoPeopleRequest.html">VimeoPeopleRequest</a>
+					</td>
+					<td>
+											Vimeo People request handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoPeopleFindByUserNameResponse.html">VimeoPeopleFindByUserNameResponse</a>
+					</td>
+					<td>
+											Vimeo People FindByUserName response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoPeopleFindByUserNameException.html">VimeoPeopleFindByUserNameException</a>
+					</td>
+					<td>
+											Vimeo People FindByUserName exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoPeopleFindByEmailResponse.html">VimeoPeopleFindByEmailResponse</a>
+					</td>
+					<td>
+											Vimeo People FindByEmail response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoPeopleFindByEmailException.html">VimeoPeopleFindByEmailException</a>
+					</td>
+					<td>
+											Vimeo People FindByEmail exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoPeopleGetInfoResponse.html">VimeoPeopleGetInfoResponse</a>
+					</td>
+					<td>
+											Vimeo People GetInfo response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoPeopleGetInfoException.html">VimeoPeopleGetInfoException</a>
+					</td>
+					<td>
+											Vimeo People GetInfo exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoPeopleGetPortraitUrlResponse.html">VimeoPeopleGetPortraitUrlResponse</a>
+					</td>
+					<td>
+											Vimeo People getPortraitUrl response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoPeopleGetPortraitUrlException.html">VimeoPeopleGetPortraitUrlException</a>
+					</td>
+					<td>
+											Vimeo People getPortraitUrl exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoPeopleAddContactResponse.html">VimeoPeopleAddContactResponse</a>
+					</td>
+					<td>
+											Vimeo People addContact response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoPeopleAddContactException.html">VimeoPeopleAddContactException</a>
+					</td>
+					<td>
+											Vimeo People addContact exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoPeopleRemoveContactResponse.html">VimeoPeopleRemoveContactResponse</a>
+					</td>
+					<td>
+											Vimeo People removeContact response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoPeopleRemoveContactException.html">VimeoPeopleRemoveContactException</a>
+					</td>
+					<td>
+											Vimeo People removeContact exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoPeopleGetUploadStatusResponse.html">VimeoPeopleGetUploadStatusResponse</a>
+					</td>
+					<td>
+											Vimeo People getUploadStatus response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoPeopleGetUploadStatusException.html">VimeoPeopleGetUploadStatusException</a>
+					</td>
+					<td>
+											Vimeo People getUploadStatus exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoPeopleAddSubscriptionResponse.html">VimeoPeopleAddSubscriptionResponse</a>
+					</td>
+					<td>
+											Vimeo People addSubscription response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoPeopleAddSubscriptionException.html">VimeoPeopleAddSubscriptionException</a>
+					</td>
+					<td>
+											Vimeo People addSubscription exception handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/ApiResponse/VimeoPeopleRemoveSubscriptionResponse.html">VimeoPeopleRemoveSubscriptionResponse</a>
+					</td>
+					<td>
+											Vimeo People removeSubscription response handler class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../SimpleVimeo/Exceptions/VimeoPeopleRemoveSubscriptionException.html">VimeoPeopleRemoveSubscriptionException</a>
+					</td>
+					<td>
+											Vimeo People removeSubscription exception handler class
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+	
+	<a name="sec-constants"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-classes">Classes</a>
+				|									<span class="disabled">Constants</span>
+											</div>
+		<div class="info-box-body">	
+			<a name="defineVIMEO_DEBUG_REQUEST"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">VIMEO_DEBUG_REQUEST</span> = true
+			(line <span class="line-number">15</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Enable debug to output raw request and response information</p>
+	
+		
+</div>
+<a name="defineVIMEO_DEBUG_RESPONSE"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">VIMEO_DEBUG_RESPONSE</span> = true
+			(line <span class="line-number">16</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+		
+</div>
+		</div>
+	</div>
+	
+	
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sun, 06 Jul 2008 17:08:20 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

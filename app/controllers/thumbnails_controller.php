@@ -10,22 +10,22 @@ class ThumbnailsController extends ApplicationController {
 
     require App::root . '/vendor/php_thumb/ThumbLib.inc.php';
 
+    $id_path = "{$params->id1}/{$params->id2}/{$params->id3}/{$params->id4}";
+
+    # TODO : if photo not found, redirect to 404 with missing image graphic
+    $photo = Photo::get(str_replace('/', '', $id_path));
+
     $version = $params->version;
-    $id_path = "{$params->id1}/{$params->id2}/{$params->id3}";
 
     if(!isset(Thumbnails::$cfg[$version])) {
       $this->render_error_page('404');
       return;
     }
 
-    # TODO : validate version and id path
-
     $pt = PhpThumb::getInstance();
     #$pt->registerPlugin('GdWatermarkLib','gd');
 
-    $src = App::root . "/public/photos/versions/original/$id_path/photo.jpg";
-
-    $thumb = PhpThumbFactory::create($src);
+    $thumb = PhpThumbFactory::create($photo->orig_disk_path());
     $thumb->setOptions(array(
       'resizeUp' => Thumbnails::$cfg[$version]['stretch'],
       'jpegQuality'	=> Thumbnails::$cfg[$version]['quality'],

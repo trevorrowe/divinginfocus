@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class VimeoBase</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class VimeoBase</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Vimeo base class</p>
+<p class="description"><p>Provides vital functions to API (access, permission and object handling)</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_lib---class.vimeo.php.html">/lib/class.vimeo.php</a> (line <span class="field">27</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#COOKIE_FILE" title="details" class="const-name">COOKIE_FILE</a> = 					<span class="var-type"> 'curl_cookies'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#PERMISSION_DELETE" title="details" class="const-name">PERMISSION_DELETE</a> = 					<span class="var-type"> 'delete'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#PERMISSION_NONE" title="details" class="const-name">PERMISSION_NONE</a> = 					<span class="var-type"> false</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#PERMISSION_READ" title="details" class="const-name">PERMISSION_READ</a> = 					<span class="var-type"> 'read'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#PERMISSION_WRITE" title="details" class="const-name">PERMISSION_WRITE</a> = 					<span class="var-type"> 'write'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#PROJECT_NAME" title="details" class="const-name">PROJECT_NAME</a> = 					<span class="var-type"> 'php5-simplevimeo'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#REQUEST_ENGINE_CURL" title="details" class="const-name">REQUEST_ENGINE_CURL</a> = 					<span class="var-type"> 'executeRemoteCall_CURL'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#VIDEOPOST_ENGINE_FSOCK" title="details" class="const-name">VIDEOPOST_ENGINE_FSOCK</a> = 					<span class="var-type"> 'executeVideopostCall_CURL'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#VIMEO_AUTH_URL" title="details" class="const-name">VIMEO_AUTH_URL</a> = 					<span class="var-type"> 'http://www.vimeo.com/services/auth/'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#VIMEO_LOGIN_URL" title="details" class="const-name">VIMEO_LOGIN_URL</a> = 					<span class="var-type"> 'http://www.vimeo.com/log_in'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#VIMEO_REST_URL" title="details" class="const-name">VIMEO_REST_URL</a> = 					<span class="var-type"> 'http://www.vimeo.com/api/rest/'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#VIMEO_UPLOAD_URL" title="details" class="const-name">VIMEO_UPLOAD_URL</a> = 					<span class="var-type"> 'http://www.vimeo.com/services/upload/'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+									<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+												<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#buildAuthenticationUrl" title="details" class="method-name">buildAuthenticationUrl</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$ePermission</span>)
+									</div>
+																								<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#clearToken" title="details" class="method-name">clearToken</a>
+										()
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#debug" title="details" class="method-name">debug</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$sTitle</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$sContent</span>)
+									</div>
+																																<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#getToken" title="details" class="method-name">getToken</a>
+										()
+									</div>
+																																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#setToken" title="details" class="method-name">setToken</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sToken</span>)
+									</div>
+								
+																				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#checkPermission" title="details" class="method-name">checkPermission</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$ePermissionNeeded</span>)
+									</div>
+																																<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoResponse.html">VimeoResponse</a></span>
+										<a href="#executeRemoteCall" title="details" class="method-name">executeRemoteCall</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sMethod</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$aArgs</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#executeVideopostCall" title="details" class="method-name">executeVideopostCall</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sFilename</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$sTicket</span> = <span class="var-default">false</span>])
+									</div>
+																								<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#login" title="details" class="method-name">login</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sUsername</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$sPassword</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#permit" title="details" class="method-name">permit</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$ePermission</span>)
+									</div>
+																</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodbuildAuthenticationUrl" id="buildAuthenticationUrl"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method buildAuthenticationUrl</span> (line <span class="line-number">397</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Build authentication URL</p>
+<p class="description"><p>Easy way to build a correct authentication url. You can use this  to link the user directly to the correct vimeo authentication page.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> URL you can use to directly link the user to the vimeo authentication page</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">string</span>
+		<span class="method-name">
+			buildAuthenticationUrl
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$ePermission</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ePermission</span><span class="var-description">: Permission level you need the user to give you (i.e. VimeoBase::PERMISSION_READ)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodclearToken" id="clearToken"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method clearToken</span> (line <span class="line-number">437</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Clear current logged in user token</p>
+<p class="description"><p>Removes the current logged in user from the cache. Next API query  will be made as clean, not logged in, request.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			clearToken
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methoddebug" id="debug"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method debug</span> (line <span class="line-number">84</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Debug output function</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			debug
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$sTitle</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$sContent</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$sTitle</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$sContent</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetToken" id="getToken"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method getToken</span> (line <span class="line-number">413</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get current logged in user token</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Token or FALSE if not logged in</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getToken
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetToken" id="setToken"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method setToken</span> (line <span class="line-number">424</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set current logged in user token</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setToken
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sToken</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sToken</span><span class="var-description">: Authentication token</span>			</li>
+				</ul>
+		
+			
+	</div>
+
+<a name="methodcheckPermission" id="checkPermission"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkPermission</span> (line <span class="line-number">127</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check permission</p>
+<p class="description"><p>Checks the current user permission with the given one. This will be  heavily used by the executeRemoteCall method to ensure the user  will not run into trouble.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> TRUE if access can be granted, FALSE if permission denied</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			checkPermission
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$ePermissionNeeded</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ePermissionNeeded</span><span class="var-description">: Needed Permission</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexecuteRemoteCall" id="executeRemoteCall"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">executeRemoteCall</span> (line <span class="line-number">162</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Proxy for API queries</p>
+<p class="description"><p>Will check permission for the requested API method as well as type  of the object result response or exception. Will call the given  API query handler method (default: executeRemoteCall_CURL) for  the raw connection stuff</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Response object of API corresponding query (for vimeo.test.login you will get VimeoTestLoginResponse object)</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleVimeo/ApiResponse/VimeoResponse.html">VimeoResponse</a></span>
+		<span class="method-name">
+			executeRemoteCall
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sMethod</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$aArgs</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sMethod</span><span class="var-description">: API method name</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$aArgs</span><span class="var-description">: Additional arguments that need to be passed to the API</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexecuteVideopostCall" id="executeVideopostCall"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">executeVideopostCall</span> (line <span class="line-number">286</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Proxy for video uploads</p>
+<p class="description"><p>Will call the given video upload handler method (default: executeVideopostCall_FSOCK)  for the raw connection and send stuff</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> VimeoVideosCheckUploadStatusResponse</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			executeVideopostCall
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sFilename</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$sTicket</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sFilename</span><span class="var-description">: Local filename to be transfered</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sTicket</span><span class="var-description">: Ticket</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlogin" id="login"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">login</span> (line <span class="line-number">494</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Ensures that the user is logged in</p>
+<p class="description"><p>ONLY USED IN SITE-MODE, see howto.autologin.php  Ensures the site-account is logged in</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> TRUE if user could be logged in, FALSE if an error occured (try manually to see error)</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			login
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sUsername</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$sPassword</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sUsername</span><span class="var-description">: Username</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sPassword</span><span class="var-description">: Password</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpermit" id="permit"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">permit</span> (line <span class="line-number">451</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Execute a permit request</p>
+<p class="description"><p>ONLY USED IN SITE-MODE, see howto.autologin.php  Permits the current CURL cached user with your vimeo API application</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Vimeo Token</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			permit
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$ePermission</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$ePermission</span><span class="var-description">: Permission</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constCOOKIE_FILE" id="COOKIE_FILE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">COOKIE_FILE</span>
+			 = <span class="const-default"> 'curl_cookies'</span>
+			(line <span class="line-number">79</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constPERMISSION_DELETE" id="PERMISSION_DELETE"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PERMISSION_DELETE</span>
+			 = <span class="const-default"> 'delete'</span>
+			(line <span class="line-number">77</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constPERMISSION_NONE" id="PERMISSION_NONE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PERMISSION_NONE</span>
+			 = <span class="const-default"> false</span>
+			(line <span class="line-number">74</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constPERMISSION_READ" id="PERMISSION_READ"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PERMISSION_READ</span>
+			 = <span class="const-default"> 'read'</span>
+			(line <span class="line-number">75</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constPERMISSION_WRITE" id="PERMISSION_WRITE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PERMISSION_WRITE</span>
+			 = <span class="const-default"> 'write'</span>
+			(line <span class="line-number">76</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constPROJECT_NAME" id="PROJECT_NAME"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">PROJECT_NAME</span>
+			 = <span class="const-default"> 'php5-simplevimeo'</span>
+			(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREQUEST_ENGINE_CURL" id="REQUEST_ENGINE_CURL"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">REQUEST_ENGINE_CURL</span>
+			 = <span class="const-default"> 'executeRemoteCall_CURL'</span>
+			(line <span class="line-number">71</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">You can choose between the following engines:</p>
+<p class="description"><p>executeRemoteCall_FSOCK = PHP5 file_get_content and stream_contexts (bad error handling)  executeRemoteCall_CURL = CURL is used for file transfer (better error handling)</p></p>
+	
+	
+</div>
+<a name="constVIDEOPOST_ENGINE_FSOCK" id="VIDEOPOST_ENGINE_FSOCK"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">VIDEOPOST_ENGINE_FSOCK</span>
+			 = <span class="const-default"> 'executeVideopostCall_CURL'</span>
+			(line <span class="line-number">72</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constVIMEO_AUTH_URL" id="VIMEO_AUTH_URL"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">VIMEO_AUTH_URL</span>
+			 = <span class="const-default"> 'http://www.vimeo.com/services/auth/'</span>
+			(line <span class="line-number">62</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constVIMEO_LOGIN_URL" id="VIMEO_LOGIN_URL"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">VIMEO_LOGIN_URL</span>
+			 = <span class="const-default"> 'http://www.vimeo.com/log_in'</span>
+			(line <span class="line-number">64</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constVIMEO_REST_URL" id="VIMEO_REST_URL"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">VIMEO_REST_URL</span>
+			 = <span class="const-default"> 'http://www.vimeo.com/api/rest/'</span>
+			(line <span class="line-number">61</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constVIMEO_UPLOAD_URL" id="VIMEO_UPLOAD_URL"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">VIMEO_UPLOAD_URL</span>
+			 = <span class="const-default"> 'http://www.vimeo.com/services/upload/'</span>
+			(line <span class="line-number">63</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+
+	<p class="notes" id="credit">
+		Documentation generated on Sun, 06 Jul 2008 17:08:21 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.2</a>
+	</p>
+	</div></body>
+</html>

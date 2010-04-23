@@ -118,7 +118,7 @@ function titleize($word) {
 
 function underscore($camel_cased_word) {
   $str = $camel_cased_word;
-  $str = str_replace('_', '/', $str);
+  $str = str_replace('/', '_', $str);
   $str = preg_replace('/([A-Z]+)([A-Z])/', '\1_\2', $str);
   return strtolower(preg_replace('/([a-z\d])([A-Z])/', '\1_\2', $str));
 }

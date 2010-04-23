@@ -5,6 +5,8 @@
 <?php $this->add_js('/yui/uploader-min.js') ?>
 <?php $this->add_js('upload') ?>
 
+<?php echo $this->hidden_field_tag('batch', $batch->uuid) ?>
+
 <div id='add_button'>
   <div id='swf_overlay'></div>
   <div id='add_button_text'>Choose Files</div>

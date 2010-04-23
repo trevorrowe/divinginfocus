@@ -1,0 +1,48 @@
+--- EXAMPLES ---
+
+To get the examples running, please follow these steps
+
+1) Request API access for Vimeo: http://www.vimeo.com/api
+2) Fill out the "Application Callback URL" with an URL where you (and your
+   local machine) can reach the authenticate.php file provided with this
+   example (i.e. http://localhost/php5-simplevimeo/authenticate.php)
+3) Fill in $sApiKey and $sApiSecret parameters in the class.vimeo.php file
+
+
+--- SHORT AUTHENTICATION TUTORIAL ---
+
+To get a full vimeo user integration onto your site we need a FROB.
+
+In short: You provide a link where the user of your site will be linked to the vimeo login page.
+There he gets an explanation which permissions your sites gets if he logs in (or "links" his account to
+your vimeo application (therefore with your site)).
+
+Once the user authenticates successfully with the vimeo login page, vimeo will header redirect to
+the "Application Callback URL" given by you with a frob ID valid for one getToken request.
+
+Now that you have the frob, you can request a token for this user. Tokens should be stored on
+by-user-basis. One token is valid as long as the user is logged in on vimeo or the link to your
+applicaiton is removed.
+ 
+Thats the main stuff about this authentication procedure. Now for the very first step:
+We need a frob. But first we need to send the user to the vimeo login page to link it.
+ 
+(See http://www.vimeo.com/api/web-auth-howto for permission details)
+ 
+The index page will let you choose between permission authentications to test the examples.
+
+You can also skip the authentication if you just want to test API methods not requiring any permissions.
+ 
+--- CODING STYLE ---
+
+I know it can be a bit bad, but this is how i name my stuff:
+
+$aSomething = array
+$iSomething = integer
+$sSomething = string
+$bSomething = boolean
+$oSomething = object instance
+$eSomething = Something enumerated like a class constant i.e. VimeoBase::PERMISSION_NONE
+$aoSomething = Array of object instances
+$rSomething = Resource handle (i.e. for files)
+$mSomething = mixed (i.e. can be array or string)

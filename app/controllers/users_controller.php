@@ -13,12 +13,19 @@ class UsersController extends PublicBaseController {
   }
 
   public function show_action($params) {
-    $this->photos = $this->user->photos->paginate(1, 16);
+    $this->photos = $this->user->photos->paginate(1, 20);
+    $this->videos = $this->user->videos->paginate(1, 10);
+    $this->albums = $this->user->albums->paginate(1, 10);
   }
 
   public function photos_action($params) {
     $this->add_crumb('Photos');
-    $this->photos = $this->user->photos->paginate($params->page, 40);
+    $this->photos = $this->user->photos->paginate($params->page, 50);
+  }
+
+  public function videos_action($params) {
+    $this->add_crumb('Videos');
+    $this->videos = $this->user->videos->paginate($params->page, 25);
   }
 
   public function load_user_filter($params) {
