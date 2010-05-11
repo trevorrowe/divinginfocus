@@ -40,7 +40,7 @@ class ApplicationController extends \Pippa\Controller {
     # a perfect match found, we will log the user in
     if($db_cookie) {
       $this->login($db_cookie->user(), $db_cookie);
-      # TODO : redirect the user someplace meaningful
+      $this->redirect('/home');
       return;
     }
 
@@ -48,7 +48,7 @@ class ApplicationController extends \Pippa\Controller {
     # in the same series, we have to assume the worst and consider it
     # session theft
     if(LoginCookie::matching_series($cookie)->count > 0) {
-      LoginCookie::matching_user($cookie)->delete_all();
+      LoginCookie::matching_user($cookie)->delete();
       $cookie->delete();
       $this->flash('error', 'Your session appears to have been hijacked.');
       $this->redirect('/login');
@@ -67,9 +67,13 @@ class ApplicationController extends \Pippa\Controller {
   public function login($user, $remember) {
     
     # log the user into the session
+    $target = App::$session->pre_login_target;
     App::$session->clear();
     App::$session->username = $user->username;
     App::$session->timestamp = time();
+
+    if($target) App::$session->pre_login_target = $target;
+
 
     if($remember) {
 
@@ -106,13 +110,14 @@ class ApplicationController extends \Pippa\Controller {
 
     # get rid of any persistant login cookies
     $cookie = RememberMeCookie::get();
-    LoginCookie::matching_series($cookie)->delete_all();
+    LoginCookie::matching_series($cookie)->delete();
     $cookie->delete();
   }
 
   protected function authenticate_or_redirect() {
     if(!$this->logged_in()) {
       $warning = 'You must login to view the requested page.';
+      App::$session->pre_login_target = $this->params;
       $this->flash('warn', $warning);
       $this->redirect('/login');
       return false;

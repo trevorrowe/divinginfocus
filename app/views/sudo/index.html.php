@@ -16,9 +16,9 @@
   <tbody>
     <?php foreach($users as $i => $user): ?>
       <tr class='<?php echo $i % 2 == 1 ? 'even' : 'odd' ?>'>
-        <td><?php echo $this->icon_only_link('sudo', "Login As {$user->username}", url('sudo', 'login_as', $user)) ?></td>
+        <td><?php echo $this->icon_only_link('sudo', "Login As {$user->username}", $this->sudo_path($user)) ?></td>
         <td><?php echo $user->id ?></td>
-        <td><?php echo $this->link_to($user->username, url('login_as', $user)) ?></td>
+        <td><?php echo $this->link_to($user->username, $this->sudo_path($user)) ?></td>
         <td><?php echo h($user->email) ?></td>
         <td class='uuid'><?php echo $user->uuid ?></td>
         <td class='boolean'><?php echo format_y_n($user->admin) ?></td>

@@ -13,7 +13,7 @@ class ThumbnailsController extends ApplicationController {
     $id_path = "{$params->id1}/{$params->id2}/{$params->id3}/{$params->id4}";
 
     # TODO : if photo not found, redirect to 404 with missing image graphic
-    $photo = Photo::get(str_replace('/', '', $id_path));
+    $photo = Photo::get((int) str_replace('/', '', $id_path));
 
     $version = $params->version;
 

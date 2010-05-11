@@ -10,6 +10,10 @@ class LocalsContainer {
     $this->_locals = Locals::get();
   }
 
+  public function __call($method, $args) {
+    return Helper::invoke($method, $args);
+  }
+
   public function &__get($key) {
     if(isset($this->_locals->$key))
       $value =& $this->_locals->$key;

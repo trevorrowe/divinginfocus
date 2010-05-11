@@ -15,7 +15,6 @@ class Basic extends \Pippa\MagicHash {
   public function __construct($name, 
     $expire = 0, $path = '/', $domain = '', $secure = '', $http_only = '') 
   {
-
     $this->name = $name;
     $this->expire = $expire;
     $this->path = $path;

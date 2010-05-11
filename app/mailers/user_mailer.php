@@ -2,19 +2,19 @@
 
 class UserMailer extends \Pippa\Mailer {
 
-  public static function validation(User $user) {
-    self::$subject = '[Diving in Focus] Account Activation';
-    self::$from    = 'noreply@divinginfocus.com';
-    self::$to      = $user->email;
-    self::$bcc     = 'trevorrowe@gmail.com';
-    self::$locals  = array('user' => $user);
+  public function validation(User $user) {
+    $this->subject = '[Diving in Focus] Account Activation';
+    $this->from    = 'noreply@divinginfocus.com';
+    $this->to      = $user->email;
+    $this->bcc     = 'trevorrowe@gmail.com';
+    $this->locals  = array('user' => $user);
   }
 
-  public static function password_reset(User $user) {
-    self::$subject = '[Diving in Focus] Password Reset';
-    self::$from    = 'noreply@divinginfocus.com';
-    self::$to      = $user->email;
-    self::$locals  = array('user' => $user);
+  public function password_reset(User $user) {
+    $this->subject = '[Diving in Focus] Password Reset';
+    $this->from    = 'noreply@divinginfocus.com';
+    $this->to      = $user->email;
+    $this->locals  = array('user' => $user);
   }
 
 }

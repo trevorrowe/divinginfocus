@@ -15,6 +15,7 @@ class Router {
         # appropriate action
         \App::$log->request($request);
         \App::$log->params($request->params);
+        \App::$log->files();
         
         $controller = $request->params['controller'];
 

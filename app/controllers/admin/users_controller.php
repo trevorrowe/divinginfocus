@@ -1,6 +1,10 @@
 <?php
 
-class Admin_UsersController extends Admin_BaseController {
+namespace Admin;
+
+use \User as User;
+
+class UsersController extends BaseController {
 
   public function index_action($params) {
     $this->users = User::paginate($params->page);

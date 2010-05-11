@@ -2,53 +2,52 @@
 
 namespace Pippa;
 
-require(App::root . '/vendor/phpmailer/class.phpmailer.php');
+require(\App::root . '/vendor/phpmailer/class.phpmailer.php');
 
-class Mailer {
+class Mailer extends LocalsContainer {
 
-  protected static $from = null;
-  protected static $reply_to = null;
-  protected static $to = null;
-  protected static $cc = null;
-  protected static $bcc = null;
-  protected static $subject = null;
-  protected static $locals = array();
+  protected $from = null;
+  protected $reply_to = null;
+  protected $to = null;
+  protected $cc = null;
+  protected $bcc = null;
+  protected $subject = null;
+  protected $locals = array();
 
   public static function __callStatic($method, $args) {
 
-    self::clear();
+    # build the mailer object
+    $class = get_called_class();  
+    $mailer = new $class();
 
-    $method = substr($method, 8); # remove the 'deliver_' prefix from $method
-    $class = get_called_class();  # so we can forward $method to the right class
-    forward_static_call_array(array($class, $method), $args);
+    # remove the 'deliver_' prefix from $method and call it
+    $method = substr($method, 8); 
+    call_user_func_array(array($mailer, $method), $args); 
 
-    self::send_email();
+    # now deliver the email
+    $mailer->send_email();
 
   }
 
-  private static function clear() {
-    self::$from = null;
-    self::$reply_to = null;
-    self::$to = null;
-    self::$cc = null;
-    self::$bcc = null;
-    self::$subject = null;
-    self::$locals = array();
+  private function render() {
   }
 
-  private static function send_email() {
+  private function send_email() {
 
     $mail = new PHPMailer();
     #$mail->isSendmail();
 
-    if(!is_null(self::$from)) $mail->setFrom(self::$from);
-    if(!is_null(self::$reply_to)) $mail->addReplyTo(self::$reply_to);
-    if(!is_null(self::$to)) $mail->addAddress(self::$to);
-    if(!is_null(self::$cc)) $mail->addCC(self::$cc);
-    if(!is_null(self::$bcc)) $mail->addBCC(self::$bcc);
-    if(!is_null(self::$subject)) $mail->Subject(self::$subject);
+    if(!is_null($this->$from))     $mail->setFrom($this->$from);
+    if(!is_null($this->$reply_to)) $mail->addReplyTo($this->$reply_to);
+    if(!is_null($this->$to))       $mail->addAddress($this->$to);
+    if(!is_null($this->$cc))       $mail->addCC($this->$cc);
+    if(!is_null($this->$bcc))      $mail->addBCC($this->$bcc);
+    if(!is_null($this->$subject))  $mail->Subject($this->$subject);
 
-    $mail->send();
+    $mail->Body = 'html body';
+    $mail->AltBody = 'text body';
+
+    $mail->Send();
 
   }
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html>
 <head>
   <title><?php echo isset($title) ? "$title : Diving in Focus" : 'Diving in Focus' ?></title>
@@ -19,31 +19,30 @@
   </div>
 </div>
 
-<div id='header'>
+<header>
   <?php echo $this->crumbtrail() ?>
   <?php $this->render('/shared/user_links') ?>
-</div>
+  <nav id='menu'>
+    <ul>
+      <li><?php echo $this->link_to('Upload', '/upload') ?></li>
+      <li><?php echo $this->link_to('Photos', '/photos') ?></li>
+      <li><?php echo $this->link_to('Videos', '/videos') ?></li>
+      <li><?php echo $this->link_to('Dive Reports', '/users') ?></li>
+      <li><?php echo $this->link_to('Users', '/users') ?></li>
+      <li class='last'>
+      <?php if($this->logged_in()): ?>
+        <?php echo $this->link_to('Home', '/home') ?>
+      <?php else: ?>
+        <?php echo $this->link_to('Login / Register', '/login') ?>
+      <?php endif ?>
+      </li>
+    </ul>
+  </nav>
+</header>
 
-<div id='menu'>
-  <ul>
-    <li><?php echo $this->link_to('Upload', '/upload') ?></li>
-    <li><?php echo $this->link_to('Photos', '/photos') ?></li>
-    <li><?php echo $this->link_to('Videos', '/videos') ?></li>
-    <li><?php echo $this->link_to('Dive Reports', '/users') ?></li>
-    <li><?php echo $this->link_to('Users', '/users') ?></li>
-    <li class='last'>
-    <?php if($this->logged_in()): ?>
-      <?php echo $this->link_to('Me', '/users') ?>
-    <?php else: ?>
-      <?php echo $this->link_to('Login / Register', '/login') ?>
-    <?php endif ?>
-    </li>
-  </ul>
-</div>
-
-<div id='footer'>
+<footer>
   &copy; <?php echo date('Y') ?> DivingInFocus.com
-</div>
+</footer>
 
 <div id='scripts'>
   <?php echo $this->js_tag('jquery-1.4.1.min') ?>

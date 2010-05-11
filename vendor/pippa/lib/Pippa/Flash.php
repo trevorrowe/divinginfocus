@@ -3,37 +3,29 @@
 namespace Pippa;
 
 # TODO : Pippa\Flash should extend / use Pippa\Cookie\TamperProof
-class Flash {
+class Flash extends Cookies\Encrypted {
 
-  const cookie_name = '_pippa_flash';
+  protected $to_expire = array();
 
-  public static $data = array();
-
-  protected static $to_expire = array();
-
-  public static function set($key, $payload, $now = false) {
-    self::$data[$key] = $payload;
-    if($now)
-      self::$to_expire[] = $key;
+  public function __construct() {
+    # TODO : config this
+    parent::__construct(
+      '_app_flash',
+      'c198c701f9e0452ab7d9711512fc02f6375a59b6c83ad82fca64463da5f4da27',
+      '72b655188071ae33400002e9d1e11e103c98b071e9d99e1cbc50c94f7ef694fb'
+    );
+    
+    $this->to_expire = array_keys($this->data);
   }
 
-  public static function get($key) {
-    return isset(self::$data[$key]) ? self::$data[$key] : null;
+  public function save($expire = null) {
+    foreach($this->to_expire as $key)
+      unset($this->data[$key]);
+    parent::save($expire);
   }
 
-  public static function init() {
-    if(isset($_COOKIE[self::cookie_name]))
-      self::$data = unserialize($_COOKIE[self::cookie_name]);
-    self::$to_expire = array_keys(self::$data);
-  }
-
-  public static function clean() {
-    foreach(self::$to_expire as $key)
-      unset(self::$data[$key]);
-    $data = serialize(self::$data);
-    # TODO : get the current domain
-    $domain = '.' . $_SERVER['HTTP_HOST'];
-    setcookie(self::cookie_name, $data, 0, '/', $domain, false, true);
+  public function set_to_expire($key) {
+    $this->to_expire[] = $key;
   }
 
 }

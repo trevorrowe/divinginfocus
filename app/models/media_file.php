@@ -91,10 +91,11 @@ abstract class MediaFile extends \Sculpt\Model {
     $this->upload_error_code = $error ? $error : null;
 
     # don't trust the browser-posted content-type, get the real content-type
-    #$this->content_type = $_FILES[$key]['type'];
-    $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $this->content_type = finfo_file($finfo, $this->tmp_filename);
-    finfo_close($finfo);
+    if($this->tmp_filename) {
+      $finfo = finfo_open(FILEINFO_MIME_TYPE);
+      $this->content_type = finfo_file($finfo, $this->tmp_filename);
+      finfo_close($finfo);
+    }
 
   }
 

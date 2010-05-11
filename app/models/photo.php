@@ -104,7 +104,11 @@ class Photo extends MediaFile {
       return "/photos/versions/$version/" . $this->id_path() . '/photo.jpg';
   }
 
-  public function alt() {
+  public function html_title() {
+    return "{$this->title} by {$this->username}";
+  }
+
+  public function html_alt() {
     return isset($this->caption) ? $this->caption : $this->title;
   }
 

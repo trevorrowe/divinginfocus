@@ -180,8 +180,8 @@ class Controller extends LocalsContainer {
 
   public function __call($method, $args) {
     if(str_ends_with($method, '_action'))
-      throw new UndefinedActionException($this->request);
-    return Helper::invoke($method, $args);
+      throw new Exceptions\UndefinedAction($this->request);
+    return parent::__call($method, $args);
   }
 
   ##
@@ -379,7 +379,15 @@ class Controller extends LocalsContainer {
   }
 
   public static function class_name($controller) {
-    return camelize("{$controller}_controller");
+    $parts = explode('/', $controller);
+    $last_part = count($parts) - 1;
+    foreach($parts as $i => $part) {
+      if($i == $last_part)
+        $parts[$i] = camelize("{$part}_controller");
+      else
+        $parts[$i] = camelize($part);
+    }
+    return '\\' . implode('\\', $parts);
   }
 
 }

@@ -25,7 +25,7 @@ uploader.addListener('uploadProgress', uploadProgressHandler);
 uploader.addListener('uploadStart', uploadStartHandler);
 
 $upload_button.click(function() {
-  uploader.uploadAll('/upload/flash_upload.json', 'POST', { 'batch':batch });
+  uploader.uploadAll('/upload/flash.json', 'POST', { 'batch':batch });
 });
 
 /**

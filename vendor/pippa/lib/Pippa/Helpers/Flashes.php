@@ -6,15 +6,12 @@ class Flashes extends \Pippa\Helper {
 
   public function flash() {
     $args = func_get_args();
-    switch(func_num_args()) {
-      case 0:
-        return \Pippa\Flash::$data;
-        break;
+    switch(count($args)) {
       case 1:
-        return \Pippa\Flash::get($args[0]);
+        return \App::$flash[$args[0]];
         break;
       case 2:
-        \Pippa\Flash::set($args[0], $args[1]);
+        \App::$flash[$args[0]] = $args[1];
         break;
       default:
         throw new Exception('invalid args');
@@ -22,7 +19,8 @@ class Flashes extends \Pippa\Helper {
   }
 
   public function flash_now($key, $payload) {
-    \Pippa\Flash::set($key, $payload, true);
+    \App::$flash->$key = $payload;
+    \App::$flash->set_to_expire($key);
   }
 
   public function flash_messages($levels = null) {

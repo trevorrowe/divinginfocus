@@ -6,29 +6,53 @@ class ApplicationHelper extends \Pippa\Helper {
   ## authorization & authentication
   ##
 
-  # return true if there is a user logged into the current session
+  # Returns true if there is a user logged into the current session
   public function logged_in() {
-    return isset(App::$session['username']);
+    return(is_null($this->current_user()) ? false : true);
   }
 
-  # returns true if the current user is actually another user sudoing
+  # Returns true if the current user is actually another user sudoing
   public function user_is_sudoed() {
-    return App::$session->sudo_username ? true : false;
+    return App::$session->sudoer_username ? true : false;
   }
 
-  # returns true if the current user has privileges to sudo
+  public function sudo_path($user_or_username) {
+
+    $username = is_object($user_or_username) ? 
+      $user_or_username->username :
+      $user_or_username;
+
+    return url(array(
+      'controller' => 'sudo',
+      'action' => 'login_as',
+      'username' => $username,
+    ));
+  }
+
+  # Returns true if the current user has privileges to sudo
   public function user_can_sudo() {
     return (
-      ($this->logged_in()) && 
-      ($this->current_user()->admin || App::$session->sudo_username));
+      $this->logged_in() && 
+      $this->current_user()->admin || 
+      $this->user_is_sudoed()
+    );
   }
 
-  # returns the current user object (if logged in), null otherwise
+  # Returns the current user object if logged in, null otherwise
   public function current_user() {
-    if($this->logged_in())
-      if(is_null($this->current_user))
-        $this->current_user = User::username_is(App::$session->username)->get();
-    return $this->current_user;
+    # We only want to find the current user once.  We will cache it in
+    # the local "_current_user"
+    if(isset(App::$session['username']) and is_null($this->_current_user)) {
+      $user = User::username_is(App::$session->username)->first();
+      if(is_null($user)) {
+        # the session contained a username to a user that no longer exists
+        # by that name in the database, so lets remove the username
+        # from the session
+        unset(App::$session['username']);
+      }
+      $this->_current_user = $user;
+    }
+    return $this->_current_user;
   }
 
   ##
@@ -114,8 +138,8 @@ class ApplicationHelper extends \Pippa\Helper {
       # TODO : caclulate height based on the $photo->height
       $opts['width'] = $cfg[$size]['operations']['resize'][0];
     }
-    $opts['title'] = "{$photo->title} by {$photo->username}";
-    $opts['alt'] = $photo->alt();
+    $opts['title'] = $photo->html_title();
+    $opts['alt'] = $photo->html_alt();
     $this->append_class_name($opts, 'photo');
     $this->append_class_name($opts, $size);
     $this->append_class_name($opts, 'thumb');

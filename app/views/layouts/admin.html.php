@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html>
 <head>
   <title><?php echo isset($title) ? "$title : " : '' ?>DivingInFocus.com Admin Interface</title>
@@ -16,27 +16,29 @@
     <?php echo $this->flash_messages() ?>
     <?php echo $_content ?>
   </div><!-- end #content_box -->
-  <div id='footer'>
+  <footer>
     <p>&copy; <?php echo date('Y') ?> DivingInFocus.com</p>
-  </div><!-- end #footer -->
+  </footer>
 </div><!-- end #content -->
 
 <div id='sidebar'>
   <?php $this->render('sidebar') ?>
 </div><!-- end #sidebar -->
 
-<div id="header">
+<header>
   <h2>
     <?php echo $this->link_to('Diving In Focus', '/') ?>
     &mdash; Admin Interface
   </h2>
   <?php $this->render('/shared/user_links') ?>
   <?php if($this->current_user()->admin): ?>
-    <ul id='menu'>
-      <li><?php echo $this->link_to('Users', array('controller' => 'admin/users')) ?></li>
-    </ul><!-- end #menu -->
+    <nav id='menu'>
+      <ul>
+        <li><?php echo $this->link_to('Users', array('controller' => 'admin/users')) ?></li>
+      </ul
+    </nav>
   <?php endif; ?>
-</div><!-- end #header -->
+</header>
 
 </div><!-- end #actn -->
 </div><!-- end #cntl -->

@@ -14,10 +14,6 @@ class View extends LocalsContainer {
     $this->_default_format = $default_format;
   }
 
-  public function __call($method, $args) {
-    return Helper::invoke($method, $args);
-  }
-
   public function render($template) {
     echo $this->render_to_string($template);
   }

@@ -27,7 +27,7 @@
   </table>
 </div>
 
-<form enctype='multipart/form-data' action='<?php echo url('form_upload') ?>' method='post'>
+<form enctype='multipart/form-data' action='<?php echo url('form') ?>' method='post'>
   <?php echo $this->hidden_field_tag('MAX_FILE_SIZE', 10485760) ?>
   <?php echo $this->file_field_tag('file') ?>
   <?php echo $this->submit_row('Upload') ?>

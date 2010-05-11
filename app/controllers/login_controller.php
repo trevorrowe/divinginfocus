@@ -12,7 +12,12 @@ class LoginController extends PublicBaseController {
     $password = $this->user->password;
     if($user = User::authenticate($username, $password)) {
       $this->login($user, $params->remember_me);
-      $this->redirect('/');
+      if($target = App::$session->pre_login_target) {
+        $this->redirect($target);  
+        unset(App::$session->pre_login_target);
+      }
+      else
+        $this->redirect('/home');
     } else {
       $this->flash_now('error', 'Invalid username and/or password.');
       $this->render('index');

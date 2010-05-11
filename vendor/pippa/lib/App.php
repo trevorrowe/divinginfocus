@@ -15,6 +15,8 @@ class App {
 
   public static $session;
 
+  public static $flash;
+
   public static $cfg;
 
   public static $log;
@@ -34,7 +36,10 @@ class App {
 
     # loading application controllers
     if(substr($class, strlen($class) - 10) == 'Controller') {
-      require(\App::root . '/app/controllers/' . underscore($class) . '.php');
+      $path = str_replace('\\', '/', underscore($class));
+      if($path[0] == '/')
+        $path = substr($path, 1);
+      require(\App::root . "/app/controllers/{$path}.php");
       return;
     }
 
@@ -55,15 +60,13 @@ class App {
   public static function run() {
 
     self::$session = new \Pippa\Session();
-
-    \Pippa\Flash::init();
+    self::$flash = new \Pippa\Flash();
 
     ob_start();
 
     \Pippa\Router::dispatch(\Pippa\Request::get_http_request());
 
-    \Pippa\Flash::clean();
-
+    self::$flash->save();
     self::$session->save();
   }
 

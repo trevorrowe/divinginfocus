@@ -40,6 +40,13 @@ class Logger {
     $this->write('Parameters: ' . (string) $params);
   }
 
+  public function files() {
+    if(!empty($_FILES)) {
+      $file_params = new Params($_FILES);
+      $this->write('Files: ' . (string) $file_params);
+    }
+  }
+
   public function timing($seconds) {
     $time = self::format_seconds($seconds);
     $status = 200;

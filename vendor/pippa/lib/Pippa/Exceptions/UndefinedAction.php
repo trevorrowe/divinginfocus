@@ -7,7 +7,7 @@ class UndefinedAction extends \Pippa\Exception {
 
   public function __construct($request) {
 
-    $cntl = Controller::class_name($request->params['controller']);
+    $cntl = \Pippa\Controller::class_name($request->params['controller']);
     $actn = $request->params['action'];
 
     $reflect = new \ReflectionClass($cntl);

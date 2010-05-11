@@ -20,6 +20,10 @@ foreach(array('photos', 'videos') as $media) {
 
 }
 
+Route::add('/sudo/:username', array(
+  'controller' => 'sudo', 'action' => 'login_as'
+));
+
 Route::add('/users/:username', array(
   'controller' => 'users', 'action' => 'show'
 ));

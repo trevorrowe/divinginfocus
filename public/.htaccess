@@ -13,3 +13,9 @@ RewriteEngine On
 # static cache
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /index.php
+
+# TODO : apply only upload actions /upload/form and /upload/flash
+# increase max file size to 500 megabytes and upload time to 5 hours
+php_value upload_max_filesize 500M
+php_value post_max_size 500M
+php_value max_input_time 18000

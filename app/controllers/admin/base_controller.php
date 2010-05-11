@@ -1,6 +1,8 @@
 <?php
 
-class Admin_BaseController extends ApplicationController {
+namespace Admin;
+
+class BaseController extends \ApplicationController {
 
   public function init() {
     parent::init();
