@@ -126,7 +126,7 @@ class ApplicationHelper extends \Pippa\Helper {
     $this->append_class_name($opts, 'video');
     $this->append_class_name($opts, $size);
     $this->append_class_name($opts, 'thumb');
-    return $this->img_tag('missing.png', $opts);
+    return $this->img_tag('/images/videos/play_arrow.png', $opts);
   }
 
   public function photo_thumb($photo, $size, $opts = array()) {
@@ -150,7 +150,7 @@ class ApplicationHelper extends \Pippa\Helper {
     $this->append_class_name($opts, 'ablum');
     $this->append_class_name($opts, $size);
     $this->append_class_name($opts, 'thumb');
-    return $this->img_tag('missing.png', $opts);
+    return $this->img_tag('/images/videos/play_arrow.png', $opts);
   }
 
   public function quilt($collection, $more_url = null, $opts = array()) {

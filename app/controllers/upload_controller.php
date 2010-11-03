@@ -14,7 +14,7 @@ class UploadController extends PublicBaseController {
 
   public function init() {
     parent::init();
-    $this->before_filter('require_user', array('except' => 'flash_upload'));
+    $this->before_filter('require_user', array('except' => 'flash'));
   }
 
   public function index_action($params) {

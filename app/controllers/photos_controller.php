@@ -7,18 +7,6 @@ class PhotosController extends MediaBaseController {
     $this->add_crumb('Photos', '/photos');
   }
 
-  public function show_action($params) {
-    $this->comments = $this->photo->comments->recent->paginate($params->page);
-    $this->comment = $this->photo->comments->build($params->photo_comment);
-  }
-
-  public function original_action($params) {
-    $this->render(false);
-  }
-
-  public function identify_action($params) {
-  }
-
   public function edit_action($params) {
     $this->add_crumb('Edit', $this->media_url($this->photo, 'edit'));
   }
@@ -30,18 +18,6 @@ class PhotosController extends MediaBaseController {
     } else {
       $this->flash_now('error', 'Unable to save changes, see errors below.');
       $this->render('edit');
-    }
-  }
-
-  public function comment_action($params) {
-    $this->show_action($params);
-    $this->comment->username = $this->current_user()->username;
-    if($this->comment->save()) {
-      $this->flash('notice', 'Your comment has been added.');
-      $this->redirect($this->media_url($this->photo));
-    } else {
-      $this->flash_now('error', 'Unable to add your comment, see errors below.');
-      $this->render('show');
     }
   }
   

@@ -25,7 +25,7 @@ class UsersController extends PublicBaseController {
 
   public function videos_action($params) {
     $this->add_crumb('Videos');
-    $this->videos = $this->user->videos->paginate($params->page, 25);
+    $this->videos = $this->user->videos->paginate($params->page, 15);
   }
 
   public function load_user_filter($params) {

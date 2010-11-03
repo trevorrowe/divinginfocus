@@ -2,9 +2,15 @@
 
 abstract class MediaFile extends \Sculpt\Model {
 
+  public static $table_name = 'media_files'; 
+
   protected $upload_error_code;
 
   protected $tmp_filename;
+
+  ##
+  ## validations
+  ##
 
   public function validate() {
 
@@ -23,8 +29,44 @@ abstract class MediaFile extends \Sculpt\Model {
   }
 
   ##
+  ## associations
+  ##
+
+  public static $associations = array(
+
+    'uploader' => array(
+      'type' => 'belongs_to',
+      'class' => 'User',
+      'local_key' => 'username',
+      'foreign_key' => 'username'),
+
+    'meta' => array(
+      'type' => 'has_one',
+      'class' => 'PhotoMeta'),
+
+    'upload_batch' => array(
+      'type' => 'belongs_to'),
+
+    'favored_by' => array(
+      'type' => 'has_and_belongs_to_many',
+      'join_table' => 'media_favorites',
+      'class' => 'User',
+      'target_col' => 'username',
+      'target_key' => 'username'),
+
+    'comments' => array(
+      'type' => 'has_many',
+      'class' => 'PhotoComment'),
+
+  );
+
+  ##
   ## triggers
   ##
+
+  protected function before_create() {
+    $this->type = strtolower(get_called_class());
+  }
 
   protected function after_create() {
 

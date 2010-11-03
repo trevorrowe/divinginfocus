@@ -5,38 +5,6 @@ class Photo extends MediaFile {
   protected $exif;
 
   ##
-  ## associations
-  ##
-
-  public static $associations = array(
-
-    'uploader' => array(
-      'type' => 'belongs_to',
-      'class' => 'User',
-      'local_key' => 'username',
-      'foreign_key' => 'username'),
-
-    'meta' => array(
-      'type' => 'has_one',
-      'class' => 'PhotoMeta'),
-
-    'upload_batch' => array(
-      'type' => 'belongs_to'),
-
-    'favored_by' => array(
-      'type' => 'has_and_belongs_to_many',
-      'join_table' => 'photo_favorites',
-      'class' => 'User',
-      'target_col' => 'username',
-      'target_key' => 'username'),
-
-    'comments' => array(
-      'type' => 'has_many',
-      'class' => 'PhotoComment'),
-
-  );
-
-  ##
   ## validations
   ##
 
@@ -45,7 +13,7 @@ class Photo extends MediaFile {
     parent::validate();
 
     $this->validate_format_of('content_type', array(
-      'regex' => '/^image\/(jpe?g|png|gif|tiff)$/'
+      'regex' => '/^image\/(jpe?g|png|gif|tiff)$/',
     ));
     
   }

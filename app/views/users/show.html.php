@@ -10,11 +10,7 @@
 
 <?php if($videos->total > 0): ?>
 <h2>Videos (<?php echo $videos->total ?>)</h2>
-<ul>
-  <?php foreach($videos as $video): ?>
-    <li><?php echo $this->linked_media($video) ?></li>
-  <?php endforeach ?>
-</ul>
+<?php echo $this->quilt($videos, $this->user_path($user, 'videos')) ?>
 <?php else: ?>
   <h2>Videos</h2>
   <p><?php echo $user->username ?> has not uploaded any videos yet.</p>

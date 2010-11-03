@@ -15,6 +15,27 @@ class MediaBaseController extends PublicBaseController {
   }
 
   ##
+  ## shared actions
+  ##
+
+  public function show_action($params) {
+    $this->comments = $this->media->comments->recent->paginate($params->page);
+    $this->comment = $this->media->comments->build($params["{$this->lc_type}_comment"]);
+  }
+
+  public function comment_action($params) {
+    $this->show_action($params);
+    $this->comment->username = $this->current_user()->username;
+    if($this->comment->save()) {
+      $this->flash('notice', 'Your comment has been added.');
+      $this->redirect($this->media_url($this->photo));
+    } else {
+      $this->flash_now('error', 'Unable to add your comment, see errors below.');
+      $this->render('show');
+    }
+  }
+
+  ##
   ## filters
   ##
 
@@ -28,12 +49,13 @@ class MediaBaseController extends PublicBaseController {
       $class = static::media_class();
       $media = $class::get($params->id);
 
-      $assoc = strtolower($class);
-      $show_url = $this->media_url($media);
+      $this->add_crumb($media->title, $this->media_url($media));
 
-      $this->add_crumb($media->title, $show_url);
-      $this->$assoc = $media;
+      $lc_type = strtolower($class);
 
+      $this->type = $class;
+      $this->media = $media;
+      $this->$lc_type = $media;
 
     }
   }
